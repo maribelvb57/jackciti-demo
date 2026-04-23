@@ -7,7 +7,7 @@ export function SiteNavbar() {
     <nav className="sticky top-0 z-50">
       <div className="flex items-center justify-center">
         <div
-          className="w-full max-w-[1200px] px-6 flex items-center justify-between h-11"
+          className="w-full max-w-[1200px] px-4 md:px-6 flex items-center justify-between h-11"
           style={{ backgroundColor: "#004d99" }}
         >
           {/* Logo compacto */}
@@ -23,19 +23,21 @@ export function SiteNavbar() {
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-1">
-            {["Hotel", "Cómo Funciona", "Testimonios", "Contacto"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="px-3 py-1 text-xs font-medium text-white rounded-md transition-colors hover:bg-white/20"
-              >
-                {item}
-              </a>
-            ))}
+          <div className="flex items-center">
+            <div className="hidden md:flex items-center gap-1">
+              {["Hotel", "Cómo Funciona", "Testimonios", "Contacto"].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="px-3 py-1 text-xs font-medium text-white rounded-md transition-colors hover:bg-white/20"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
             <a
               href="#"
-              className="ml-2 px-3 py-1 text-xs font-semibold rounded-md transition-colors"
+              className="px-3 py-1 text-xs font-semibold rounded-md transition-colors md:ml-2"
               style={{
                 backgroundColor: "#F7EEDF",
                 color: "#1F3A36",

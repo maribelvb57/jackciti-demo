@@ -28,7 +28,7 @@ export function PromoSection() {
       <div className="flex items-center justify-center">
         <div
           className="w-full max-w-[1200px] py-16 md:py-20"
-          style={{ background: "linear-gradient(180deg, #1f4075 0%, #7e9ec2 100%)" }}
+          style={{ background: "linear-gradient(180deg, #1a2f51 0%, #7e9ec2 100%)" }}
         >
           <div className="mx-auto max-w-[1100px] px-6">
             {/* Headline */}
