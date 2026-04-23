@@ -1,0 +1,93 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Petstay brand colors */
+  --brand-yellow: #D4AA20;
+  --brand-yellow-light: #F0CC40;
+  --brand-yellow-bg: #FDF6D8;
+  --brand-green: #5C7A4A;
+  --brand-green-light: #7A9E64;
+  --brand-green-bg: #EEF4E8;
+  --accent-orange: #D97230;
+  --accent-orange-light: #F0905A;
+  --warm-cream: #FBF8F1;
+  --warm-cream-dark: #F2EDE0;
+
+  /* Shadcn tokens */
+  --background: oklch(0.985 0.008 88);
+  --foreground: oklch(0.22 0.02 75);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 75);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 75);
+  --primary: oklch(0.72 0.17 87);
+  --primary-foreground: oklch(0.18 0.03 75);
+  --secondary: oklch(0.52 0.09 145);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.95 0.01 88);
+  --muted-foreground: oklch(0.48 0.03 75);
+  --accent: oklch(0.68 0.17 52);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.02 88);
+  --input: oklch(0.88 0.02 88);
+  --ring: oklch(0.72 0.17 87);
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --font-sans: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  --font-heading: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Brand color utilities */
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-yellow-light: var(--brand-yellow-light);
+  --color-brand-yellow-bg: var(--brand-yellow-bg);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-light: var(--brand-green-light);
+  --color-brand-green-bg: var(--brand-green-bg);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-orange-light: var(--accent-orange-light);
+  --color-warm-cream: var(--warm-cream);
+  --color-warm-cream-dark: var(--warm-cream-dark);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  }
+}
