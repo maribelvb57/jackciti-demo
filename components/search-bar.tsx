@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { MapPin, CalendarDays, Dog, Truck, Search, ChevronDown, Plus, X } from "lucide-react"
 import { DayPicker, DateRange } from "react-day-picker"
 import { format } from "date-fns"
@@ -50,6 +51,7 @@ const CITIES = [
 ]
 
 export function SearchBar() {
+  const router = useRouter()
 
   const accentColor = "rgb(0 6 255)"
   const accentHover = "rgb(0 5 220)"
@@ -402,6 +404,7 @@ export function SearchBar() {
                 </label>
                 <button
                   type="button"
+                  onClick={() => router.push("/busqueda")}
                   className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all hover:shadow-lg active:scale-95"
                   style={{ backgroundColor: accentColor, color: "#fff", boxShadow: "0 10px 24px rgba(217, 114, 48, 0.35)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = accentHover)}
