@@ -22,7 +22,7 @@ export function SearchBar() {
   const accentOutline = "#D9723040"
   const fieldIconColor = "rgb(0 6 255)"
 
-  const cardColor = "#FFE600"
+  const cardColor =   "#ffcc02" // "#FFC857"  //"#e9d62c"
   const inputColor = "#FFF9F2"
   const inputBorder = "#D9C7AE"
   const labelColor = "#0A1830"
