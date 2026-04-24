@@ -7,33 +7,40 @@ import { format } from "date-fns"
 import { es } from "date-fns/locale"
 import "react-day-picker/style.css"
 
-const RAZAS = [
-  "Sin especificar",
-  "Labrador",
-  "Golden Retriever",
-  "Bulldog",
-  "Poodle",
-  "Chihuahua",
-  "Pastor Alemán",
-  "Beagle",
-  "Dálmata",
-  "Otro",
-]
+const RAZAS_TAMANOS: Record<string, string> = {
+  "Akita Inu": "Grande",
+  "Beagle": "Mediano",
+  "Border Collie": "Mediano",
+  "Boxer": "Grande",
+  "Bulldog Francés": "Pequeño",
+  "Chihuahua": "Pequeño",
+  "Cocker Spaniel": "Mediano",
+  "Dachshund": "Pequeño",
+  "Golden Retriever": "Grande",
+  "Husky Siberiano": "Grande",
+  "Labrador Retriever": "Grande",
+  "Maltés": "Pequeño",
+  "Pastor Alemán": "Grande",
+  "Pitbull Terrier Americano": "Mediano",
+  "Poodle": "Pequeño",
+  "Pug": "Pequeño",
+  "Rottweiler": "Extra Grande",
+  "Schnauzer": "Pequeño",
+  "Shih Tzu": "Pequeño",
+  "Yorkshire Terrier": "Pequeño",
+  "Otra Raza o mestizo": "",
+}
 
-const TAMANOS = [
-  "Sin especificar",
-  "Pequeño (hasta 10 kg)",
-  "Mediano (10–25 kg)",
-  "Grande (25–45 kg)",
-  "Extra grande (+ 45 kg)",
-]
+const RAZAS = ["Sin especificar", ...Object.keys(RAZAS_TAMANOS)]
+
+const TAMANOS = ["Pequeño", "Mediano", "Grande", "Extra Grande"]
 
 type Mascota = {
   raza: string
   tamano: string
 }
 
-const defaultMascota = (): Mascota => ({ raza: "Sin especificar", tamano: "Sin especificar" })
+const defaultMascota = (): Mascota => ({ raza: "Sin especificar", tamano: "" })
 
 const CITIES = [
   "Santiago de Chile",
@@ -84,7 +91,16 @@ export function SearchBar() {
   }
 
   const updateMascota = (index: number, field: keyof Mascota, value: string) => {
-    setMascotas((prev) => prev.map((m, i) => (i === index ? { ...m, [field]: value } : m)))
+    setMascotas((prev) =>
+      prev.map((m, i) => {
+        if (i !== index) return m
+        if (field === "raza") {
+          const autoTamano = RAZAS_TAMANOS[value] ?? ""
+          return { ...m, raza: value, tamano: autoTamano }
+        }
+        return { ...m, [field]: value }
+      })
+    )
   }
 
   const addMascota = () => {
@@ -265,20 +281,20 @@ export function SearchBar() {
                     style={{ backgroundColor: inputColor, borderColor: inputBorder, minWidth: 300, width: "100%" }}
                   >
                     {mascotas.map((mascota, index) => (
-                      <div key={index} className="mb-4">
+                      <div key={index} className="mb-4 relative">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-bold" style={{ color: "#0A1830" }}>
-                            {index + 1} {index === 0 ? "mascota" : "mascota"}
+                            Mascota {index + 1}
                           </span>
                           {mascotas.length > 1 && (
                             <button
                               type="button"
                               onClick={() => removeMascota(index)}
-                              className="rounded-full p-0.5 transition-colors"
-                              style={{ color: "#888" }}
+                              className="flex items-center justify-center w-5 h-5 rounded-full transition-colors hover:bg-red-50"
+                              style={{ color: "#aaa" }}
                               aria-label="Eliminar mascota"
                             >
-                              <X size={14} />
+                              <X size={13} />
                             </button>
                           )}
                         </div>
@@ -308,28 +324,38 @@ export function SearchBar() {
                         </div>
 
                         {/* Tamaño */}
-                        <div className="flex items-center gap-3">
-                          <span className="text-sm w-16 flex-shrink-0" style={{ color: helperColor }}>
-                            Tamaño
-                          </span>
-                          <div className="relative flex-1">
-                            <select
-                              value={mascota.tamano}
-                              onChange={(e) => updateMascota(index, "tamano", e.target.value)}
-                              className="w-full appearance-none px-3 py-1.5 pr-8 rounded-lg border text-sm"
-                              style={{
-                                backgroundColor: "#fff",
-                                borderColor: inputBorder,
-                                color: "#0A1830",
-                              }}
-                            >
-                              {TAMANOS.map((t) => (
-                                <option key={t} value={t}>{t}</option>
-                              ))}
-                            </select>
-                            <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: fieldIconColor }} />
-                          </div>
-                        </div>
+                        {(() => {
+                          const isOtraRaza = mascota.raza === "Otra Raza o mestizo"
+                          const isDisabled = !isOtraRaza
+                          return (
+                            <div className="flex items-center gap-3">
+                              <span className="text-sm w-16 flex-shrink-0" style={{ color: helperColor }}>
+                                Tamaño
+                              </span>
+                              <div className="relative flex-1">
+                                <select
+                                  value={mascota.tamano}
+                                  onChange={(e) => updateMascota(index, "tamano", e.target.value)}
+                                  disabled={isDisabled}
+                                  className="w-full appearance-none px-3 py-1.5 pr-8 rounded-lg border text-sm"
+                                  style={{
+                                    backgroundColor: isDisabled ? "#F5F3EE" : "#fff",
+                                    borderColor: inputBorder,
+                                    color: mascota.tamano ? "#0A1830" : "#999",
+                                    cursor: isDisabled ? "not-allowed" : "pointer",
+                                    opacity: isDisabled ? 0.7 : 1,
+                                  }}
+                                >
+                                  <option value="" disabled>Indicar tamaño</option>
+                                  {TAMANOS.map((t) => (
+                                    <option key={t} value={t}>{t}</option>
+                                  ))}
+                                </select>
+                                <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: fieldIconColor }} />
+                              </div>
+                            </div>
+                          )
+                        })()}
 
                         {index < mascotas.length - 1 && (
                           <div className="mt-4 border-t" style={{ borderColor: "#E5DFC8" }} />
@@ -337,16 +363,18 @@ export function SearchBar() {
                       </div>
                     ))}
 
-                    {/* Agregar otra mascota */}
-                    <button
-                      type="button"
-                      onClick={addMascota}
-                      className="flex items-center gap-1.5 text-sm font-medium mb-4 transition-opacity hover:opacity-70"
-                      style={{ color: accentColor }}
-                    >
-                      <Plus size={14} />
-                      Agregar otra mascota
-                    </button>
+                    {/* Agregar otra mascota — máximo 3 */}
+                    {mascotas.length < 3 && (
+                      <button
+                        type="button"
+                        onClick={addMascota}
+                        className="flex items-center gap-1.5 text-sm font-medium mb-4 transition-opacity hover:opacity-70"
+                        style={{ color: accentColor }}
+                      >
+                        <Plus size={14} />
+                        Agregar otra mascota
+                      </button>
+                    )}
 
                     <div className="mb-4 border-t" style={{ borderColor: "#E5DFC8" }} />
 
