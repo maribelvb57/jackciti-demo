@@ -57,7 +57,7 @@ export function ResultCard({ data }: ResultCardProps) {
           <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
             <div
               className="flex items-center justify-center w-10 h-8 md:w-12 md:h-10 rounded-lg text-white font-bold text-sm md:text-base flex-shrink-0"
-              style={{ backgroundColor: "#0B3D91" }}
+              style={{ backgroundColor: "#1a6b4a" }}
             >
               {data.score.toFixed(1).replace(".", ",")}
             </div>
