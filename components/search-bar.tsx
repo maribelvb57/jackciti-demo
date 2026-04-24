@@ -324,29 +324,38 @@ export function SearchBar() {
                         </div>
 
                         {/* Tamaño */}
-                        <div className="flex items-center gap-3">
-                          <span className="text-sm w-16 flex-shrink-0" style={{ color: helperColor }}>
-                            Tamaño
-                          </span>
-                          <div className="relative flex-1">
-                            <select
-                              value={mascota.tamano}
-                              onChange={(e) => updateMascota(index, "tamano", e.target.value)}
-                              className="w-full appearance-none px-3 py-1.5 pr-8 rounded-lg border text-sm"
-                              style={{
-                                backgroundColor: "#fff",
-                                borderColor: inputBorder,
-                                color: mascota.tamano ? "#0A1830" : "#999",
-                              }}
-                            >
-                              <option value="" disabled>Indicar tamaño</option>
-                              {TAMANOS.map((t) => (
-                                <option key={t} value={t}>{t}</option>
-                              ))}
-                            </select>
-                            <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: fieldIconColor }} />
-                          </div>
-                        </div>
+                        {(() => {
+                          const isOtraRaza = mascota.raza === "Otra Raza o mestizo"
+                          const isDisabled = !isOtraRaza
+                          return (
+                            <div className="flex items-center gap-3">
+                              <span className="text-sm w-16 flex-shrink-0" style={{ color: helperColor }}>
+                                Tamaño
+                              </span>
+                              <div className="relative flex-1">
+                                <select
+                                  value={mascota.tamano}
+                                  onChange={(e) => updateMascota(index, "tamano", e.target.value)}
+                                  disabled={isDisabled}
+                                  className="w-full appearance-none px-3 py-1.5 pr-8 rounded-lg border text-sm"
+                                  style={{
+                                    backgroundColor: isDisabled ? "#F5F3EE" : "#fff",
+                                    borderColor: inputBorder,
+                                    color: mascota.tamano ? "#0A1830" : "#999",
+                                    cursor: isDisabled ? "not-allowed" : "pointer",
+                                    opacity: isDisabled ? 0.7 : 1,
+                                  }}
+                                >
+                                  <option value="" disabled>Indicar tamaño</option>
+                                  {TAMANOS.map((t) => (
+                                    <option key={t} value={t}>{t}</option>
+                                  ))}
+                                </select>
+                                <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: fieldIconColor }} />
+                              </div>
+                            </div>
+                          )
+                        })()}
 
                         {index < mascotas.length - 1 && (
                           <div className="mt-4 border-t" style={{ borderColor: "#E5DFC8" }} />
