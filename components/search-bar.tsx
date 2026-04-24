@@ -7,33 +7,40 @@ import { format } from "date-fns"
 import { es } from "date-fns/locale"
 import "react-day-picker/style.css"
 
-const RAZAS = [
-  "Sin especificar",
-  "Labrador",
-  "Golden Retriever",
-  "Bulldog",
-  "Poodle",
-  "Chihuahua",
-  "Pastor Alemán",
-  "Beagle",
-  "Dálmata",
-  "Otro",
-]
+const RAZAS_TAMANOS: Record<string, string> = {
+  "Akita Inu": "Grande",
+  "Beagle": "Mediano",
+  "Border Collie": "Mediano",
+  "Boxer": "Grande",
+  "Bulldog Francés": "Pequeño",
+  "Chihuahua": "Pequeño",
+  "Cocker Spaniel": "Mediano",
+  "Dachshund": "Pequeño",
+  "Golden Retriever": "Grande",
+  "Husky Siberiano": "Grande",
+  "Labrador Retriever": "Grande",
+  "Maltés": "Pequeño",
+  "Pastor Alemán": "Grande",
+  "Pitbull Terrier Americano": "Mediano",
+  "Poodle": "Pequeño",
+  "Pug": "Pequeño",
+  "Rottweiler": "Extra Grande",
+  "Schnauzer": "Pequeño",
+  "Shih Tzu": "Pequeño",
+  "Yorkshire Terrier": "Pequeño",
+  "Otra Raza o mestizo": "",
+}
 
-const TAMANOS = [
-  "Sin especificar",
-  "Pequeño (hasta 10 kg)",
-  "Mediano (10–25 kg)",
-  "Grande (25–45 kg)",
-  "Extra grande (+ 45 kg)",
-]
+const RAZAS = ["Sin especificar", ...Object.keys(RAZAS_TAMANOS)]
+
+const TAMANOS = ["Pequeño", "Mediano", "Grande", "Extra Grande"]
 
 type Mascota = {
   raza: string
   tamano: string
 }
 
-const defaultMascota = (): Mascota => ({ raza: "Sin especificar", tamano: "Sin especificar" })
+const defaultMascota = (): Mascota => ({ raza: "Sin especificar", tamano: "" })
 
 const CITIES = [
   "Santiago de Chile",
@@ -84,7 +91,16 @@ export function SearchBar() {
   }
 
   const updateMascota = (index: number, field: keyof Mascota, value: string) => {
-    setMascotas((prev) => prev.map((m, i) => (i === index ? { ...m, [field]: value } : m)))
+    setMascotas((prev) =>
+      prev.map((m, i) => {
+        if (i !== index) return m
+        if (field === "raza") {
+          const autoTamano = RAZAS_TAMANOS[value] ?? ""
+          return { ...m, raza: value, tamano: autoTamano }
+        }
+        return { ...m, [field]: value }
+      })
+    )
   }
 
   const addMascota = () => {
@@ -320,9 +336,10 @@ export function SearchBar() {
                               style={{
                                 backgroundColor: "#fff",
                                 borderColor: inputBorder,
-                                color: "#0A1830",
+                                color: mascota.tamano ? "#0A1830" : "#999",
                               }}
                             >
+                              <option value="" disabled>Indicar tamaño</option>
                               {TAMANOS.map((t) => (
                                 <option key={t} value={t}>{t}</option>
                               ))}
