@@ -30,7 +30,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     petCount: 1,
     nights: 3,
     price: 89000,
-    imageUrl: "/images/hotel-patitas-inn.jpg",
+    imageUrl: "/images/hotel-huellitas.jpg",
   },
   {
     name: "Pet Lodge Santiago Centro",
@@ -43,7 +43,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     petCount: 1,
     nights: 2,
     price: 54000,
-    imageUrl: "/images/hotel-patitas-inn.jpg",
+    imageUrl: "/images/hotel-pet-lodge.jpg",
   },
   {
     name: "Casa Canina Providencia",
@@ -56,7 +56,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     petCount: 2,
     nights: 4,
     price: 220000,
-    imageUrl: "/images/hotel-patitas-inn.jpg",
+    imageUrl: "/images/hotel-casa-canina.jpg",
   },
   {
     name: "Paws & Rest Ñuñoa",
@@ -69,7 +69,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     petCount: 1,
     nights: 5,
     price: 112000,
-    imageUrl: "/images/hotel-patitas-inn.jpg",
+    imageUrl: "/images/hotel-paws-rest.jpg",
   },
   {
     name: "Retiro Peludo Vitacura",
