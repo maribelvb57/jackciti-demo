@@ -123,7 +123,7 @@ export default function BusquedaPage() {
               <button
                 key={f}
                 className="flex-shrink-0 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors"
-                style={{ borderColor: "#C8C0AA", color: "#0A1830", backgroundColor: "#fff" }}
+                style={{ borderColor: "#22c55e", color: "#0A1830", backgroundColor: "#fff" }}
               >
                 {f}
               </button>
