@@ -348,6 +348,8 @@ export function SearchBar() {
                       Agregar otra mascota
                     </button>
 
+                    <div className="mb-4 border-t" style={{ borderColor: "#E5DFC8" }} />
+
                     {/* Listo */}
                     <div className="flex justify-end">
                       <button
