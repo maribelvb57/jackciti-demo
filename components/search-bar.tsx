@@ -281,20 +281,20 @@ export function SearchBar() {
                     style={{ backgroundColor: inputColor, borderColor: inputBorder, minWidth: 300, width: "100%" }}
                   >
                     {mascotas.map((mascota, index) => (
-                      <div key={index} className="mb-4">
+                      <div key={index} className="mb-4 relative">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-bold" style={{ color: "#0A1830" }}>
-                            {index + 1} {index === 0 ? "mascota" : "mascota"}
+                            Mascota {index + 1}
                           </span>
                           {mascotas.length > 1 && (
                             <button
                               type="button"
                               onClick={() => removeMascota(index)}
-                              className="rounded-full p-0.5 transition-colors"
-                              style={{ color: "#888" }}
+                              className="flex items-center justify-center w-5 h-5 rounded-full transition-colors hover:bg-red-50"
+                              style={{ color: "#aaa" }}
                               aria-label="Eliminar mascota"
                             >
-                              <X size={14} />
+                              <X size={13} />
                             </button>
                           )}
                         </div>
@@ -363,16 +363,18 @@ export function SearchBar() {
                       </div>
                     ))}
 
-                    {/* Agregar otra mascota */}
-                    <button
-                      type="button"
-                      onClick={addMascota}
-                      className="flex items-center gap-1.5 text-sm font-medium mb-4 transition-opacity hover:opacity-70"
-                      style={{ color: accentColor }}
-                    >
-                      <Plus size={14} />
-                      Agregar otra mascota
-                    </button>
+                    {/* Agregar otra mascota — máximo 3 */}
+                    {mascotas.length < 3 && (
+                      <button
+                        type="button"
+                        onClick={addMascota}
+                        className="flex items-center gap-1.5 text-sm font-medium mb-4 transition-opacity hover:opacity-70"
+                        style={{ color: accentColor }}
+                      >
+                        <Plus size={14} />
+                        Agregar otra mascota
+                      </button>
+                    )}
 
                     <div className="mb-4 border-t" style={{ borderColor: "#E5DFC8" }} />
 
