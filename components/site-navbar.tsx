@@ -39,14 +39,14 @@ export function SiteNavbar() {
               href="#"
               className="px-3 py-1 text-xs font-semibold rounded-md transition-colors md:ml-2"
               style={{
-                backgroundColor: "#F7EEDF",
-                color: "#1F3A36",
+                backgroundColor: "#FF6B5B",
+                color: "#ffffff",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#F2E3CB"
+                e.currentTarget.style.backgroundColor = "#FF5144"
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#F7EEDF"
+                e.currentTarget.style.backgroundColor = "#FF6B5B"
               }}
             >
               Ingresar
