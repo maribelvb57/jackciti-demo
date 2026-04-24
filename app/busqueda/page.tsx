@@ -109,11 +109,30 @@ export default function BusquedaPage() {
 
       {/* Main content area */}
       <div className="flex-1 flex justify-center">
-        <div className="relative w-full max-w-[1200px] flex" style={{ backgroundColor: "#F7EEDF" }}>
-          
-          {/* Left sidebar - Filters */}
+        <div className="relative w-full max-w-[1200px] flex flex-col md:flex-row" style={{ backgroundColor: "#F7EEDF" }}>
+
+          {/* MOBILE: Horizontal filter strip */}
+          <div
+            className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0"
+            style={{ backgroundColor: "#FFFDF8", borderColor: "#E5DFC8" }}
+          >
+            <span className="text-xs font-semibold flex-shrink-0 mr-1" style={{ color: "#0A1830" }}>
+              Filtros:
+            </span>
+            {["Libre de Jaulas", "Cancelación gratis", "Veterinario", "Patio exterior", "Calificación 8+"].map((f) => (
+              <button
+                key={f}
+                className="flex-shrink-0 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors"
+                style={{ borderColor: "#C8C0AA", color: "#0A1830", backgroundColor: "#fff" }}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+
+          {/* DESKTOP: Left sidebar - Filters */}
           <aside
-            className="relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
+            className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
               borderColor: "#E5DFC8",
@@ -125,7 +144,6 @@ export default function BusquedaPage() {
               <h2 className="text-lg font-bold mb-4" style={{ color: "#0A1830" }}>
                 Filtros
               </h2>
-              {/* Placeholder for filters - will be implemented later */}
               <p className="text-sm" style={{ color: "#666" }}>
                 Los filtros irán aquí
               </p>
@@ -152,11 +170,11 @@ export default function BusquedaPage() {
             </button>
           </aside>
 
-          {/* Toggle button when sidebar is collapsed */}
+          {/* DESKTOP: Toggle button when sidebar is collapsed */}
           {!sidebarOpen && (
             <button
               onClick={() => setSidebarOpen(true)}
-              className="absolute z-10 flex items-center justify-center w-6 h-12 rounded-r-lg shadow-md"
+              className="hidden md:flex absolute z-10 items-center justify-center w-6 h-12 rounded-r-lg shadow-md"
               style={{
                 left: 0,
                 top: 104,
@@ -171,13 +189,13 @@ export default function BusquedaPage() {
           )}
 
           {/* Right section - Search results */}
-          <section className="flex-1 p-6 overflow-auto">
-            <h1 className="text-xl font-bold mb-6" style={{ color: "#0A1830" }}>
+          <section className="flex-1 p-4 md:p-6 overflow-auto">
+            <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
               Resultados de búsqueda
             </h1>
 
             {/* Results list */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-4 md:gap-5">
               {MOCK_RESULTS.map((result, index) => (
                 <ResultCard key={index} data={result} />
               ))}
