@@ -47,7 +47,7 @@ const STORY_SLIDES = [
     subtitle: "Los mejores hoteles, aprobados por Jack",
     description:
       "Después de su exhaustiva investigación, Jack seleccionó los mejores hoteles caninos de la ciudad. Ahora, cada hotel en JackCity tiene el sello de aprobación de Jack. ¡Tu mascota merece lo mejor!",
-    bgColor: "#FEF0F0",
+    bgColor: "#FEF7F7",
     accentColor: "#C26B6B",
   },
 ]
@@ -135,7 +135,7 @@ export function JackStoryCarousel() {
                 {slide.descriptionJsx ? (
                   <>
                     Decidido a que ningún perrito pasara por lo mismo, Jack salió a recorrer las calles de la ciudad. Visitó cada hotel canino, evaluó sus instalaciones, conoció a los cuidadores y{" "}
-                    <strong className="font-serif font-bold" style={{ color: "#0A1830" }}>
+                    <strong className="font-sans font-bold tracking-wide" style={{ color: "#0A1830" }}>
                       ¡probó todas las camas!
                     </strong>
                   </>
