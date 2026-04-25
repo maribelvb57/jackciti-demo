@@ -54,6 +54,7 @@ const STORY_SLIDES = [
 
 export function JackStoryCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index)
@@ -65,6 +66,19 @@ export function JackStoryCarousel() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + STORY_SLIDES.length) % STORY_SLIDES.length)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX
+    if (Math.abs(deltaX) > 50) {
+      deltaX < 0 ? nextSlide() : prevSlide()
+    }
+    setTouchStartX(null)
   }
 
   const slide = STORY_SLIDES[currentSlide]
@@ -84,8 +98,10 @@ export function JackStoryCarousel() {
 
         {/* Carousel container */}
         <div
-          className="relative mx-4 md:mx-8 rounded-3xl overflow-hidden transition-colors duration-500"
+          className="relative mx-4 md:mx-8 rounded-3xl overflow-hidden transition-colors duration-500 cursor-grab active:cursor-grabbing"
           style={{ backgroundColor: slide.bgColor }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Content */}
           <div className="flex flex-col md:flex-row min-h-[500px] md:min-h-[450px]">
