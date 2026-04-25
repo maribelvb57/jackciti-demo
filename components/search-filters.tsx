@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { MapPin, DollarSign, Home, Star, ArrowUpDown, ChevronDown } from "lucide-react"
 
-const DARK = "#1a1a1a"
+const DARK = "#4B5563"
 
 const ZONAS = [
   "Todas las zonas",
@@ -237,7 +237,7 @@ export function SearchFilters() {
                   style={{ borderColor: selected ? DARK : "#999" }}
                 >
                   {selected && (
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: DARK }} />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#fff" }} />
                   )}
                 </div>
                 <span className="text-sm" style={{ color: "#222" }}>{option}</span>
