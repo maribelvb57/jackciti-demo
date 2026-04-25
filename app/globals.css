@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Filter sidebar */
+  --filter-bg: #FACC15;
+  --filter-border: #EAB308;
+
   /* Petstay brand colors */
   --brand-yellow: #D4AA20;
   --brand-yellow-light: #F0CC40;
@@ -89,5 +93,14 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-filter {
+    background-color: var(--filter-bg);
+  }
+  .border-filter {
+    border-color: var(--filter-border);
   }
 }

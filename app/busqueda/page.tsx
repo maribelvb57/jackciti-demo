@@ -4,6 +4,7 @@ import { useState } from "react"
 import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
+import { SearchFilters } from "@/components/search-filters"
 
 const MOCK_RESULTS: ResultCardData[] = [
   {
@@ -114,7 +115,7 @@ export default function BusquedaPage() {
           {/* MOBILE: Horizontal filter strip */}
           <div
             className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0"
-            style={{ backgroundColor: "#E5E7EB", borderColor: "#D1D5DB" }}
+            style={{ backgroundColor: "var(--filter-bg)", borderColor: "var(--filter-border)" }}
           >
             <span className="text-xs font-semibold flex-shrink-0 mr-1" style={{ color: "#0A1830" }}>
               Filtros:
@@ -135,30 +136,27 @@ export default function BusquedaPage() {
             className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
-              borderColor: "#D1D5DB",
-              backgroundColor: "#E5E7EB",
+              backgroundColor: "var(--filter-bg)",
+              borderColor: "var(--filter-border)",
               overflow: "hidden",
             }}
           >
-            <div className="p-5" style={{ width: 300 }}>
-              <h2 className="text-lg font-bold mb-4" style={{ color: "#0A1830" }}>
+            <div className="p-5 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-80px)]" style={{ width: 300 }}>
+              <h2 className="text-lg font-bold mb-5" style={{ color: "#0A1830" }}>
                 Filtros
               </h2>
-              <p className="text-sm" style={{ color: "#666" }}>
-                Los filtros irán aquí
-              </p>
+              <SearchFilters />
             </div>
 
             {/* Collapse/Expand toggle button */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="absolute z-10 flex items-center justify-center w-6 h-12 rounded-r-lg shadow-md transition-all duration-300"
+              className="absolute z-10 flex items-center justify-center w-6 h-12 rounded-r-lg shadow-md transition-all duration-300 border"
               style={{
                 right: -24,
                 top: 60,
-                backgroundColor: "#E5E7EB",
-                border: "1px solid #D1D5DB",
-                borderLeft: "none",
+                backgroundColor: "var(--filter-bg)",
+                borderColor: "var(--filter-border)",
               }}
               aria-label={sidebarOpen ? "Colapsar filtros" : "Expandir filtros"}
             >
@@ -174,13 +172,12 @@ export default function BusquedaPage() {
           {!sidebarOpen && (
             <button
               onClick={() => setSidebarOpen(true)}
-              className="hidden md:flex absolute z-10 items-center justify-center w-6 h-12 rounded-r-lg shadow-md"
+              className="hidden md:flex absolute z-10 items-center justify-center w-6 h-12 rounded-r-lg shadow-md border"
               style={{
                 left: 0,
                 top: 104,
-                backgroundColor: "#E5E7EB",
-                border: "1px solid #D1D5DB",
-                borderLeft: "none",
+                backgroundColor: "var(--filter-bg)",
+                borderColor: "var(--filter-border)",
               }}
               aria-label="Expandir filtros"
             >
