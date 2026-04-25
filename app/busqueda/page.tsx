@@ -115,7 +115,7 @@ export default function BusquedaPage() {
           {/* MOBILE: Horizontal filter strip */}
           <div
             className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0"
-            style={{ backgroundColor: "#FACC15", borderColor: "#EAB308" }}
+            style={{ backgroundColor: "var(--filter-bg)", borderColor: "var(--filter-border)" }}
           >
             <span className="text-xs font-semibold flex-shrink-0 mr-1" style={{ color: "#0A1830" }}>
               Filtros:
@@ -136,8 +136,8 @@ export default function BusquedaPage() {
             className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
-              borderColor: "#EAB308",
-              backgroundColor: "#FACC15",
+              borderColor: "var(--filter-border)",
+              backgroundColor: "var(--filter-bg)",
               overflow: "hidden",
             }}
           >
@@ -155,8 +155,8 @@ export default function BusquedaPage() {
               style={{
                 right: -24,
                 top: 60,
-                backgroundColor: "#FACC15",
-                border: "1px solid #EAB308",
+                backgroundColor: "var(--filter-bg)",
+                border: "1px solid var(--filter-border)",
                 borderLeft: "none",
               }}
               aria-label={sidebarOpen ? "Colapsar filtros" : "Expandir filtros"}
@@ -177,8 +177,8 @@ export default function BusquedaPage() {
               style={{
                 left: 0,
                 top: 104,
-                backgroundColor: "#FACC15",
-                border: "1px solid #EAB308",
+                backgroundColor: "var(--filter-bg)",
+                border: "1px solid var(--filter-border)",
                 borderLeft: "none",
               }}
               aria-label="Expandir filtros"
