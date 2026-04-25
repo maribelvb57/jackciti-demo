@@ -95,3 +95,12 @@
     font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
   }
 }
+
+@layer utilities {
+  .bg-filter {
+    background-color: var(--filter-bg);
+  }
+  .border-filter {
+    border-color: var(--filter-border);
+  }
+}
