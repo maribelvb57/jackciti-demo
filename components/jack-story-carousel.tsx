@@ -21,7 +21,7 @@ const STORY_SLIDES = [
     title: "Un día difícil",
     subtitle: "Cuando su buddy tuvo que partir...",
     description:
-      "Un día, el mejor amigo de Jack tuvo que salir de vacaciones y no pudo llevarlo. Jack se quedó solo en casa, triste y sin entender por qué no podía ir también. Esa experiencia lo marcó para siempre.",
+      "Un día, el mejor amigo de Jack tuvo que salir de vacaciones y no pudo llevarlo. Jack se quedó solo en casa, extrañándolo mucho y preguntándose si existía un lugar mejor donde quedarse la próxima vez.",
     bgColor: "#E8EEF5",
     accentColor: "#0A1830",
   },
