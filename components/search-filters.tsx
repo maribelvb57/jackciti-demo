@@ -165,14 +165,13 @@ export function SearchFilters() {
           {TIPOS_ALOJAMIENTO.map((tipo) => {
             const checked = tiposSeleccionados.includes(tipo)
             return (
-              <label key={tipo} className="flex items-start gap-2.5 cursor-pointer">
+              <label key={tipo} className="flex items-start gap-2.5 cursor-pointer select-none" onClick={() => toggleTipo(tipo)}>
                 <div
                   className="w-4 h-4 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors"
                   style={{
-                    borderColor: checked ? DARK : "#D1D5DB",
+                    borderColor: checked ? DARK : "#999",
                     backgroundColor: checked ? DARK : "#fff",
                   }}
-                  onClick={() => toggleTipo(tipo)}
                 >
                   {checked && (
                     <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
@@ -180,8 +179,7 @@ export function SearchFilters() {
                     </svg>
                   )}
                 </div>
-                <input type="checkbox" checked={checked} onChange={() => toggleTipo(tipo)} className="sr-only" />
-                <span className="text-sm leading-tight" style={{ color: "#444" }}>{tipo}</span>
+                <span className="text-sm leading-tight" style={{ color: "#222" }}>{tipo}</span>
               </label>
             )
           })}
@@ -233,18 +231,16 @@ export function SearchFilters() {
           {ORDENAR_OPTIONS.map((option) => {
             const selected = ordenarPor === option
             return (
-              <label key={option} className="flex items-center gap-2.5 cursor-pointer">
+              <label key={option} className="flex items-center gap-2.5 cursor-pointer select-none" onClick={() => setOrdenarPor(option)}>
                 <div
                   className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors"
-                  style={{ borderColor: selected ? DARK : "#D1D5DB" }}
-                  onClick={() => setOrdenarPor(option)}
+                  style={{ borderColor: selected ? DARK : "#999" }}
                 >
                   {selected && (
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: DARK }} />
                   )}
                 </div>
-                <input type="radio" name="ordenar" checked={selected} onChange={() => setOrdenarPor(option)} className="sr-only" />
-                <span className="text-sm" style={{ color: "#444" }}>{option}</span>
+                <span className="text-sm" style={{ color: "#222" }}>{option}</span>
               </label>
             )
           })}
