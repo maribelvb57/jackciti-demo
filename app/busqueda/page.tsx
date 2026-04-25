@@ -4,6 +4,7 @@ import { useState } from "react"
 import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
+import { SearchFilters } from "@/components/search-filters"
 
 const MOCK_RESULTS: ResultCardData[] = [
   {
@@ -140,13 +141,11 @@ export default function BusquedaPage() {
               overflow: "hidden",
             }}
           >
-            <div className="p-5" style={{ width: 300 }}>
-              <h2 className="text-lg font-bold mb-4" style={{ color: "#0A1830" }}>
+            <div className="p-5 overflow-y-auto max-h-[calc(100vh-80px)]" style={{ width: 300 }}>
+              <h2 className="text-lg font-bold mb-5" style={{ color: "#0A1830" }}>
                 Filtros
               </h2>
-              <p className="text-sm" style={{ color: "#666" }}>
-                Los filtros irán aquí
-              </p>
+              <SearchFilters />
             </div>
 
             {/* Collapse/Expand toggle button */}
