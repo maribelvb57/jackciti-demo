@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { MapPin, DollarSign, Home, Star, ArrowUpDown, ChevronDown } from "lucide-react"
 
+const ACCENT = "#1D4ED8"
+
 const ZONAS = [
   "Todas las zonas",
   "Santiago Oriente",
@@ -33,8 +35,7 @@ const ORDENAR_OPTIONS = [
 export function SearchFilters() {
   const [zona, setZona] = useState("Todas las zonas")
   const [zonaOpen, setZonaOpen] = useState(false)
-  const [presupuestoMin, setPresupuestoMin] = useState(30000)
-  const [presupuestoMax, setPresupuestoMax] = useState(120000)
+  const [presupuesto, setPresupuesto] = useState(120000)
   const [tiposSeleccionados, setTiposSeleccionados] = useState<string[]>([])
   const [puntuacionMin, setPuntuacionMin] = useState(6)
   const [ordenarPor, setOrdenarPor] = useState("Recomendados de Jack")
@@ -45,34 +46,31 @@ export function SearchFilters() {
     )
   }
 
-  const formatPrice = (value: number) => {
-    return `$${value.toLocaleString("es-CL")}`
-  }
+  const formatPrice = (value: number) =>
+    `$${value.toLocaleString("es-CL")}`
+
+  const sliderPct = ((presupuesto - 30000) / (120000 - 30000)) * 100
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-full overflow-x-hidden">
+
       {/* Zona */}
-      <div>
+      <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <MapPin size={16} style={{ color: "#0A1830" }} />
-          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>
-            Zona
-          </h3>
+          <MapPin size={15} style={{ color: ACCENT }} />
+          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Zona</h3>
         </div>
-        <div className="relative">
+        <div className="relative w-full">
           <button
             type="button"
             onClick={() => setZonaOpen(!zonaOpen)}
             className="w-full flex items-center justify-between px-3 py-2 rounded-lg border text-sm"
-            style={{
-              backgroundColor: "#fff",
-              borderColor: "#D1D5DB",
-              color: "#0A1830",
-            }}
+            style={{ backgroundColor: "#fff", borderColor: "#D1D5DB", color: "#0A1830" }}
           >
-            <span>{zona}</span>
+            <span className="truncate">{zona}</span>
             <ChevronDown
-              size={16}
+              size={15}
+              className="flex-shrink-0 ml-1"
               style={{
                 color: "#666",
                 transform: zonaOpen ? "rotate(180deg)" : "none",
@@ -89,15 +87,14 @@ export function SearchFilters() {
                 <button
                   key={z}
                   type="button"
-                  onClick={() => {
-                    setZona(z)
-                    setZonaOpen(false)
-                  }}
-                  className="w-full px-3 py-2 text-left text-sm hover:bg-gray-100 transition-colors"
+                  onClick={() => { setZona(z); setZonaOpen(false) }}
+                  className="w-full px-3 py-2 text-left text-sm transition-colors"
                   style={{
                     color: "#0A1830",
-                    backgroundColor: zona === z ? "#F3F4F6" : "transparent",
+                    backgroundColor: zona === z ? "#EFF6FF" : "transparent",
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EFF6FF")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = zona === z ? "#EFF6FF" : "transparent")}
                 >
                   {z}
                 </button>
@@ -107,117 +104,93 @@ export function SearchFilters() {
         </div>
       </div>
 
-      {/* Presupuesto */}
-      <div>
+      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+
+      {/* Presupuesto — slider único */}
+      <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <DollarSign size={16} style={{ color: "#0A1830" }} />
-          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>
-            Presupuesto
-          </h3>
+          <DollarSign size={15} style={{ color: ACCENT }} />
+          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Presupuesto</h3>
         </div>
-        <div className="px-1">
-          <div className="flex justify-between text-xs mb-2" style={{ color: "#666" }}>
-            <span>{formatPrice(presupuestoMin)}</span>
-            <span>{formatPrice(presupuestoMax)}</span>
+        <div className="px-1 w-full">
+          <div className="flex justify-between text-xs mb-3" style={{ color: "#666" }}>
+            <span>$30.000</span>
+            <span className="font-semibold" style={{ color: ACCENT }}>{formatPrice(presupuesto)}</span>
           </div>
-          <div className="relative h-2 rounded-full" style={{ backgroundColor: "#E5E7EB" }}>
+          {/* Track + fill */}
+          <div className="relative h-1.5 rounded-full mb-3" style={{ backgroundColor: "#D1D5DB" }}>
             <div
-              className="absolute h-full rounded-full"
-              style={{
-                backgroundColor: "#22c55e",
-                left: `${((presupuestoMin - 10000) / 190000) * 100}%`,
-                right: `${100 - ((presupuestoMax - 10000) / 190000) * 100}%`,
-              }}
+              className="absolute left-0 h-full rounded-full"
+              style={{ width: `${sliderPct}%`, backgroundColor: ACCENT }}
             />
           </div>
-          <div className="flex gap-2 mt-3">
-            <input
-              type="range"
-              min={10000}
-              max={200000}
-              step={5000}
-              value={presupuestoMin}
-              onChange={(e) => setPresupuestoMin(Math.min(Number(e.target.value), presupuestoMax - 10000))}
-              className="flex-1 accent-green-500"
-            />
-            <input
-              type="range"
-              min={10000}
-              max={200000}
-              step={5000}
-              value={presupuestoMax}
-              onChange={(e) => setPresupuestoMax(Math.max(Number(e.target.value), presupuestoMin + 10000))}
-              className="flex-1 accent-green-500"
-            />
+          <input
+            type="range"
+            min={30000}
+            max={120000}
+            step={5000}
+            value={presupuesto}
+            onChange={(e) => setPresupuesto(Number(e.target.value))}
+            className="w-full"
+            style={{ accentColor: ACCENT }}
+          />
+          <div className="flex justify-between text-xs mt-1" style={{ color: "#aaa" }}>
+            <span>$30.000</span>
+            <span>$120.000</span>
           </div>
         </div>
       </div>
+
+      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
 
       {/* Tipo Alojamiento */}
-      <div>
+      <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <Home size={16} style={{ color: "#0A1830" }} />
-          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>
-            Tipo Alojamiento
-          </h3>
+          <Home size={15} style={{ color: ACCENT }} />
+          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Tipo Alojamiento</h3>
         </div>
-        <div className="flex flex-col gap-2">
-          {TIPOS_ALOJAMIENTO.map((tipo) => (
-            <label
-              key={tipo}
-              className="flex items-start gap-2.5 cursor-pointer group"
-            >
-              <div
-                className="w-4 h-4 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors"
-                style={{
-                  borderColor: tiposSeleccionados.includes(tipo) ? "#22c55e" : "#D1D5DB",
-                  backgroundColor: tiposSeleccionados.includes(tipo) ? "#22c55e" : "#fff",
-                }}
-              >
-                {tiposSeleccionados.includes(tipo) && (
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                    <path
-                      d="M1 4L3.5 6.5L9 1"
-                      stroke="#fff"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
-              </div>
-              <input
-                type="checkbox"
-                checked={tiposSeleccionados.includes(tipo)}
-                onChange={() => toggleTipo(tipo)}
-                className="sr-only"
-              />
-              <span
-                className="text-sm leading-tight group-hover:text-green-700 transition-colors"
-                style={{ color: "#444" }}
-              >
-                {tipo}
-              </span>
-            </label>
-          ))}
+        <div className="flex flex-col gap-2.5">
+          {TIPOS_ALOJAMIENTO.map((tipo) => {
+            const checked = tiposSeleccionados.includes(tipo)
+            return (
+              <label key={tipo} className="flex items-start gap-2.5 cursor-pointer">
+                <div
+                  className="w-4 h-4 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors"
+                  style={{
+                    borderColor: checked ? ACCENT : "#D1D5DB",
+                    backgroundColor: checked ? ACCENT : "#fff",
+                  }}
+                  onClick={() => toggleTipo(tipo)}
+                >
+                  {checked && (
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                      <path d="M1 4L3.5 6.5L9 1" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </div>
+                <input type="checkbox" checked={checked} onChange={() => toggleTipo(tipo)} className="sr-only" />
+                <span className="text-sm leading-tight" style={{ color: "#444" }}>{tipo}</span>
+              </label>
+            )
+          })}
         </div>
       </div>
 
+      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+
       {/* Puntuación */}
-      <div>
+      <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <Star size={16} style={{ color: "#0A1830" }} />
-          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>
-            Puntuación mínima
-          </h3>
+          <Star size={15} style={{ color: ACCENT }} />
+          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Puntuación mínima</h3>
         </div>
-        <div className="px-1">
-          <div className="flex justify-between mb-1">
+        <div className="px-1 w-full">
+          <div className="flex justify-between mb-2">
             {[6, 7, 8, 9].map((val) => (
               <span
                 key={val}
-                className="text-xs font-medium"
-                style={{ color: puntuacionMin === val ? "#22c55e" : "#888" }}
+                className="text-xs font-semibold"
+                style={{ color: puntuacionMin === val ? ACCENT : "#888" }}
               >
                 {val}+
               </span>
@@ -230,55 +203,42 @@ export function SearchFilters() {
             step={1}
             value={puntuacionMin}
             onChange={(e) => setPuntuacionMin(Number(e.target.value))}
-            className="w-full accent-green-500"
+            className="w-full"
+            style={{ accentColor: ACCENT }}
           />
         </div>
       </div>
 
+      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+
       {/* Ordenar Por */}
-      <div>
+      <div className="w-full pb-4">
         <div className="flex items-center gap-2 mb-3">
-          <ArrowUpDown size={16} style={{ color: "#0A1830" }} />
-          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>
-            Ordenar Por
-          </h3>
+          <ArrowUpDown size={15} style={{ color: ACCENT }} />
+          <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Ordenar Por</h3>
         </div>
-        <div className="flex flex-col gap-2">
-          {ORDENAR_OPTIONS.map((option) => (
-            <label
-              key={option}
-              className="flex items-center gap-2.5 cursor-pointer group"
-            >
-              <div
-                className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors"
-                style={{
-                  borderColor: ordenarPor === option ? "#22c55e" : "#D1D5DB",
-                }}
-              >
-                {ordenarPor === option && (
-                  <div
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: "#22c55e" }}
-                  />
-                )}
-              </div>
-              <input
-                type="radio"
-                name="ordenar"
-                checked={ordenarPor === option}
-                onChange={() => setOrdenarPor(option)}
-                className="sr-only"
-              />
-              <span
-                className="text-sm group-hover:text-green-700 transition-colors"
-                style={{ color: "#444" }}
-              >
-                {option}
-              </span>
-            </label>
-          ))}
+        <div className="flex flex-col gap-2.5">
+          {ORDENAR_OPTIONS.map((option) => {
+            const selected = ordenarPor === option
+            return (
+              <label key={option} className="flex items-center gap-2.5 cursor-pointer">
+                <div
+                  className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors"
+                  style={{ borderColor: selected ? ACCENT : "#D1D5DB" }}
+                  onClick={() => setOrdenarPor(option)}
+                >
+                  {selected && (
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
+                  )}
+                </div>
+                <input type="radio" name="ordenar" checked={selected} onChange={() => setOrdenarPor(option)} className="sr-only" />
+                <span className="text-sm" style={{ color: "#444" }}>{option}</span>
+              </label>
+            )
+          })}
         </div>
       </div>
+
     </div>
   )
 }
