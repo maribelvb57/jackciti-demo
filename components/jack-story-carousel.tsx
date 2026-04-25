@@ -12,7 +12,7 @@ const STORY_SLIDES = [
     pillLabel: "Nuestro protagonista",
     subtitle: "Un Jack Russell Terrier muy especial",
     description:
-      "Jack es un perrito amigable, sociable y lleno de energía. Le encanta conocer nuevos amigos, jugar y explorar. Con sus gafas amarillas y su estilo único, Jack siempre está listo para la aventura.",
+      "Jack es un Jack Russell Terrier amigable, sociable y lleno de energía. Le encanta conocer nuevos amigos, jugar y explorar. Con sus gafas amarillas y su estilo único, Jack siempre está listo para la aventura.",
     bgColor: "#FFF8E7",
     accentColor: "#D4A853",
   },
