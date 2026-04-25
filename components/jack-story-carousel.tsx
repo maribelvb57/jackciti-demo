@@ -70,7 +70,7 @@ export function JackStoryCarousel() {
   const slide = STORY_SLIDES[currentSlide]
 
   return (
-    <section id="historia-de-jack" className="w-full" style={{ backgroundColor: "#0A1830" }}>
+    <section id="jack-story" className="w-full" style={{ backgroundColor: "#0A1830" }}>
       <div className="max-w-[1200px] mx-auto">
         {/* Section header */}
         <div className="text-center pt-12 pb-8 px-4">
