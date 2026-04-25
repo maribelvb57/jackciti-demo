@@ -19,7 +19,10 @@ export function SiteNavbar() {
               height={28}
               className="rounded-full"
             />
-            <span className="text-sm font-bold tracking-tight text-white">JackCity</span>
+            <span className="text-sm font-bold tracking-tight text-white">JackCity</span>  &nbsp;
+
+            <span className="text-sm text-white">33</span>
+
           </div>
 
           {/* Links */}
