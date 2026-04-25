@@ -70,7 +70,7 @@ export function JackStoryCarousel() {
   const slide = STORY_SLIDES[currentSlide]
 
   return (
-    <section className="w-full" style={{ backgroundColor: "#0A1830" }}>
+    <section id="historia-de-jack" className="w-full" style={{ backgroundColor: "#0A1830" }}>
       <div className="max-w-[1200px] mx-auto">
         {/* Section header */}
         <div className="text-center pt-12 pb-8 px-4">
@@ -136,7 +136,7 @@ export function JackStoryCarousel() {
                   <>
                     Decidido a que ningún perrito pasara por lo mismo, Jack salió a recorrer las calles de la ciudad. Visitó cada hotel canino, evaluó sus instalaciones, conoció a los cuidadores y{" "}
                     <strong className="font-sans font-bold tracking-wide" style={{ color: "#0A1830" }}>
-                      ¡probó todas las camas!
+                      probó todas las camas!
                     </strong>
                   </>
                 ) : (
