@@ -4,6 +4,7 @@ import { SearchBar } from "@/components/search-bar"
 import { PromoSection } from "@/components/promo-section"
 import { HowItWorks } from "@/components/how-it-works"
 import { Testimonials } from "@/components/testimonials"
+import { JackStoryCarousel } from "@/components/jack-story-carousel"
 import { SiteFooter } from "@/components/site-footer"
 
 export default function Home() {
@@ -27,7 +28,10 @@ export default function Home() {
       {/* Section 5: Testimonials */}
       <Testimonials />
 
-      {/* Section 6: Footer */}
+      {/* Section 6: Jack's Story Carousel */}
+      <JackStoryCarousel />
+
+      {/* Section 7: Footer */}
       <SiteFooter />
     </main>
   )
