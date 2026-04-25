@@ -123,6 +123,15 @@ export function SearchFilters() {
               className="absolute left-0 h-full rounded-full"
               style={{ width: `${sliderPct}%`, backgroundColor: ACCENT }}
             />
+            {/* Thumb */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow-md cursor-pointer border-2 transition-all"
+              style={{
+                left: `calc(${sliderPct}% - 10px)`,
+                backgroundColor: "#fff",
+                borderColor: ACCENT,
+              }}
+            />
           </div>
           <input
             type="range"
@@ -131,7 +140,7 @@ export function SearchFilters() {
             step={5000}
             value={presupuesto}
             onChange={(e) => setPresupuesto(Number(e.target.value))}
-            className="w-full"
+            className="w-full absolute opacity-0 cursor-pointer"
             style={{ accentColor: ACCENT }}
           />
           <div className="flex justify-between text-xs mt-1" style={{ color: "#aaa" }}>
