@@ -114,7 +114,8 @@ export default function BusquedaPage() {
 
           {/* MOBILE: Horizontal filter strip */}
           <div
-            className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0 bg-filter border-filter"
+            className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0"
+            style={{ backgroundColor: "var(--filter-bg)", borderColor: "var(--filter-border)" }}
           >
             <span className="text-xs font-semibold flex-shrink-0 mr-1" style={{ color: "#0A1830" }}>
               Filtros:
@@ -132,9 +133,11 @@ export default function BusquedaPage() {
 
           {/* DESKTOP: Left sidebar - Filters */}
           <aside
-            className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r bg-filter border-filter"
+            className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
+              backgroundColor: "var(--filter-bg)",
+              borderColor: "var(--filter-border)",
               overflow: "hidden",
             }}
           >
@@ -148,10 +151,12 @@ export default function BusquedaPage() {
             {/* Collapse/Expand toggle button */}
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="absolute z-10 flex items-center justify-center w-6 h-12 rounded-r-lg shadow-md transition-all duration-300 bg-filter border border-filter border-l-0"
+              className="absolute z-10 flex items-center justify-center w-6 h-12 rounded-r-lg shadow-md transition-all duration-300 border"
               style={{
                 right: -24,
                 top: 60,
+                backgroundColor: "var(--filter-bg)",
+                borderColor: "var(--filter-border)",
               }}
               aria-label={sidebarOpen ? "Colapsar filtros" : "Expandir filtros"}
             >
@@ -167,10 +172,12 @@ export default function BusquedaPage() {
           {!sidebarOpen && (
             <button
               onClick={() => setSidebarOpen(true)}
-              className="hidden md:flex absolute z-10 items-center justify-center w-6 h-12 rounded-r-lg shadow-md bg-filter border border-filter border-l-0"
+              className="hidden md:flex absolute z-10 items-center justify-center w-6 h-12 rounded-r-lg shadow-md border"
               style={{
                 left: 0,
                 top: 104,
+                backgroundColor: "var(--filter-bg)",
+                borderColor: "var(--filter-border)",
               }}
               aria-label="Expandir filtros"
             >
