@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { MapPin, DollarSign, Home, Star, ArrowUpDown, ChevronDown } from "lucide-react"
 
-const ACCENT = "#1D4ED8"
+const DARK = "#1a1a1a"
 
 const ZONAS = [
   "Todas las zonas",
@@ -57,7 +57,7 @@ export function SearchFilters() {
       {/* Zona */}
       <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <MapPin size={15} style={{ color: ACCENT }} />
+          <MapPin size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Zona</h3>
         </div>
         <div className="relative w-full">
@@ -109,42 +109,45 @@ export function SearchFilters() {
       {/* Presupuesto — slider único */}
       <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <DollarSign size={15} style={{ color: ACCENT }} />
+          <DollarSign size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Presupuesto</h3>
         </div>
         <div className="px-1 w-full">
-          <div className="flex justify-between text-xs mb-3" style={{ color: "#666" }}>
-            <span>$30.000</span>
-            <span className="font-semibold" style={{ color: ACCENT }}>{formatPrice(presupuesto)}</span>
-          </div>
-          {/* Track + fill */}
-          <div className="relative h-1.5 rounded-full mb-3" style={{ backgroundColor: "#D1D5DB" }}>
-            <div
-              className="absolute left-0 h-full rounded-full"
-              style={{ width: `${sliderPct}%`, backgroundColor: ACCENT }}
+          {/* Track + fill + slider */}
+          <div className="relative h-6 mb-2">
+            {/* Track background */}
+            <div 
+              className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 rounded-full" 
+              style={{ backgroundColor: "#D1D5DB" }}
             />
-            {/* Thumb */}
+            {/* Fill */}
             <div
-              className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow-md cursor-pointer border-2 transition-all"
+              className="absolute top-1/2 -translate-y-1/2 left-0 h-1.5 rounded-full"
+              style={{ width: `${sliderPct}%`, backgroundColor: DARK }}
+            />
+            {/* Native slider on top */}
+            <input
+              type="range"
+              min={30000}
+              max={120000}
+              step={5000}
+              value={presupuesto}
+              onChange={(e) => setPresupuesto(Number(e.target.value))}
+              className="absolute top-0 left-0 w-full h-full cursor-pointer opacity-0"
+            />
+            {/* Custom thumb */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full shadow-md border-2 pointer-events-none"
               style={{
                 left: `calc(${sliderPct}% - 10px)`,
                 backgroundColor: "#fff",
-                borderColor: ACCENT,
+                borderColor: DARK,
               }}
             />
           </div>
-          <input
-            type="range"
-            min={30000}
-            max={120000}
-            step={5000}
-            value={presupuesto}
-            onChange={(e) => setPresupuesto(Number(e.target.value))}
-            className="w-full absolute opacity-0 cursor-pointer"
-            style={{ accentColor: ACCENT }}
-          />
-          <div className="flex justify-between text-xs mt-1" style={{ color: "#aaa" }}>
+          <div className="flex justify-between text-xs" style={{ color: "#555" }}>
             <span>$30.000</span>
+            <span className="font-bold" style={{ color: DARK }}>{formatPrice(presupuesto)}</span>
             <span>$120.000</span>
           </div>
         </div>
@@ -155,7 +158,7 @@ export function SearchFilters() {
       {/* Tipo Alojamiento */}
       <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <Home size={15} style={{ color: ACCENT }} />
+          <Home size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Tipo Alojamiento</h3>
         </div>
         <div className="flex flex-col gap-2.5">
@@ -166,8 +169,8 @@ export function SearchFilters() {
                 <div
                   className="w-4 h-4 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors"
                   style={{
-                    borderColor: checked ? ACCENT : "#D1D5DB",
-                    backgroundColor: checked ? ACCENT : "#fff",
+                    borderColor: checked ? DARK : "#D1D5DB",
+                    backgroundColor: checked ? DARK : "#fff",
                   }}
                   onClick={() => toggleTipo(tipo)}
                 >
@@ -190,7 +193,7 @@ export function SearchFilters() {
       {/* Puntuación */}
       <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <Star size={15} style={{ color: ACCENT }} />
+          <Star size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Puntuación mínima</h3>
         </div>
         <div className="px-1 w-full">
@@ -199,7 +202,7 @@ export function SearchFilters() {
               <span
                 key={val}
                 className="text-xs font-semibold"
-                style={{ color: puntuacionMin === val ? ACCENT : "#888" }}
+                style={{ color: puntuacionMin === val ? DARK : "#888" }}
               >
                 {val}+
               </span>
@@ -213,7 +216,7 @@ export function SearchFilters() {
             value={puntuacionMin}
             onChange={(e) => setPuntuacionMin(Number(e.target.value))}
             className="w-full"
-            style={{ accentColor: ACCENT }}
+            style={{ accentColor: DARK }}
           />
         </div>
       </div>
@@ -223,7 +226,7 @@ export function SearchFilters() {
       {/* Ordenar Por */}
       <div className="w-full pb-4">
         <div className="flex items-center gap-2 mb-3">
-          <ArrowUpDown size={15} style={{ color: ACCENT }} />
+          <ArrowUpDown size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Ordenar Por</h3>
         </div>
         <div className="flex flex-col gap-2.5">
@@ -233,11 +236,11 @@ export function SearchFilters() {
               <label key={option} className="flex items-center gap-2.5 cursor-pointer">
                 <div
                   className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors"
-                  style={{ borderColor: selected ? ACCENT : "#D1D5DB" }}
+                  style={{ borderColor: selected ? DARK : "#D1D5DB" }}
                   onClick={() => setOrdenarPor(option)}
                 >
                   {selected && (
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: DARK }} />
                   )}
                 </div>
                 <input type="radio" name="ordenar" checked={selected} onChange={() => setOrdenarPor(option)} className="sr-only" />
