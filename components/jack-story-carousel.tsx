@@ -9,41 +9,45 @@ const STORY_SLIDES = [
     id: 1,
     image: "/images/jack-story-01.jpg",
     title: "Conoce a Jack",
+    pillLabel: "Nuestro protagonista",
     subtitle: "Un Jack Russell Terrier muy especial",
     description:
       "Jack es un perrito amigable, sociable y lleno de energía. Le encanta conocer nuevos amigos, jugar y explorar. Con sus gafas amarillas y su estilo único, Jack siempre está listo para la aventura.",
-    bgColor: "#FEF3E2",
-    accentColor: "#FFB800",
+    bgColor: "#FFF8E7",
+    accentColor: "#D4A853",
   },
   {
     id: 2,
     image: "/images/jack-story-02.jpg",
     title: "Un día difícil",
+    pillLabel: "La despedida",
     subtitle: "Cuando su buddy tuvo que partir...",
     description:
       "Un día, el mejor amigo de Jack tuvo que salir de vacaciones y no pudo llevarlo. Jack se quedó solo en casa, extrañándolo mucho y preguntándose cómo hacer para no extrañarlo tanto la próxima vez.",
-    bgColor: "#E8EEF5",
-    accentColor: "#0A1830",
+    bgColor: "#E8F5EC",
+    accentColor: "#5A9E6F",
   },
   {
     id: 3,
     image: "/images/jack-story-03.jpg",
     title: "La gran búsqueda",
+    pillLabel: "La aventura",
     subtitle: "Jack sale a explorar la ciudad",
     description:
       "Decidido a que ningún perrito pasara por lo mismo, Jack salió a recorrer las calles de la ciudad. Visitó cada hotel canino, evaluó sus instalaciones, conoció a los cuidadores y probó todas las camas.",
-    bgColor: "#E3F4EC",
-    accentColor: "#16a34a",
+    bgColor: "#E8F1F8",
+    accentColor: "#5B8DB8",
   },
   {
     id: 4,
     image: "/images/jack-story-04.jpg",
     title: "Nace JackCity",
+    pillLabel: "El comienzo",
     subtitle: "Los mejores hoteles, aprobados por Jack",
     description:
       "Después de su exhaustiva investigación, Jack seleccionó los mejores hoteles caninos de la ciudad. Ahora, cada hotel en JackCity tiene el sello de aprobación de Jack. ¡Tu mascota merece lo mejor!",
-    bgColor: "#0A1830",
-    accentColor: "#FFB800",
+    bgColor: "#F5E8F0",
+    accentColor: "#9B6B8B",
   },
 ]
 
@@ -63,7 +67,6 @@ export function JackStoryCarousel() {
   }
 
   const slide = STORY_SLIDES[currentSlide]
-  const isLastSlide = currentSlide === STORY_SLIDES.length - 1
 
   return (
     <section className="w-full" style={{ backgroundColor: "#0A1830" }}>
@@ -98,35 +101,35 @@ export function JackStoryCarousel() {
             </div>
 
             {/* Text side */}
-            <div className="flex-1 flex flex-col justify-center p-6 md:p-10 md:pr-12">
-              {/* Step indicator */}
+            <div className="flex-1 flex flex-col justify-center p-6 md:p-10 md:pl-4 md:pr-20 max-w-xl">
+              {/* Pill label */}
               <div
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-4 w-fit"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 w-fit"
                 style={{
                   backgroundColor: slide.accentColor,
-                  color: isLastSlide ? "#0A1830" : "#fff",
+                  color: "#fff",
                 }}
               >
-                <span>PASO {slide.id} DE 4</span>
+                <span>{slide.pillLabel}</span>
               </div>
 
               <h3
                 className="text-2xl md:text-3xl font-bold mb-2"
-                style={{ color: isLastSlide ? "#FFB800" : "#0A1830" }}
+                style={{ color: "#0A1830" }}
               >
                 {slide.title}
               </h3>
 
               <p
                 className="text-base md:text-lg font-medium mb-4"
-                style={{ color: isLastSlide ? "#F7EEDF" : slide.accentColor }}
+                style={{ color: slide.accentColor }}
               >
                 {slide.subtitle}
               </p>
 
               <p
                 className="text-sm md:text-base leading-relaxed"
-                style={{ color: isLastSlide ? "#D1D5DB" : "#555" }}
+                style={{ color: "#555" }}
               >
                 {slide.description}
               </p>
