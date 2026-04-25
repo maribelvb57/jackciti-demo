@@ -33,6 +33,7 @@ const STORY_SLIDES = [
     title: "La gran búsqueda",
     pillLabel: "La aventura",
     subtitle: "Jack sale a explorar la ciudad",
+    descriptionJsx: true,
     description:
       "Decidido a que ningún perrito pasara por lo mismo, Jack salió a recorrer las calles de la ciudad. Visitó cada hotel canino, evaluó sus instalaciones, conoció a los cuidadores y probó todas las camas.",
     bgColor: "#E8F1F8",
@@ -46,8 +47,8 @@ const STORY_SLIDES = [
     subtitle: "Los mejores hoteles, aprobados por Jack",
     description:
       "Después de su exhaustiva investigación, Jack seleccionó los mejores hoteles caninos de la ciudad. Ahora, cada hotel en JackCity tiene el sello de aprobación de Jack. ¡Tu mascota merece lo mejor!",
-    bgColor: "#F5E8F0",
-    accentColor: "#9B6B8B",
+    bgColor: "#FEF0F0",
+    accentColor: "#C26B6B",
   },
 ]
 
@@ -131,7 +132,16 @@ export function JackStoryCarousel() {
                 className="text-sm md:text-base leading-relaxed"
                 style={{ color: "#555" }}
               >
-                {slide.description}
+                {slide.descriptionJsx ? (
+                  <>
+                    Decidido a que ningún perrito pasara por lo mismo, Jack salió a recorrer las calles de la ciudad. Visitó cada hotel canino, evaluó sus instalaciones, conoció a los cuidadores y{" "}
+                    <strong className="font-serif font-bold" style={{ color: "#0A1830" }}>
+                      ¡probó todas las camas!
+                    </strong>
+                  </>
+                ) : (
+                  slide.description
+                )}
               </p>
             </div>
           </div>
