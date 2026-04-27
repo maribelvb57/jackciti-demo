@@ -112,7 +112,7 @@ export function SearchFilters() {
           <DollarSign size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Presupuesto</h3>
         </div>
-        <div className="px-1 w-full">
+        <div className="px-3 w-full">
           {/* Track + fill + slider */}
           <div className="relative h-6 mb-2">
             {/* Track background */}
@@ -194,7 +194,7 @@ export function SearchFilters() {
           <Star size={15} style={{ color: DARK }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Puntuación mínima</h3>
         </div>
-        <div className="px-1 w-full">
+        <div className="px-3 w-full">
           <div className="flex justify-between mb-2">
             {[6, 7, 8, 9].map((val) => (
               <span
