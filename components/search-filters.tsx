@@ -158,7 +158,7 @@ export function SearchFilters() {
       {/* Tipo Alojamiento */}
       <div className="w-full">
         <div className="flex items-center gap-2 mb-3">
-          <Home size={15} style={{ color: DARK }} />
+          <Home size={15} style={{ color: "#E05B3A" }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Tipo Alojamiento</h3>
         </div>
         <div className="flex flex-col gap-2.5">
