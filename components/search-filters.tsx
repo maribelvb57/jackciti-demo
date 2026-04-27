@@ -224,7 +224,7 @@ export function SearchFilters() {
       {/* Ordenar Por */}
       <div className="w-full pb-4">
         <div className="flex items-center gap-2 mb-3">
-          <ArrowUpDown size={15} style={{ color: DARK }} />
+          <ArrowUpDown size={15} style={{ color: "#E05B3A" }} />
           <h3 className="text-sm font-bold" style={{ color: "#0A1830" }}>Ordenar Por</h3>
         </div>
         <div className="flex flex-col gap-2.5">
@@ -234,7 +234,7 @@ export function SearchFilters() {
               <label key={option} className="flex items-center gap-2.5 cursor-pointer select-none" onClick={() => setOrdenarPor(option)}>
                 <div
                   className="w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors"
-                  style={{ borderColor: selected ? DARK : "#999" }}
+                  style={{ borderColor: selected ? "#E05B3A" : "#999", backgroundColor: selected ? "#E05B3A" : "#fff" }}
                 >
                   {selected && (
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "#fff" }} />
