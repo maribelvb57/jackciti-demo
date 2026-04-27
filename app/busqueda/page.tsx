@@ -2,9 +2,16 @@
 
 import { useState } from "react"
 import { SiteNavbar } from "@/components/site-navbar"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
 import { SearchFilters } from "@/components/search-filters"
+
+const ORDENAR_OPTIONS = [
+  "Recomendados de Jack",
+  "Precio menor a mayor",
+  "Precio mayor a menor",
+  "Mejor puntuación Usuarios",
+]
 
 const MOCK_RESULTS: ResultCardData[] = [
   {
@@ -102,6 +109,9 @@ const MOCK_RESULTS: ResultCardData[] = [
 
 export default function BusquedaPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [mobileOrdenar, setMobileOrdenar] = useState("Recomendados de Jack")
+  const [mobileOrdenarOpen, setMobileOrdenarOpen] = useState(false)
 
   return (
     <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
@@ -112,24 +122,90 @@ export default function BusquedaPage() {
       <div className="flex-1 flex justify-center">
         <div className="relative w-full max-w-[1200px] flex flex-col md:flex-row" style={{ backgroundColor: "#F3F4F6" }}>
 
-          {/* MOBILE: Horizontal filter strip */}
+          {/* MOBILE: Top pill bar */}
           <div
-            className="md:hidden flex items-center gap-2 px-4 py-3 overflow-x-auto border-b flex-shrink-0"
+            className="md:hidden flex items-center justify-between px-4 py-2.5 border-b flex-shrink-0 gap-3"
             style={{ backgroundColor: "var(--filter-bg)", borderColor: "var(--filter-border)" }}
           >
-            <span className="text-xs font-semibold flex-shrink-0 mr-1" style={{ color: "#0A1830" }}>
-              Filtros:
-            </span>
-            {["Libre de Jaulas", "Cancelación gratis", "Veterinario", "Patio exterior", "Calificación 8+"].map((f) => (
+            {/* Filtros pill */}
+            <button
+              onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold border shadow-sm transition-all flex-1 justify-center"
+              style={{
+                backgroundColor: mobileFiltersOpen ? "#0A1830" : "#fff",
+                color: mobileFiltersOpen ? "#fff" : "#0A1830",
+                borderColor: "#0A1830",
+              }}
+            >
+              <SlidersHorizontal size={13} />
+              Filtros
+            </button>
+
+            {/* Ordenar por pill + combobox */}
+            <div className="relative flex-1">
               <button
-                key={f}
-                className="flex-shrink-0 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors"
-                style={{ borderColor: "#22c55e", color: "#0A1830", backgroundColor: "#fff" }}
+                onClick={() => setMobileOrdenarOpen(!mobileOrdenarOpen)}
+                className="w-full flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold border shadow-sm transition-all justify-center"
+                style={{
+                  backgroundColor: mobileOrdenarOpen ? "#0A1830" : "#fff",
+                  color: mobileOrdenarOpen ? "#fff" : "#0A1830",
+                  borderColor: "#0A1830",
+                }}
               >
-                {f}
+                <ArrowUpDown size={13} />
+                <span className="truncate max-w-[100px]">Ordenar por</span>
+                <ChevronDown size={13} style={{ transform: mobileOrdenarOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s", flexShrink: 0 }} />
               </button>
-            ))}
+              {mobileOrdenarOpen && (
+                <div
+                  className="absolute top-full mt-1 right-0 z-50 rounded-xl border shadow-lg overflow-hidden"
+                  style={{ backgroundColor: "#fff", borderColor: "#D1D5DB", minWidth: 200 }}
+                >
+                  {ORDENAR_OPTIONS.map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => { setMobileOrdenar(option); setMobileOrdenarOpen(false) }}
+                      className="w-full px-4 py-2.5 text-left text-xs font-medium transition-colors"
+                      style={{
+                        backgroundColor: mobileOrdenar === option ? "#FEF9C3" : "transparent",
+                        color: "#0A1830",
+                      }}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* MOBILE: Filters drawer panel */}
+          {mobileFiltersOpen && (
+            <div
+              className="md:hidden border-b overflow-y-auto flex-shrink-0"
+              style={{
+                backgroundColor: "var(--filter-bg)",
+                borderColor: "var(--filter-border)",
+                maxHeight: "70vh",
+              }}
+            >
+              <div className="flex items-center justify-between px-4 pt-3 pb-1">
+                <span className="text-sm font-bold" style={{ color: "#0A1830" }}>Filtros</span>
+                <button
+                  onClick={() => setMobileFiltersOpen(false)}
+                  className="p-1 rounded-full"
+                  style={{ color: "#0A1830" }}
+                  aria-label="Cerrar filtros"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <div className="px-4 pb-4">
+                <SearchFilters />
+              </div>
+            </div>
+          )}
 
           {/* DESKTOP: Left sidebar - Filters */}
           <aside
