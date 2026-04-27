@@ -123,7 +123,7 @@ export function SearchFilters() {
             {/* Fill */}
             <div
               className="absolute top-1/2 -translate-y-1/2 left-0 h-1.5 rounded-full"
-              style={{ width: `${sliderPct}%`, backgroundColor: "var(--filter-slider)" }}
+              style={{ width: `${sliderPct}%`, backgroundColor: "#E05B3A" }}
             />
             {/* Native slider on top */}
             <input
@@ -141,13 +141,13 @@ export function SearchFilters() {
               style={{
                 left: `calc(${sliderPct}% - 10px)`,
                 backgroundColor: "#fff",
-                borderColor: "var(--filter-slider)",
+                borderColor: "#E05B3A",
               }}
             />
           </div>
           <div className="flex justify-between text-xs" style={{ color: "#555" }}>
             <span>$30.000</span>
-            <span className="font-bold" style={{ color: "var(--filter-slider)" }}>{formatPrice(presupuesto)}</span>
+            <span className="font-bold" style={{ color: "#E05B3A" }}>{formatPrice(presupuesto)}</span>
             <span>$120.000</span>
           </div>
         </div>
@@ -200,7 +200,7 @@ export function SearchFilters() {
               <span
                 key={val}
                 className="text-xs font-semibold"
-                style={{ color: puntuacionMin === val ? "var(--filter-slider)" : "#888" }}
+                style={{ color: puntuacionMin === val ? "#E05B3A" : "#888" }}
               >
                 {val}+
               </span>
@@ -214,7 +214,7 @@ export function SearchFilters() {
             value={puntuacionMin}
             onChange={(e) => setPuntuacionMin(Number(e.target.value))}
             className="w-full"
-            style={{ accentColor: "var(--filter-slider)" }}
+            style={{ accentColor: "#E05B3A" }}
           />
         </div>
       </div>
