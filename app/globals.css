@@ -5,8 +5,9 @@
 
 :root {
   /* Filter sidebar */
-  --filter-bg: #FACC15;
-  --filter-border: #EAB308;
+  --filter-bg: #E8EDF5;
+  --filter-border: #C5D0E0;
+  --filter-slider: #E05B3A;
 
   /* Petstay brand colors */
   --brand-yellow: #D4AA20;

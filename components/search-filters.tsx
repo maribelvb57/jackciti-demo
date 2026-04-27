@@ -104,7 +104,7 @@ export function SearchFilters() {
         </div>
       </div>
 
-      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+      <div className="border-t" style={{ borderColor: "#C5D0E0" }} />
 
       {/* Presupuesto — slider único */}
       <div className="w-full">
@@ -116,14 +116,14 @@ export function SearchFilters() {
           {/* Track + fill + slider */}
           <div className="relative h-6 mb-2">
             {/* Track background */}
-            <div 
-              className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 rounded-full" 
-              style={{ backgroundColor: "#D1D5DB" }}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-1.5 rounded-full"
+              style={{ backgroundColor: "#C5D0E0" }}
             />
             {/* Fill */}
             <div
               className="absolute top-1/2 -translate-y-1/2 left-0 h-1.5 rounded-full"
-              style={{ width: `${sliderPct}%`, backgroundColor: DARK }}
+              style={{ width: `${sliderPct}%`, backgroundColor: "var(--filter-slider)" }}
             />
             {/* Native slider on top */}
             <input
@@ -141,19 +141,19 @@ export function SearchFilters() {
               style={{
                 left: `calc(${sliderPct}% - 10px)`,
                 backgroundColor: "#fff",
-                borderColor: DARK,
+                borderColor: "var(--filter-slider)",
               }}
             />
           </div>
           <div className="flex justify-between text-xs" style={{ color: "#555" }}>
             <span>$30.000</span>
-            <span className="font-bold" style={{ color: DARK }}>{formatPrice(presupuesto)}</span>
+            <span className="font-bold" style={{ color: "var(--filter-slider)" }}>{formatPrice(presupuesto)}</span>
             <span>$120.000</span>
           </div>
         </div>
       </div>
 
-      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+      <div className="border-t" style={{ borderColor: "#C5D0E0" }} />
 
       {/* Tipo Alojamiento */}
       <div className="w-full">
@@ -186,7 +186,7 @@ export function SearchFilters() {
         </div>
       </div>
 
-      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+      <div className="border-t" style={{ borderColor: "#C5D0E0" }} />
 
       {/* Puntuación */}
       <div className="w-full">
@@ -200,7 +200,7 @@ export function SearchFilters() {
               <span
                 key={val}
                 className="text-xs font-semibold"
-                style={{ color: puntuacionMin === val ? DARK : "#888" }}
+                style={{ color: puntuacionMin === val ? "var(--filter-slider)" : "#888" }}
               >
                 {val}+
               </span>
@@ -214,12 +214,12 @@ export function SearchFilters() {
             value={puntuacionMin}
             onChange={(e) => setPuntuacionMin(Number(e.target.value))}
             className="w-full"
-            style={{ accentColor: DARK }}
+            style={{ accentColor: "var(--filter-slider)" }}
           />
         </div>
       </div>
 
-      <div className="border-t" style={{ borderColor: "#E8D98A" }} />
+      <div className="border-t" style={{ borderColor: "#C5D0E0" }} />
 
       {/* Ordenar Por */}
       <div className="w-full pb-4">
