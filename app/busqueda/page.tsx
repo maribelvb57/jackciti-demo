@@ -125,7 +125,7 @@ export default function BusquedaPage() {
           {/* MOBILE: Top pill bar */}
           <div
             className="md:hidden flex items-center justify-between px-4 py-2.5 border-b flex-shrink-0 gap-3"
-            style={{ backgroundColor: "var(--filter-bg)", borderColor: "var(--filter-border)" }}
+            style={{ backgroundColor: "#E8EDF5", borderColor: "#C5D0E0" }}
           >
             {/* Filtros pill */}
             <button
@@ -185,8 +185,8 @@ export default function BusquedaPage() {
             <div
               className="md:hidden border-b overflow-y-auto flex-shrink-0"
               style={{
-                backgroundColor: "var(--filter-bg)",
-                borderColor: "var(--filter-border)",
+                backgroundColor: "#E8EDF5",
+                borderColor: "#C5D0E0",
                 maxHeight: "70vh",
               }}
             >
@@ -212,8 +212,8 @@ export default function BusquedaPage() {
             className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
-              backgroundColor: "var(--filter-bg)",
-              borderColor: "var(--filter-border)",
+              backgroundColor: "#E8EDF5",
+              borderColor: "#C5D0E0",
               overflow: "hidden",
             }}
           >
@@ -231,8 +231,8 @@ export default function BusquedaPage() {
               style={{
                 right: -24,
                 top: 60,
-                backgroundColor: "var(--filter-bg)",
-                borderColor: "var(--filter-border)",
+                backgroundColor: "#E8EDF5",
+                border: "1px solid #C5D0E0",
               }}
               aria-label={sidebarOpen ? "Colapsar filtros" : "Expandir filtros"}
             >
@@ -252,8 +252,8 @@ export default function BusquedaPage() {
               style={{
                 left: 0,
                 top: 104,
-                backgroundColor: "var(--filter-bg)",
-                borderColor: "var(--filter-border)",
+                backgroundColor: "#E8EDF5",
+                border: "1px solid #C5D0E0",
               }}
               aria-label="Expandir filtros"
             >
