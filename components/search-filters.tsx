@@ -169,8 +169,8 @@ export function SearchFilters() {
                 <div
                   className="w-4 h-4 mt-0.5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors"
                   style={{
-                    borderColor: checked ? DARK : "#999",
-                    backgroundColor: checked ? DARK : "#fff",
+                    borderColor: checked ? "#E05B3A" : "#999",
+                    backgroundColor: checked ? "#E05B3A" : "#fff",
                   }}
                 >
                   {checked && (
