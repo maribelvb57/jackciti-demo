@@ -21,7 +21,7 @@ export function SiteNavbar() {
             />
             <span className="text-sm font-bold tracking-tight text-white">JackCity</span>  &nbsp;
 
-            <span className="text-sm text-white">33</span>
+            <span className="text-sm text-white">35</span>
 
           </div>
 
