@@ -68,7 +68,7 @@ export function SearchBenefitsBanner() {
 
         {/* Speech bubble */}
         <div
-          className="relative rounded-xl px-3 py-2.5 text-xs font-bold leading-snug text-center"
+          className="relative rounded-xl px-3 py-2 text-xs font-bold leading-snug text-center"
           style={{ backgroundColor: AMBER, color: NAVY, minWidth: 120, marginBottom: 4 }}
         >
           Aquí los perros la pasan increible.
