@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { AppQueryClientProvider } from '@/providers/query-client-provider'
 import { SearchStoreProvider } from '@/providers/search-store-provider'
-import { SiteNavbar } from '@/components/site-navbar'
 import './globals.css'
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -54,13 +53,11 @@ export default function RootLayout({
   return (
     <html lang="es" className="bg-background">
       <body className="font-sans antialiased">
-        <SiteNavbar />
         <AppQueryClientProvider>
-            <SearchStoreProvider>
-              {children}
-            </SearchStoreProvider>
-          </AppQueryClientProvider>
-        
+          <SearchStoreProvider>
+            {children}
+          </SearchStoreProvider>
+        </AppQueryClientProvider>
       </body>
     </html>
   )

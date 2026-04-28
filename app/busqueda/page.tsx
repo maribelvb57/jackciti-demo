@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
+import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
 import { SearchFilters } from "@/components/search-filters"
@@ -130,6 +131,9 @@ export default function BusquedaPage() {
 
   return (
     <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
+      {/* Top navigation */}
+      <SiteNavbar />
+
       {/* Main content area */}
       <div className="flex-1 flex justify-center">
         <div className="relative w-full max-w-[1200px] flex flex-col md:flex-row" style={{ backgroundColor: "#F3F4F6" }}>
