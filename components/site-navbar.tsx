@@ -4,8 +4,7 @@ import { User } from "lucide-react"
 
 export function SiteNavbar() {
   return (
-    <nav className="w-full flex justify-center" style={{ backgroundColor: "#0D2B45" }}>
-      <div className="w-full max-w-[1200px] px-6 md:px-10 flex items-center h-14">
+    <nav className="w-full px-4 md:px-6 flex items-center h-14" style={{ backgroundColor: "#0D2B45" }}>
 
         {/* Logo */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
@@ -45,7 +44,6 @@ export function SiteNavbar() {
           </button>
         </div>
 
-      </div>
     </nav>
   )
 }

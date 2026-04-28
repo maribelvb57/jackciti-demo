@@ -130,13 +130,13 @@ export default function BusquedaPage() {
   })
 
   return (
-    <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
-      {/* Top navigation */}
-      <SiteNavbar />
+    <main className="min-h-screen flex flex-col items-center" style={{ backgroundColor: "#0B1F3A" }}>
+      <div className="w-full max-w-[1200px] flex flex-col">
+        {/* Top navigation */}
+        <SiteNavbar />
 
-      {/* Main content area */}
-      <div className="flex-1 flex justify-center">
-        <div className="relative w-full max-w-[1200px] flex flex-col md:flex-row" style={{ backgroundColor: "#F3F4F6" }}>
+        {/* Main content area */}
+        <div className="relative w-full flex flex-col md:flex-row flex-1" style={{ backgroundColor: "#F3F4F6" }}>
 
           {/* MOBILE: Top pill bar */}
           <div
