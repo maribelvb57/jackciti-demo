@@ -5,9 +5,10 @@
 
 :root {
   /* Filter sidebar */
-  --filter-bg: #E8EDF5;
-  --filter-border: #C5D0E0;
-  --filter-slider: #E05B3A;
+  --filter-bg: #ffffff;
+  --filter-border: #E5E7EB;
+  --filter-slider: #F5A623;
+  --filter-accent: #F5A623;
 
   /* Petstay brand colors */
   --brand-yellow: #D4AA20;
