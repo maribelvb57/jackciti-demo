@@ -206,7 +206,7 @@ export default function BusquedaPage() {
               style={{
                 backgroundColor: "#ffffff",
                 borderColor: "#E5E7EB",
-                maxHeight: "70vh",
+                maxHeight: "90vh",
               }}
             >
               <div className="flex items-center justify-between px-4 pt-3 pb-1">
