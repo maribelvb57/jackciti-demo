@@ -6,6 +6,7 @@ import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
 import { SearchFilters } from "@/components/search-filters"
+import { WhyJackCity } from "@/components/why-jackcity"
 
 const ORDENAR_OPTIONS = [
   "Recomendados de Jack",
@@ -276,8 +277,8 @@ export default function BusquedaPage() {
             </button>
           )}
 
-          {/* Right section - Search results */}
-          <section className="flex-1 p-4 md:p-6 overflow-auto">
+          {/* Center section - Search results */}
+          <section className="flex-1 p-4 md:p-6 overflow-auto min-w-0">
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
               Resultados de búsqueda
             </h1>
@@ -303,6 +304,11 @@ export default function BusquedaPage() {
               </div>
             )}
           </section>
+
+          {/* Right column - Why JackCity */}
+          <aside className="hidden lg:block flex-shrink-0 p-4 pt-6" style={{ width: 260 }}>
+            <WhyJackCity />
+          </aside>
         </div>
       </div>
     </main>
