@@ -1,6 +1,5 @@
 "use client"
 
-import { Show, SignInButton, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
 
 export function SiteNavbar() {
@@ -37,20 +36,13 @@ export function SiteNavbar() {
               ))}
             </div>
             <div className="md:ml-2 flex items-center gap-2">
-              <Show when="signed-out">
-                <SignInButton>
-                  <button
-                    type="button"
-                    className="px-3 py-1 text-xs font-semibold rounded-md transition-colors"
-                    style={{ backgroundColor: "#FF6B5B", color: "#ffffff" }}
-                  >
-                    Ingresar
-                  </button>
-                </SignInButton>
-              </Show>
-              <Show when="signed-in">
-                <UserButton />
-              </Show>
+              <button
+                type="button"
+                className="px-3 py-1 text-xs font-semibold rounded-md transition-colors"
+                style={{ backgroundColor: "#FF6B5B", color: "#ffffff" }}
+              >
+                Ingresar
+              </button>
             </div>
           </div>
         </div>

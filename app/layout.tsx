@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { ClerkProvider } from '@clerk/nextjs'
 import { AppQueryClientProvider } from '@/providers/query-client-provider'
 import { SearchStoreProvider } from '@/providers/search-store-provider'
 import './globals.css'
@@ -54,13 +53,13 @@ export default function RootLayout({
   return (
     <html lang="es" className="bg-background">
       <body className="font-sans antialiased">
-        <ClerkProvider>
+        
           <AppQueryClientProvider>
             <SearchStoreProvider>
               {children}
             </SearchStoreProvider>
           </AppQueryClientProvider>
-        </ClerkProvider>
+        
       </body>
     </html>
   )
