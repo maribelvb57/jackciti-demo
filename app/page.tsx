@@ -9,30 +9,32 @@ import { SiteFooter } from "@/components/site-footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
-      {/* Top navigation */}
-      <SiteNavbar />
+    <main className="min-h-screen flex flex-col items-center" style={{ backgroundColor: "#0B1F3A" }}>
+      <div className="w-full max-w-[1200px] flex flex-col">
+        {/* Top navigation */}
+        <SiteNavbar />
 
-      {/* Section 1: Hero header */}
-      <HeroHeader />
+        {/* Section 1: Hero header */}
+        <HeroHeader />
 
-      {/* Section 2: Search bar (attached to header) */}
-      <SearchBar />
+        {/* Section 2: Search bar (attached to header) */}
+        <SearchBar />
 
-      {/* Section 3: Promotional */}
-      <PromoSection />
+        {/* Section 3: Promotional */}
+        <PromoSection />
 
-      {/* Section 4: How it works */}
-      <HowItWorks />
+        {/* Section 4: How it works */}
+        <HowItWorks />
 
-      {/* Section 5: Testimonials */}
-      <Testimonials />
+        {/* Section 5: Testimonials */}
+        <Testimonials />
 
-      {/* Section 6: Jack's Story Carousel */}
-      <JackStoryCarousel />
+        {/* Section 6: Jack's Story Carousel */}
+        <JackStoryCarousel />
 
-      {/* Section 7: Footer */}
-      <SiteFooter />
+        {/* Section 7: Footer */}
+        <SiteFooter />
+      </div>
     </main>
   )
 }

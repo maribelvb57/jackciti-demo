@@ -53,13 +53,11 @@ export default function RootLayout({
   return (
     <html lang="es" className="bg-background">
       <body className="font-sans antialiased">
-        
-          <AppQueryClientProvider>
-            <SearchStoreProvider>
-              {children}
-            </SearchStoreProvider>
-          </AppQueryClientProvider>
-        
+        <AppQueryClientProvider>
+          <SearchStoreProvider>
+            {children}
+          </SearchStoreProvider>
+        </AppQueryClientProvider>
       </body>
     </html>
   )

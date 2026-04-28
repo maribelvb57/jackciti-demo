@@ -1,52 +1,49 @@
 "use client"
 
-import Image from "next/image"
+import { User } from "lucide-react"
 
 export function SiteNavbar() {
   return (
-    <nav className="sticky top-0 z-50">
-      <div className="flex items-center justify-center">
-        <div
-          className="w-full max-w-[1200px] px-4 md:px-6 flex items-center justify-between h-11"
-          style={{ backgroundColor: "#004d99" }}
-        >
-          {/* Logo compacto */}
-          <div className="flex items-center gap-2">
-            <Image
-              src="/logo-02.png"
-              alt="JackCity"
-              width={28}
-              height={28}
-              className="rounded-full"
-            />
-            <span className="text-sm font-bold tracking-tight text-white">JackCity   v37</span>
-          </div>
+    <nav className="w-full px-4 md:px-6 flex items-center h-14" style={{ backgroundColor: "#0D2B45" }}>
 
-          {/* Links */}
-          <div className="flex items-center">
-            <div className="hidden md:flex items-center gap-1">
-              {["Hotel", "Cómo Funciona", "Testimonios", "Contacto"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="px-3 py-1 text-xs font-medium text-white rounded-md transition-colors hover:bg-white/20"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-            <div className="md:ml-2 flex items-center gap-2">
-              <button
-                type="button"
-                className="px-3 py-1 text-xs font-semibold rounded-md transition-colors"
-                style={{ backgroundColor: "#FF6B5B", color: "#ffffff" }}
-              >
-                Ingresar
-              </button>
-            </div>
-          </div>
+        {/* Logo */}
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          <img
+            src="/images/dog-banner.png"
+            alt="JackCity mascot"
+            className="w-9 h-9 object-contain"
+          />
+          <span className="text-lg font-bold tracking-tight">
+            <span style={{ color: "#ffffff" }}>Jack</span>
+            <span style={{ color: "#FFC43D" }}>City</span>
+          </span>
+          <span className="text-sm font-medium ml-1" style={{ color: "#8899AA" }}>35</span>
         </div>
-      </div>
+
+        {/* Nav links + button pushed to the right */}
+        <div className="hidden md:flex items-center gap-1 ml-auto">
+          {["Hotel", "Cómo Funciona", "Testimonios", "Contacto"].map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="px-3 py-1.5 text-sm font-medium rounded-lg transition-colors hover:bg-white/10"
+              style={{ color: "#ffffff" }}
+            >
+              {item}
+            </a>
+          ))}
+
+          {/* Ingresar button */}
+          <button
+            type="button"
+            className="ml-3 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
+          >
+            <User size={13} strokeWidth={2.5} />
+            Ingresar
+          </button>
+        </div>
+
     </nav>
   )
 }

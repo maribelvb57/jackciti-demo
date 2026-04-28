@@ -5,19 +5,32 @@
 
 :root {
   /* Filter sidebar */
-  --filter-bg: #E8EDF5;
-  --filter-border: #C5D0E0;
-  --filter-slider: #E05B3A;
+  --filter-bg: #ffffff;
+  --filter-border: #E5E7EB;
+  --filter-slider: #F5A623;
+  --filter-accent: #F5A623;
 
-  /* Petstay brand colors */
-  --brand-yellow: #D4AA20;
-  --brand-yellow-light: #F0CC40;
-  --brand-yellow-bg: #FDF6D8;
-  --brand-green: #5C7A4A;
-  --brand-green-light: #7A9E64;
-  --brand-green-bg: #EEF4E8;
-  --accent-orange: #D97230;
-  --accent-orange-light: #F0905A;
+  /* =============================================
+     JACKCITY COLOR PALETTE - Base Colors
+     ============================================= */
+  
+  /* Primary Colors */
+  --jc-navy: #0D2B45;           /* Dark navy - text, headers */
+  --jc-blue: #1E56A0;           /* Medium blue - links, accents */
+  --jc-yellow: #FFC43D;         /* Golden yellow - primary buttons, highlights */
+  --jc-coral: #FF6B5E;          /* Coral/salmon - accent, alerts */
+  --jc-green: #2E7D32;          /* Green - success, benefits */
+  --jc-gray: #F6F7F9;           /* Light gray - backgrounds */
+
+  /* Legacy Petstay brand colors (for backwards compatibility) */
+  --brand-yellow: #FFC43D;
+  --brand-yellow-light: #FFD873;
+  --brand-yellow-bg: #FEF9E7;
+  --brand-green: #2E7D32;
+  --brand-green-light: #4CAF50;
+  --brand-green-bg: #E8F5E9;
+  --accent-orange: #FF6B5E;
+  --accent-orange-light: #FF8A80;
   --warm-cream: #FBF8F1;
   --warm-cream-dark: #F2EDE0;
 

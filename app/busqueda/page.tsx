@@ -6,6 +6,7 @@ import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
 import { SearchFilters } from "@/components/search-filters"
+import { SearchBenefitsBanner } from "@/components/search-benefits-banner"
 
 const ORDENAR_OPTIONS = [
   "Recomendados de Jack",
@@ -27,6 +28,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     nights: 5,
     price: 178000,
     imageUrl: "/images/hotel-patitas-inn.jpg",
+    recommended: true,
   },
   {
     name: "Hostal Huellitas",
@@ -128,18 +130,21 @@ export default function BusquedaPage() {
   })
 
   return (
-    <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
-      {/* Top navigation */}
-      <SiteNavbar />
+    <main className="min-h-screen flex flex-col items-center" style={{ backgroundColor: "#0B1F3A" }}>
+      <div className="w-full max-w-[1200px] flex flex-col">
+        {/* Top navigation */}
+        <SiteNavbar />
 
-      {/* Main content area */}
-      <div className="flex-1 flex justify-center">
-        <div className="relative w-full max-w-[1200px] flex flex-col md:flex-row" style={{ backgroundColor: "#F3F4F6" }}>
+        {/* Benefits banner - Full width */}
+        <SearchBenefitsBanner />
+
+        {/* Main content area */}
+        <div className="relative w-full flex flex-col md:flex-row flex-1" style={{ backgroundColor: "#F3F4F6" }}>
 
           {/* MOBILE: Top pill bar */}
           <div
             className="md:hidden flex items-center justify-between px-4 py-2.5 border-b flex-shrink-0 gap-3"
-            style={{ backgroundColor: "#E8EDF5", borderColor: "#C5D0E0" }}
+            style={{ backgroundColor: "#ffffff", borderColor: "#E5E7EB" }}
           >
             {/* Filtros pill */}
             <button
@@ -199,9 +204,9 @@ export default function BusquedaPage() {
             <div
               className="md:hidden border-b overflow-y-auto flex-shrink-0"
               style={{
-                backgroundColor: "#E8EDF5",
-                borderColor: "#C5D0E0",
-                maxHeight: "70vh",
+                backgroundColor: "#ffffff",
+                borderColor: "#E5E7EB",
+                maxHeight: "50vh",
               }}
             >
               <div className="flex items-center justify-between px-4 pt-3 pb-1">
@@ -226,8 +231,8 @@ export default function BusquedaPage() {
             className="hidden md:block relative flex-shrink-0 transition-all duration-300 ease-in-out border-r"
             style={{
               width: sidebarOpen ? 300 : 0,
-              backgroundColor: "#E8EDF5",
-              borderColor: "#C5D0E0",
+              backgroundColor: "#ffffff",
+              borderColor: "#E5E7EB",
               overflow: "hidden",
             }}
           >
@@ -245,8 +250,8 @@ export default function BusquedaPage() {
               style={{
                 right: -24,
                 top: 60,
-                backgroundColor: "#E8EDF5",
-                border: "1px solid #C5D0E0",
+                backgroundColor: "#ffffff",
+                border: "1px solid #E5E7EB",
               }}
               aria-label={sidebarOpen ? "Colapsar filtros" : "Expandir filtros"}
             >
@@ -266,8 +271,8 @@ export default function BusquedaPage() {
               style={{
                 left: 0,
                 top: 104,
-                backgroundColor: "#E8EDF5",
-                border: "1px solid #C5D0E0",
+                backgroundColor: "#ffffff",
+                border: "1px solid #E5E7EB",
               }}
               aria-label="Expandir filtros"
             >
@@ -278,7 +283,7 @@ export default function BusquedaPage() {
           {/* Right section - Search results */}
           <section className="flex-1 p-4 md:p-6 overflow-auto">
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
-              Resultados de búsqueda
+              Resultados de busqueda
             </h1>
 
             {isLoading && (
@@ -302,6 +307,9 @@ export default function BusquedaPage() {
               </div>
             )}
           </section>
+
+          {/* Right margin spacer - 57px */}
+          <div style={{ width: "57px", flexShrink: 0 }} />
         </div>
       </div>
     </main>
