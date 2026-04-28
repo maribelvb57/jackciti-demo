@@ -281,7 +281,7 @@ export default function BusquedaPage() {
           )}
 
           {/* Right section - Search results */}
-          <section className="p-4 md:p-6 overflow-auto" style={{ maxWidth: "calc(100% - 120px)" }}>
+          <section className="p-4 md:p-6 overflow-auto" style={{ maxWidth: "calc(100% - 80px)" }}>
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
               Resultados de busqueda
             </h1>
