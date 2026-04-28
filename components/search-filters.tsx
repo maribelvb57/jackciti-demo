@@ -4,7 +4,7 @@ import { useState } from "react"
 import { MapPin, DollarSign, Home, Star, ArrowUpDown, ChevronDown } from "lucide-react"
 
 const NAVY = "#0A1830"
-const AMBER = "#F5A623"
+const AMBER = "#FFC43D"
 const GRAY = "#9CA3AF"
 const SEPARATOR = "#F3F4F6"
 

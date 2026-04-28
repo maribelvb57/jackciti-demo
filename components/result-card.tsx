@@ -45,7 +45,7 @@ export function ResultCard({ data }: ResultCardProps) {
         {data.recommended && (
           <div
             className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold leading-tight"
-            style={{ backgroundColor: "#FACC15", color: "#0A1830" }}
+            style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
           >
             <Star size={12} fill="#0A1830" strokeWidth={0} />
             <span>Recomendado<br />por Jack</span>
@@ -134,7 +134,7 @@ export function ResultCard({ data }: ResultCardProps) {
           {/* CTA button */}
           <button
             className="flex items-center gap-1 px-5 py-3 rounded-xl font-bold text-sm flex-shrink-0 transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "#FACC15", color: "#0A1830" }}
+            style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
           >
             Ver detalles
             <span className="text-base leading-none">›</span>
