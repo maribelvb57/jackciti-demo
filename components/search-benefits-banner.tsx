@@ -24,8 +24,8 @@ const BENEFITS = [
 export function SearchBenefitsBanner() {
   return (
     <div
-      className="relative rounded-2xl flex items-center justify-between gap-6 px-6 py-4 mb-3 overflow-visible"
-      style={{ backgroundColor: BG_CREAM }}
+      className="relative rounded-2xl flex items-center justify-between gap-6 px-6 py-4 overflow-visible"
+      style={{ backgroundColor: BG_CREAM, marginBottom: "7px" }}
     >
       {/* Decorative shine element */}
       <div
