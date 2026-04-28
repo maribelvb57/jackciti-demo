@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
+import { AppQueryClientProvider } from '@/providers/query-client-provider'
+import { SearchStoreProvider } from '@/providers/search-store-provider'
 import './globals.css'
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -53,7 +55,11 @@ export default function RootLayout({
     <html lang="es" className="bg-background">
       <body className="font-sans antialiased">
         <ClerkProvider>
-          {children}
+          <AppQueryClientProvider>
+            <SearchStoreProvider>
+              {children}
+            </SearchStoreProvider>
+          </AppQueryClientProvider>
         </ClerkProvider>
       </body>
     </html>
