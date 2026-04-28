@@ -1,6 +1,6 @@
 "use client"
 
-import { ShieldCheck, Heart, Camera, Zap } from "lucide-react"
+import { ShieldCheck, Heart, Camera } from "lucide-react"
 
 const AMBER = "#FFC43D"
 const NAVY = "#0D2B45"
@@ -18,10 +18,6 @@ const BENEFITS = [
   {
     icon: <Camera size={24} strokeWidth={2} style={{ color: NAVY }} />,
     title: "Transparencia 24/7",
-  },
-  {
-    icon: <Zap size={24} strokeWidth={2} style={{ color: NAVY }} />,
-    title: "Más que un lugar, una experiencia feliz para tu mejor amigo.",
   },
 ]
 
