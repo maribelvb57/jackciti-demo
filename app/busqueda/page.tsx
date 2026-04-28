@@ -278,7 +278,7 @@ export default function BusquedaPage() {
           )}
 
           {/* Right section - Search results */}
-          <section className="p-4 md:p-6 overflow-auto" style={{ maxWidth: "calc(100% - 170px)" }}>
+          <section className="p-4 md:p-6 overflow-auto" style={{ maxWidth: "calc(100% - 120px)" }}>
             {/* Benefits banner */}
             <SearchBenefitsBanner />
 
@@ -308,8 +308,8 @@ export default function BusquedaPage() {
             )}
           </section>
 
-          {/* Right margin spacer - 170px */}
-          <div style={{ width: "170px", flexShrink: 0 }} />
+          {/* Right margin spacer - 120px */}
+          <div style={{ width: "120px", flexShrink: 0 }} />
         </div>
       </div>
     </main>
