@@ -78,7 +78,7 @@ export function SearchBenefitsBanner() {
             className="flex justify-center mt-1"
             style={{ fontSize: "14px" }}
           >
-            ❤️
+            💛
           </div>
           {/* Tail pointing left */}
           <span
