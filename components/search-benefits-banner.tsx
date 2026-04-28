@@ -61,9 +61,9 @@ export function SearchBenefitsBanner() {
       <div className="hidden lg:flex items-end gap-3 flex-shrink-0 relative">
         {/* Dog image */}
         <img
-          src="/images/dog-banner.jpg"
+          src="/images/dog-banner.png"
           alt="Jack el perro"
-          className="w-24 h-24 object-cover rounded-lg shadow-md"
+          className="w-24 h-24 object-contain flex-shrink-0"
         />
 
         {/* Speech bubble */}
