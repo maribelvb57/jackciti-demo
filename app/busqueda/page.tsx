@@ -27,6 +27,7 @@ const MOCK_RESULTS: ResultCardData[] = [
     nights: 5,
     price: 178000,
     imageUrl: "/images/hotel-patitas-inn.jpg",
+    recommended: true,
   },
   {
     name: "Hostal Huellitas",

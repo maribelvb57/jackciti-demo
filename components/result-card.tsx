@@ -1,7 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { MapPin, Check } from "lucide-react"
+import { MapPin, Check, Heart, Star } from "lucide-react"
+import { useState } from "react"
 
 export type ResultCardData = {
   name: string
@@ -15,6 +16,7 @@ export type ResultCardData = {
   nights: number
   price: number
   imageUrl: string
+  recommended?: boolean
 }
 
 type ResultCardProps = {
@@ -22,104 +24,121 @@ type ResultCardProps = {
 }
 
 export function ResultCard({ data }: ResultCardProps) {
+  const [wished, setWished] = useState(false)
+
   return (
     <div
-      className="flex flex-col sm:flex-row rounded-2xl border overflow-hidden"
-      style={{
-        borderColor: "#D1D5DB",
-        backgroundColor: "#FFFFFF",
-      }}
+      className="flex flex-col sm:flex-row rounded-2xl border overflow-hidden bg-white"
+      style={{ borderColor: "#E2E8F0" }}
     >
-      {/* Photo — top on mobile, left on desktop */}
-      <div
-        className="relative flex-shrink-0 w-full sm:w-[240px] md:w-[280px]"
-        style={{ minHeight: 200 }}
-      >
+      {/* Photo */}
+      <div className="relative flex-shrink-0 w-full sm:w-[260px] md:w-[300px]" style={{ minHeight: 220 }}>
         <Image
           src={data.imageUrl}
           alt={data.name}
           fill
           className="object-cover"
-          sizes="(max-width: 640px) 100vw, 280px"
+          sizes="(max-width: 640px) 100vw, 300px"
         />
+
+        {/* Jack recommended badge */}
+        {data.recommended && (
+          <div
+            className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-bold leading-tight"
+            style={{ backgroundColor: "#FACC15", color: "#0A1830" }}
+          >
+            <Star size={12} fill="#0A1830" strokeWidth={0} />
+            <span>Recomendado<br />por Jack</span>
+          </div>
+        )}
+
+        {/* Wishlist heart */}
+        <button
+          onClick={() => setWished(!wished)}
+          aria-label="Guardar en favoritos"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-colors"
+          style={{ backgroundColor: "#fff" }}
+        >
+          <Heart
+            size={16}
+            strokeWidth={2}
+            style={{ color: wished ? "#E05B3A" : "#555", fill: wished ? "#E05B3A" : "none" }}
+          />
+        </button>
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 p-4 md:p-6">
-        {/* Top section */}
-        <div className="flex-1">
-          {/* Name */}
-          <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-3 leading-tight" style={{ color: "#0A1830" }}>
-            {data.name}
-          </h2>
+      <div className="flex flex-col flex-1 p-4 md:p-5 gap-2">
 
-          {/* Score + reviews */}
-          <div className="flex items-center gap-2 md:gap-3 mb-2 md:mb-3">
-            <div
-              className="flex items-center justify-center w-10 h-8 md:w-12 md:h-10 rounded-lg text-white font-bold text-sm md:text-base flex-shrink-0"
-              style={{ backgroundColor: "#1a6b4a" }}
-            >
-              {data.score.toFixed(1).replace(".", ",")}
-            </div>
-            <span className="text-sm md:text-base" style={{ color: "#444" }}>
-              <span className="font-semibold" style={{ color: "#222" }}>{data.scoreLabel}</span>
-              {" · "}
-              {data.reviewCount} comentarios
-            </span>
-          </div>
+        {/* Name */}
+        <h2 className="text-lg md:text-2xl font-bold leading-tight" style={{ color: "#0A1830" }}>
+          {data.name}
+        </h2>
 
-          {/* Location */}
-          <div className="flex items-center gap-2 mb-3 md:mb-4">
-            <div
-              className="flex items-center justify-center w-7 h-7 md:w-9 md:h-9 rounded-lg border flex-shrink-0"
-              style={{ borderColor: "#D1D5DB" }}
-            >
-              <MapPin size={15} style={{ color: "#444" }} />
-            </div>
-            <span className="text-sm md:text-base" style={{ color: "#444" }}>
-              {data.address}
-            </span>
-          </div>
-
-          {/* Features box */}
+        {/* Score + reviews */}
+        <div className="flex items-center gap-2">
           <div
-            className="rounded-xl px-4 py-3 md:px-5 md:py-4 mb-3 md:mb-4"
-            style={{ backgroundColor: "#E8F5F0" }}
+            className="flex items-center justify-center px-2 py-0.5 rounded-md text-white font-bold text-sm flex-shrink-0"
+            style={{ backgroundColor: "#1a6b4a" }}
           >
-            <ul className="flex flex-col gap-1">
-              {data.features.map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-xs md:text-sm" style={{ color: "#1a1a1a" }}>
-                  <Check size={13} style={{ color: "#16a34a", flexShrink: 0 }} strokeWidth={2.5} />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            {data.score.toFixed(1).replace(".", ",")}
           </div>
+          <span className="text-sm" style={{ color: "#333" }}>
+            <span className="font-semibold">{data.scoreLabel}</span>
+            {" · "}
+            {data.reviewCount} comentarios
+          </span>
         </div>
 
-        {/* Bottom: Pricing block */}
-        <div className="flex flex-row sm:flex-col items-end justify-between sm:items-end gap-0.5 pt-2 border-t sm:border-t-0" style={{ borderColor: "#F0EDE6" }}>
-          <div className="flex flex-col items-start sm:items-end">
+        {/* Location */}
+        <div className="flex items-center gap-1.5">
+          <MapPin size={14} style={{ color: "#555", flexShrink: 0 }} />
+          <span className="text-sm" style={{ color: "#555" }}>{data.address}</span>
+        </div>
+
+        {/* Features box */}
+        <div
+          className="rounded-xl px-4 py-3"
+          style={{ backgroundColor: "#EEF7F2" }}
+        >
+          <ul className="flex flex-col gap-1">
+            {data.features.map((feature) => (
+              <li key={feature} className="flex items-center gap-2 text-sm" style={{ color: "#1a1a1a" }}>
+                <Check size={13} style={{ color: "#16a34a", flexShrink: 0 }} strokeWidth={2.5} />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Bottom row: cancellation + pets/nights | price + CTA */}
+        <div className="flex items-end justify-between gap-2 mt-auto pt-1">
+          {/* Left: cancellation + details */}
+          <div className="flex flex-col gap-0.5">
             {data.freeCancellation && (
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <Check size={13} style={{ color: "#16a34a" }} strokeWidth={2.5} />
-                <span className="text-xs md:text-sm font-semibold" style={{ color: "#16a34a" }}>
-                  Cancelación gratis
-                </span>
+              <div className="flex items-center gap-1.5">
+                <Check size={13} style={{ color: "#16a34a", flexShrink: 0 }} strokeWidth={2.5} />
+                <span className="text-sm font-semibold" style={{ color: "#16a34a" }}>Cancelación gratis</span>
               </div>
             )}
-            <p className="text-xs md:text-base" style={{ color: "#555" }}>
+            <p className="text-xs" style={{ color: "#777" }}>
               {data.petCount} {data.petCount === 1 ? "mascota" : "mascotas"}, {data.nights} {data.nights === 1 ? "noche" : "noches"}
             </p>
-          </div>
-          <div className="flex flex-col items-end">
-            <p className="text-2xl md:text-4xl font-bold leading-tight" style={{ color: "#0A1830" }}>
-              $ {data.price.toLocaleString("es-CL")}
+            {/* Price */}
+            <p className="text-2xl md:text-3xl font-bold leading-tight mt-1" style={{ color: "#0A1830" }}>
+              ${data.price.toLocaleString("es-CL")}
             </p>
-            <p className="text-xs md:text-sm" style={{ color: "#777" }}>
-              IVA incluído
-            </p>
+            <p className="text-xs" style={{ color: "#888" }}>IVA incluido</p>
           </div>
+
+          {/* CTA button */}
+          <button
+            className="flex items-center gap-1 px-5 py-3 rounded-xl font-bold text-sm flex-shrink-0 transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#FACC15", color: "#0A1830" }}
+          >
+            Ver detalles
+            <span className="text-base leading-none">›</span>
+          </button>
         </div>
       </div>
     </div>
