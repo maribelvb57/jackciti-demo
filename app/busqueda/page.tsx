@@ -135,6 +135,9 @@ export default function BusquedaPage() {
         {/* Top navigation */}
         <SiteNavbar />
 
+        {/* Benefits banner - Full width */}
+        <SearchBenefitsBanner />
+
         {/* Main content area */}
         <div className="relative w-full flex flex-col md:flex-row flex-1" style={{ backgroundColor: "#F3F4F6" }}>
 
@@ -279,9 +282,6 @@ export default function BusquedaPage() {
 
           {/* Right section - Search results */}
           <section className="p-4 md:p-6 overflow-auto" style={{ maxWidth: "calc(100% - 120px)" }}>
-            {/* Benefits banner */}
-            <SearchBenefitsBanner />
-
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
               Resultados de busqueda
             </h1>
