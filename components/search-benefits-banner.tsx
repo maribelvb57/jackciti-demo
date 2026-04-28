@@ -1,0 +1,78 @@
+import { ShieldCheck, Heart, Camera, Smile } from "lucide-react"
+
+const BENEFITS = [
+  {
+    icon: <ShieldCheck size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
+    title: "Seguridad ante todo",
+  },
+  {
+    icon: <Heart size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
+    title: "Cuidado y amor garantizado",
+  },
+  {
+    icon: <Camera size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
+    title: "Transparencia 24/7",
+  },
+  {
+    icon: <Smile size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
+    title: "Más que un lugar, una experiencia feliz para tu mejor amigo.",
+  },
+]
+
+export function SearchBenefitsBanner() {
+  return (
+    <div
+      className="rounded-2xl flex items-center justify-between gap-4 px-5 py-4 mb-5 overflow-hidden"
+      style={{ backgroundColor: "#FDF6E3", border: "1px solid #F0E4C0" }}
+    >
+      {/* Benefits list */}
+      <div className="flex items-center gap-6 flex-1 flex-wrap">
+        {BENEFITS.map((b, i) => (
+          <div key={i} className="flex items-center gap-2.5 min-w-[120px]">
+            <div
+              className="flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0"
+              style={{ backgroundColor: "#FEF0C7" }}
+            >
+              {b.icon}
+            </div>
+            <span className="text-xs font-semibold leading-snug" style={{ color: "#0A1830", maxWidth: 100 }}>
+              {b.title}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Dog image + speech bubble */}
+      <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
+        {/* Speech bubble */}
+        <div
+          className="relative rounded-2xl px-3 py-2 text-xs font-semibold leading-snug text-center"
+          style={{ backgroundColor: "#FEF0C7", color: "#0A1830", maxWidth: 140 }}
+        >
+          Aqui los perros la pasan increible.
+          <span style={{ color: "#F5A623" }}> Como se merecen!</span>
+          {/* Tail pointing right */}
+          <span
+            className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0"
+            style={{
+              borderTop: "7px solid transparent",
+              borderBottom: "7px solid transparent",
+              borderLeft: "8px solid #FEF0C7",
+            }}
+          />
+        </div>
+        {/* Dog avatar */}
+        <div
+          className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2"
+          style={{ borderColor: "#F5A623" }}
+        >
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-E3jbBcsmXAQ4A6rbtMtlgAgx8tFlw7.png"
+            alt="Jack el perro"
+            className="w-full h-full object-cover object-[75%_10%]"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}

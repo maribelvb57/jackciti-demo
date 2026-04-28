@@ -6,6 +6,7 @@ import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
 import { SearchFilters } from "@/components/search-filters"
+import { SearchBenefitsBanner } from "@/components/search-benefits-banner"
 
 const ORDENAR_OPTIONS = [
   "Recomendados de Jack",
@@ -278,8 +279,11 @@ export default function BusquedaPage() {
 
           {/* Right section - Search results */}
           <section className="flex-1 p-4 md:p-6 overflow-auto">
+            {/* Benefits banner */}
+            <SearchBenefitsBanner />
+
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
-              Resultados de búsqueda
+              Resultados de busqueda
             </h1>
 
             {isLoading && (
