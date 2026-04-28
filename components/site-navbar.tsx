@@ -1,5 +1,6 @@
 "use client"
 
+import { Show, SignInButton, UserButton } from "@clerk/nextjs"
 import Image from "next/image"
 
 export function SiteNavbar() {
@@ -19,10 +20,7 @@ export function SiteNavbar() {
               height={28}
               className="rounded-full"
             />
-            <span className="text-sm font-bold tracking-tight text-white">JackCity</span>  &nbsp;
-
-            <span className="text-sm text-white">35</span>
-
+            <span className="text-sm font-bold tracking-tight text-white">JackCity   v37</span>
           </div>
 
           {/* Links */}
@@ -38,22 +36,22 @@ export function SiteNavbar() {
                 </a>
               ))}
             </div>
-            <a
-              href="#"
-              className="px-3 py-1 text-xs font-semibold rounded-md transition-colors md:ml-2"
-              style={{
-                backgroundColor: "#FF6B5B",
-                color: "#ffffff",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#FF5144"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#FF6B5B"
-              }}
-            >
-              Ingresar
-            </a>
+            <div className="md:ml-2 flex items-center gap-2">
+              <Show when="signed-out">
+                <SignInButton>
+                  <button
+                    type="button"
+                    className="px-3 py-1 text-xs font-semibold rounded-md transition-colors"
+                    style={{ backgroundColor: "#FF6B5B", color: "#ffffff" }}
+                  >
+                    Ingresar
+                  </button>
+                </SignInButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </div>
           </div>
         </div>
       </div>

@@ -6,6 +6,8 @@ import { MapPin, CalendarDays, Dog, Truck, Search, ChevronDown, Plus, X } from "
 import { DayPicker, DateRange } from "react-day-picker"
 import { format } from "date-fns"
 import { es } from "date-fns/locale"
+import { useSearchStore } from "@/providers/search-store-provider"
+import { defaultMascota, type Mascota } from "@/stores/search-store"
 import "react-day-picker/style.css"
 
 const RAZAS_TAMANOS: Record<string, string> = {
@@ -36,13 +38,6 @@ const RAZAS = ["Sin especificar", ...Object.keys(RAZAS_TAMANOS)]
 
 const TAMANOS = ["Pequeño", "Mediano", "Grande", "Extra Grande"]
 
-type Mascota = {
-  raza: string
-  tamano: string
-}
-
-const defaultMascota = (): Mascota => ({ raza: "Sin especificar", tamano: "" })
-
 const CITIES = [
   "Santiago de Chile",
   "Concepción",
@@ -65,13 +60,18 @@ export function SearchBar() {
   const labelColor = "#0A1830"
   const helperColor = "#16233B"
 
-  const [city, setCity] = useState("")
   const [cityOpen, setCityOpen] = useState(false)
-  const [dateRange, setDateRange] = useState<DateRange | undefined>()
   const [calendarOpen, setCalendarOpen] = useState(false)
-  const [needsTransport, setNeedsTransport] = useState(false)
   const [petsOpen, setPetsOpen] = useState(false)
-  const [mascotas, setMascotas] = useState<Mascota[]>([defaultMascota()])
+
+  const city = useSearchStore((state) => state.city)
+  const setCity = useSearchStore((state) => state.setCity)
+  const dateRange = useSearchStore((state) => state.dateRange)
+  const setDateRange = useSearchStore((state) => state.setDateRange)
+  const needsTransport = useSearchStore((state) => state.needsTransport)
+  const toggleNeedsTransport = useSearchStore((state) => state.toggleNeedsTransport)
+  const mascotas = useSearchStore((state) => state.mascotas)
+  const setMascotas = useSearchStore((state) => state.setMascotas)
 
   const cityRef = useRef<HTMLDivElement>(null)
   const calendarRef = useRef<HTMLDivElement>(null)
@@ -94,7 +94,7 @@ export function SearchBar() {
 
   const updateMascota = (index: number, field: keyof Mascota, value: string) => {
     setMascotas((prev) =>
-      prev.map((m, i) => {
+      prev.map((m: Mascota, i: number) => {
         if (i !== index) return m
         if (field === "raza") {
           const autoTamano = RAZAS_TAMANOS[value] ?? ""
@@ -111,7 +111,7 @@ export function SearchBar() {
 
   const removeMascota = (index: number) => {
     if (mascotas.length > 1) {
-      setMascotas((prev) => prev.filter((_, i) => i !== index))
+      setMascotas((prev) => prev.filter((_: Mascota, i: number) => i !== index))
     }
   }
 
@@ -422,7 +422,7 @@ export function SearchBar() {
                 type="button"
                 role="checkbox"
                 aria-checked={needsTransport}
-                onClick={() => setNeedsTransport(!needsTransport)}
+                onClick={toggleNeedsTransport}
                 className="w-5 h-5 rounded-none border-2 flex items-center justify-center transition-all flex-shrink-0"
                 style={{
                   borderColor: needsTransport ? accentColor : "#C8BFA0",

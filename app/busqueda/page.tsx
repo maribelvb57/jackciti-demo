@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { SiteNavbar } from "@/components/site-navbar"
 import { ChevronLeft, ChevronRight, SlidersHorizontal, ArrowUpDown, ChevronDown, X } from "lucide-react"
 import { ResultCard, type ResultCardData } from "@/components/result-card"
@@ -107,11 +108,24 @@ const MOCK_RESULTS: ResultCardData[] = [
   },
 ]
 
+async function getSearchResults(): Promise<ResultCardData[]> {
+  await new Promise((resolve) => setTimeout(resolve, 250))
+  return MOCK_RESULTS
+}
+
 export default function BusquedaPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [mobileOrdenar, setMobileOrdenar] = useState("Recomendados de Jack")
   const [mobileOrdenarOpen, setMobileOrdenarOpen] = useState(false)
+  const {
+    data: searchResults = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["search-results"],
+    queryFn: getSearchResults,
+  })
 
   return (
     <main className="min-h-screen flex flex-col" style={{ backgroundColor: "#0B1F3A" }}>
@@ -267,12 +281,26 @@ export default function BusquedaPage() {
               Resultados de búsqueda
             </h1>
 
+            {isLoading && (
+              <div className="rounded-2xl border px-5 py-6 text-sm font-medium" style={{ backgroundColor: "#FFFFFF", borderColor: "#D9E0EA", color: "#0A1830" }}>
+                Cargando resultados...
+              </div>
+            )}
+
+            {isError && (
+              <div className="rounded-2xl border px-5 py-6 text-sm font-medium" style={{ backgroundColor: "#FFFFFF", borderColor: "#F3C1C1", color: "#8A1C1C" }}>
+                No pudimos cargar los resultados. Intenta nuevamente.
+              </div>
+            )}
+
             {/* Results list */}
-            <div className="flex flex-col gap-4 md:gap-5">
-              {MOCK_RESULTS.map((result, index) => (
-                <ResultCard key={index} data={result} />
-              ))}
-            </div>
+            {!isLoading && !isError && (
+              <div className="flex flex-col gap-4 md:gap-5">
+                {searchResults.map((result, index) => (
+                  <ResultCard key={index} data={result} />
+                ))}
+              </div>
+            )}
           </section>
         </div>
       </div>
