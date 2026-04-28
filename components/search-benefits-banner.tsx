@@ -1,72 +1,99 @@
-import { ShieldCheck, Heart, Smile } from "lucide-react"
+"use client"
+
+import { ShieldCheck, Heart, Camera, Zap } from "lucide-react"
 
 const AMBER = "#FFC43D"
+const NAVY = "#0D2B45"
+const BG_CREAM = "#FEF8ED"
 
 const BENEFITS = [
   {
-    icon: <ShieldCheck size={28} strokeWidth={1.8} style={{ color: AMBER }} />,
+    icon: <ShieldCheck size={24} strokeWidth={2} style={{ color: NAVY }} />,
     title: "Seguridad ante todo",
   },
   {
-    icon: <Heart size={28} strokeWidth={1.8} style={{ color: AMBER }} />,
+    icon: <Heart size={24} strokeWidth={2} style={{ color: NAVY }} />,
     title: "Cuidado y amor garantizado",
   },
   {
-    icon: <Smile size={28} strokeWidth={1.8} style={{ color: AMBER }} />,
-    title: "Vacaciones caninas felices",
-    hasHeart: true,
+    icon: <Camera size={24} strokeWidth={2} style={{ color: NAVY }} />,
+    title: "Transparencia 24/7",
+  },
+  {
+    icon: <Zap size={24} strokeWidth={2} style={{ color: NAVY }} />,
+    title: "Más que un lugar, una experiencia feliz para tu mejor amigo.",
   },
 ]
 
 export function SearchBenefitsBanner() {
   return (
     <div
-      className="rounded-2xl flex items-center justify-between gap-4 px-5 py-4 mb-5 overflow-hidden"
-      style={{ backgroundColor: "#FDF6E3", border: "1px solid #F0E4C0" }}
+      className="relative rounded-2xl flex items-center justify-between gap-6 px-6 py-5 mb-6 overflow-visible"
+      style={{ backgroundColor: BG_CREAM }}
     >
-      {/* Benefits list */}
-      <div className="flex items-center gap-6 flex-1 flex-wrap">
+      {/* Decorative shine element */}
+      <div
+        className="absolute top-2 right-8 text-3xl"
+        style={{ color: AMBER }}
+      >
+        ✨
+      </div>
+
+      {/* Benefits grid - left side */}
+      <div className="flex items-center gap-8 flex-1">
         {BENEFITS.map((b, i) => (
-          <div key={i} className="flex items-center gap-2.5 min-w-[120px]">
+          <div key={i} className="flex items-center gap-3 flex-shrink-0">
+            {/* Icon circle */}
             <div
-              className="flex items-center justify-center w-10 h-10 rounded-full flex-shrink-0"
-              style={{ backgroundColor: "#FFE8B6" }}
+              className="flex items-center justify-center w-12 h-12 rounded-full flex-shrink-0 shadow-sm"
+              style={{ backgroundColor: AMBER }}
             >
               {b.icon}
             </div>
-            <span className="text-xs font-semibold leading-snug" style={{ color: "#0A1830", maxWidth: 100 }}>
+            {/* Text */}
+            <span
+              className="text-sm font-bold leading-tight"
+              style={{ color: NAVY, maxWidth: 120 }}
+            >
               {b.title}
-              {b.hasHeart && <Heart size={12} style={{ color: AMBER, marginLeft: "4px", display: "inline" }} />}
             </span>
           </div>
         ))}
       </div>
 
-      {/* Dog image + speech bubble */}
-      <div className="hidden lg:flex items-center gap-2 flex-shrink-0">
-        {/* Speech bubble */}
-        <div
-          className="relative rounded-2xl px-3 py-2 text-xs font-semibold leading-snug text-center"
-          style={{ backgroundColor: "#FFE8B6", color: "#0A1830", maxWidth: 140 }}
-        >
-          Aqui los perros la pasan increible.
-          <span style={{ color: AMBER }}> Como se merecen!</span>
-          {/* Tail pointing right */}
-          <span
-            className="absolute top-1/2 -right-2 -translate-y-1/2 w-0 h-0"
-            style={{
-              borderTop: "7px solid transparent",
-              borderBottom: "7px solid transparent",
-              borderLeft: "8px solid #FFE8B6",
-            }}
-          />
-        </div>
-        {/* Dog image without circle */}
+      {/* Right side - Dog + Speech bubble */}
+      <div className="hidden lg:flex items-end gap-3 flex-shrink-0 relative">
+        {/* Dog image */}
         <img
           src="/images/dog-banner.jpg"
           alt="Jack el perro"
-          className="hidden lg:block w-20 h-20 object-cover flex-shrink-0"
+          className="w-24 h-24 object-cover rounded-lg shadow-md"
         />
+
+        {/* Speech bubble */}
+        <div
+          className="relative rounded-xl px-3 py-2.5 text-xs font-bold leading-snug text-center"
+          style={{ backgroundColor: AMBER, color: NAVY, minWidth: 120, marginBottom: 4 }}
+        >
+          Aquí los perros la pasan increible.
+          <br />
+          <span>¡Como se merecen!</span>
+          <div
+            className="flex justify-center mt-1"
+            style={{ fontSize: "14px" }}
+          >
+            ❤️
+          </div>
+          {/* Tail pointing left */}
+          <span
+            className="absolute bottom-2 -left-2 w-0 h-0"
+            style={{
+              borderTop: "6px solid transparent",
+              borderBottom: "6px solid transparent",
+              borderRight: `8px solid ${AMBER}`,
+            }}
+          />
+        </div>
       </div>
     </div>
   )
