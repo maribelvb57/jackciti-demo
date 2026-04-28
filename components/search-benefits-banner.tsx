@@ -1,4 +1,4 @@
-import { ShieldCheck, Heart, Camera, Smile } from "lucide-react"
+import { ShieldCheck, Heart, Smile } from "lucide-react"
 
 const BENEFITS = [
   {
@@ -10,12 +10,9 @@ const BENEFITS = [
     title: "Cuidado y amor garantizado",
   },
   {
-    icon: <Camera size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
-    title: "Transparencia 24/7",
-  },
-  {
     icon: <Smile size={28} strokeWidth={1.8} style={{ color: "#F5A623" }} />,
-    title: "Más que un lugar, una experiencia feliz para tu mejor amigo.",
+    title: "Vacaciones caninas felices",
+    hasHeart: true,
   },
 ]
 
@@ -37,6 +34,7 @@ export function SearchBenefitsBanner() {
             </div>
             <span className="text-xs font-semibold leading-snug" style={{ color: "#0A1830", maxWidth: 100 }}>
               {b.title}
+              {b.hasHeart && <Heart size={12} style={{ color: "#F5A623", marginLeft: "4px", display: "inline" }} />}
             </span>
           </div>
         ))}
@@ -61,17 +59,12 @@ export function SearchBenefitsBanner() {
             }}
           />
         </div>
-        {/* Dog avatar */}
-        <div
-          className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2"
-          style={{ borderColor: "#F5A623" }}
-        >
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-E3jbBcsmXAQ4A6rbtMtlgAgx8tFlw7.png"
-            alt="Jack el perro"
-            className="w-full h-full object-cover object-[75%_10%]"
-          />
-        </div>
+        {/* Dog image without circle */}
+        <img
+          src="/images/dog-banner.jpg"
+          alt="Jack el perro"
+          className="hidden lg:block w-20 h-20 object-cover flex-shrink-0"
+        />
       </div>
     </div>
   )
