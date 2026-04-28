@@ -206,7 +206,7 @@ export default function BusquedaPage() {
               style={{
                 backgroundColor: "#ffffff",
                 borderColor: "#E5E7EB",
-                maxHeight: "70vh",
+                maxHeight: "65vh",
               }}
             >
               <div className="flex items-center justify-between px-4 pt-3 pb-1">
@@ -309,7 +309,7 @@ export default function BusquedaPage() {
           </section>
 
           {/* Right margin spacer - 120px */}
-          <div style={{ width: "120px", flexShrink: 0 }} />
+          <div style={{ width: "60px", flexShrink: 0 }} />
         </div>
       </div>
     </main>
