@@ -404,14 +404,14 @@ export function SearchBar() {
                 </label>
                 <button
                   type="button"
-                  onClick={() => router.push("/busqueda")}
+                  onClick={() => router.push("/search")}
                   className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all hover:shadow-lg active:scale-95"
                   style={{ backgroundColor: accentColor, color: "#fff", boxShadow: "0 10px 24px rgba(217, 114, 48, 0.35)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = accentHover)}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = accentColor)}
                 >
                   <Search size={16} />
-                  Buscar hotel
+                  Buscar hotel !!
                 </button>
               </div>
             </div>

@@ -11,7 +11,7 @@ export function SiteNavbar() {
           <img
             src="/images/dog-icon.png"
             alt="JackCity mascot"
-            className="w-9 h-9 object-contain"
+            className="w-6 h-6 object-contain"
           />
           <span className="text-lg font-bold tracking-tight">
             <span style={{ color: "#ffffff" }}>Jack</span>
