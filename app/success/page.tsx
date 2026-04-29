@@ -68,7 +68,7 @@ export default function PaymentSuccessPage() {
             </div>
 
             {/* Right column - 75% (success content) */}
-            <div className="flex flex-col gap-2 lg:w-3/4 order-2 lg:order-2">
+            <div className="flex flex-col gap-1 lg:w-3/4 order-2 lg:order-2">
 
               {/* Success message with Jack */}
               <div className="flex flex-col sm:flex-row items-center gap-2 py-0">
@@ -92,7 +92,7 @@ export default function PaymentSuccessPage() {
 
               {/* Reservation data card */}
               <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
-                <h2 className="text-lg font-bold mb-4" style={{ color: "#0A1830" }}>
+                <h2 className="text-lg font-bold mb-2" style={{ color: "#0A1830" }}>
                   Datos de la Reserva
                 </h2>
                 
@@ -125,7 +125,7 @@ export default function PaymentSuccessPage() {
                 className="rounded-2xl p-5 border-2"
                 style={{ backgroundColor: "#FEF9E7", borderColor: "#FFC43D" }}
               >
-                <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
+                <h2 className="text-lg font-bold mb-2" style={{ color: "#0A1830" }}>
                   Recuerda!
                 </h2>
                 
