@@ -142,7 +142,7 @@ export default function BookingConfirmationPage() {
             <div className="flex flex-col gap-4 lg:w-1/4 order-1 lg:order-1">
               
               {/* Hotel photo */}
-              <div className="bg-white rounded-2xl overflow-hidden border pt-4" style={{ borderColor: "#E5E7EB" }}>
+              <div className="bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="relative aspect-[4/3] w-full">
                   <Image
                     src={hotel.image}
