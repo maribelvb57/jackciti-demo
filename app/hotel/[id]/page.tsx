@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
 import { SearchSummaryBar } from "@/components/search-summary-bar"
@@ -84,6 +85,7 @@ const SEARCH_DATA = {
 }
 
 export default function HotelDetailPage() {
+  const router = useRouter()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [includeTransport, setIncludeTransport] = useState(true)
   const [selectedDeparture, setSelectedDeparture] = useState<string | null>(null)
@@ -375,6 +377,7 @@ export default function HotelDetailPage() {
 
                 {/* Reserve button */}
                 <button
+                  onClick={() => router.push("/confirmation")}
                   className="w-full mt-4 py-3.5 rounded-xl font-bold text-base transition-opacity hover:opacity-90"
                   style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
                 >
