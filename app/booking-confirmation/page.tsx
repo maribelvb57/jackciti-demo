@@ -134,12 +134,7 @@ export default function BookingConfirmationPage() {
         <SiteNavbar />
 
         {/* Main content */}
-        <div className="w-full p-4 md:p-6">
-          {/* Page title */}
-          <h1 className="text-2xl md:text-3xl font-bold mb-6" style={{ color: "#0A1830" }}>
-            Confirmación de Reserva
-          </h1>
-
+        <div className="w-full px-4 pb-4 md:px-6 md:pb-6 pt-4">
           {/* Two column layout - reversed: 25% left, 75% right */}
           <div className="flex flex-col lg:flex-row gap-4">
             
@@ -147,7 +142,7 @@ export default function BookingConfirmationPage() {
             <div className="flex flex-col gap-4 lg:w-1/4 order-1 lg:order-1">
               
               {/* Hotel photo */}
-              <div className="bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
+              <div className="bg-white rounded-2xl overflow-hidden border -mt-4 md:-mt-4" style={{ borderColor: "#E5E7EB" }}>
                 <div className="relative aspect-[4/3] w-full">
                   <Image
                     src={hotel.image}
@@ -199,7 +194,12 @@ export default function BookingConfirmationPage() {
 
             {/* Right column - 75% (forms) */}
             <div className="flex flex-col gap-4 lg:w-3/4 order-2 lg:order-2">
-              
+
+              {/* Page title */}
+              <h1 className="text-2xl md:text-3xl font-bold" style={{ color: "#0A1830" }}>
+                Confirmación de Reserva
+              </h1>
+
               {/* Login button */}
               <button
                 className="w-full sm:w-auto self-start flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-sm border-2 transition-colors hover:bg-gray-50"
