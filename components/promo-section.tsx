@@ -51,7 +51,23 @@ export function PromoSection() {
             </div>
 
             {/* Image grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
+            <div className="mb-14 md:hidden">
+              <div
+                className="relative overflow-hidden rounded-3xl border shadow-md"
+                style={{ borderColor: "rgba(255, 255, 255, 0.12)" }}
+              >
+                <Image
+                  src="/images/dog-banner.png"
+                  alt="JackCity recomienda los mejores hoteles y cuidados para tu perro"
+                  width={1751}
+                  height={833}
+                  className="h-auto w-full object-cover"
+                  priority={false}
+                />
+              </div>
+            </div>
+
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
               {/* Large image */}
               <div className="md:col-span-2 relative rounded-2xl overflow-hidden shadow-md border" style={{ height: 360, borderColor: "rgba(255, 255, 255, 0.08)" }}>
                 <Image
