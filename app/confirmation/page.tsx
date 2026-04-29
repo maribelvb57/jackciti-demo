@@ -196,7 +196,7 @@ export default function BookingConfirmationPage() {
             <div className="flex flex-col gap-4 lg:w-3/4 order-2 lg:order-2">
 
               {/* Page title */}
-              <h1 className="text-2xl md:text-3xl font-bold" style={{ color: "#0A1830" }}>
+              <h1 className="text-2xl md:text-3xl font-bold mt-6" style={{ color: "#0A1830" }}>
                 Confirmación de Reserva
               </h1>
 
