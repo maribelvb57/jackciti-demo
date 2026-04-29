@@ -85,7 +85,7 @@ const SEARCH_DATA = {
 
 export default function HotelDetailPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [includeTransport, setIncludeTransport] = useState(false)
+  const [includeTransport, setIncludeTransport] = useState(true)
   const [selectedDeparture, setSelectedDeparture] = useState<string | null>(null)
   const [selectedReturn, setSelectedReturn] = useState<string | null>(null)
 
