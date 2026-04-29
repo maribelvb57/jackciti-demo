@@ -9,7 +9,7 @@ export function SiteNavbar() {
         {/* Logo */}
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <img
-            src="/images/dog-banner.png"
+            src="/images/dog-icon.png"
             alt="JackCity mascot"
             className="w-9 h-9 object-contain"
           />
