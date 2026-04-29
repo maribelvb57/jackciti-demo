@@ -96,7 +96,7 @@ export default function HotelDetailPage() {
 
   return (
     <main className="min-h-screen flex flex-col items-center" style={{ backgroundColor: "#0B1F3A" }}>
-      <div className="w-full max-w-[1200px] flex flex-col">
+      <div className="w-full max-w-[1200px] flex flex-col" style={{ backgroundColor: "#ffffff" }}>
         {/* Top navigation */}
         <SiteNavbar />
 
@@ -104,12 +104,12 @@ export default function HotelDetailPage() {
         <div className="w-full p-4 md:p-6">
           {/* Hotel name and location */}
           <div className="mb-4">
-            <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
+            <h1 className="text-2xl md:text-3xl font-bold mb-1" style={{ color: "#0A1830" }}>
               {hotel.name}
             </h1>
             <div className="flex items-center gap-1.5">
-              <MapPin size={16} style={{ color: "#8899AA" }} />
-              <span className="text-sm" style={{ color: "#8899AA" }}>{hotel.location}</span>
+              <MapPin size={16} style={{ color: "#6B7280" }} />
+              <span className="text-sm" style={{ color: "#6B7280" }}>{hotel.location}</span>
             </div>
           </div>
 
@@ -120,7 +120,7 @@ export default function HotelDetailPage() {
             <div className="flex flex-col gap-4 lg:w-3/4">
               
               {/* Photo Gallery */}
-              <div className="bg-white rounded-2xl overflow-hidden">
+              <div className="bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="relative aspect-[16/9] w-full">
                   <Image
                     src={hotel.images[currentImageIndex]}
@@ -151,7 +151,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Description */}
-              <div className="bg-white rounded-2xl p-5">
+              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
                   Descripcion del Hotel
                 </h2>
@@ -161,7 +161,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Conditions */}
-              <div className="bg-white rounded-2xl p-5">
+              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
                   Condiciones del Hotel
                 </h2>
@@ -194,7 +194,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Transport Section */}
-              <div className="bg-white rounded-2xl p-5">
+              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold" style={{ color: "#0A1830" }}>
                     Transporte Incluido / Seleccionado
@@ -292,7 +292,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Reservation Summary */}
-              <div className="bg-white rounded-2xl p-5">
+              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                   <div>
                     <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
@@ -326,7 +326,7 @@ export default function HotelDetailPage() {
             <div className="flex flex-col gap-4 lg:w-1/4">
               
               {/* Score and reviews count */}
-              <div className="bg-white rounded-2xl p-4">
+              <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex items-center gap-3 mb-3">
                   <div
                     className="flex items-center justify-center px-3 py-2 rounded-lg text-white font-bold text-xl"
@@ -352,7 +352,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Highlights */}
-              <div className="bg-white rounded-2xl p-4">
+              <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
                 <h3 className="text-sm font-bold mb-3" style={{ color: "#0A1830" }}>
                   Puntos destacables
                 </h3>
@@ -367,7 +367,7 @@ export default function HotelDetailPage() {
               </div>
 
               {/* Add transport shortcut (mobile visible) */}
-              <div className="lg:hidden bg-white rounded-2xl p-4">
+              <div className="lg:hidden bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
                 <button
                   onClick={() => setIncludeTransport(!includeTransport)}
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold border transition-colors"
