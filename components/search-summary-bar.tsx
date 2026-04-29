@@ -20,7 +20,7 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
     <div className="w-full py-2 px-4" style={{ backgroundColor: "#FFC43D" }}>
       <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-2">
         {/* City */}
-        <div 
+        <div
           className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
           style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
         >
@@ -29,7 +29,7 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
         </div>
 
         {/* Dates */}
-        <div 
+        <div
           className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
           style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
         >
@@ -38,7 +38,7 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
         </div>
 
         {/* Pet count */}
-        <div 
+        <div
           className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
           style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
         >
@@ -47,12 +47,12 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
         </div>
 
         {/* Transport */}
-        <div 
+        <div
           className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
           style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
         >
-          <Car size={12} />
-          <span>Transporte {data.withTransport ? "CON" : "SIN"}</span>
+          {data.withTransport ? "<Car size={12} /><span>Transporte</span>" : ""}
+
         </div>
 
         {/* Change button */}
