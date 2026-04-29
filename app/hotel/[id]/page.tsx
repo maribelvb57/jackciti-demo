@@ -1,14 +1,15 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
 import { SearchSummaryBar } from "@/components/search-summary-bar"
-import { 
-  MapPin, 
-  ChevronLeft, 
-  ChevronRight, 
-  Check, 
+import {
+  MapPin,
+  ChevronLeft,
+  ChevronRight,
+  Check,
   AlertCircle,
   Clock,
   Car,
@@ -54,7 +55,7 @@ Ofrecemos habitaciones individuales y compartidas, todas con climatización y ca
       rating: 9,
     },
     {
-      id: "2", 
+      id: "2",
       author: "Carolina",
       text: "Excelente servicio, las instalaciones son muy limpias y el personal muy amable.",
       rating: 8,
@@ -84,6 +85,7 @@ const SEARCH_DATA = {
 }
 
 export default function HotelDetailPage() {
+  const router = useRouter()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [includeTransport, setIncludeTransport] = useState(true)
   const [selectedDeparture, setSelectedDeparture] = useState<string | null>(null)
@@ -111,12 +113,12 @@ export default function HotelDetailPage() {
         <SiteNavbar />
 
         {/* Search summary bar */}
-        <SearchSummaryBar 
-          data={SEARCH_DATA} 
+        <SearchSummaryBar
+          data={SEARCH_DATA}
           onChangeClick={() => {
             // TODO: Open edit modal or redirect to search
             console.log("Cambiar búsqueda clicked")
-          }} 
+          }}
         />
 
         {/* Main content */}
@@ -134,10 +136,10 @@ export default function HotelDetailPage() {
 
           {/* Two column layout */}
           <div className="flex flex-col lg:flex-row gap-4">
-            
+
             {/* Left column - 75% */}
             <div className="flex flex-col gap-4 lg:w-3/4">
-              
+
               {/* 1. Photo Gallery — order 1 on mobile, 1 on desktop */}
               <div className="order-1 bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="relative aspect-[16/9] w-full">
@@ -234,7 +236,7 @@ export default function HotelDetailPage() {
                     </li>
                   ))}
                 </ul>
-                
+
                 {/* Check-in / Check-out */}
                 <div className="flex gap-4 pt-4 border-t" style={{ borderColor: "#E5E7EB" }}>
                   <div className="flex items-center gap-2">
@@ -258,7 +260,7 @@ export default function HotelDetailPage() {
               <div className="order-5 lg:order-4 bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold" style={{ color: "#0A1830" }}>
-                    Transporte Incluido / Seleccionado
+                    Transporte Seleccionado
                   </h2>
                   <button
                     onClick={() => {
@@ -372,9 +374,10 @@ export default function HotelDetailPage() {
                     <p className="text-xs" style={{ color: "#888" }}>IVA incluido</p>
                   </div>
                 </div>
-                
+
                 {/* Reserve button */}
                 <button
+                  onClick={() => router.push("/confirmation")}
                   className="w-full mt-4 py-3.5 rounded-xl font-bold text-base transition-opacity hover:opacity-90"
                   style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
                 >
@@ -385,7 +388,7 @@ export default function HotelDetailPage() {
 
             {/* Right column - 25% — hidden on mobile, shown on desktop */}
             <div className="hidden lg:flex flex-col gap-4 lg:w-1/4">
-              
+
               {/* Score and reviews count */}
               <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex items-center gap-3 mb-3">
@@ -400,7 +403,7 @@ export default function HotelDetailPage() {
                     <p className="text-sm" style={{ color: "#555" }}>{hotel.reviewCount} comentarios</p>
                   </div>
                 </div>
-                
+
                 {/* Featured review */}
                 <div className="pt-3 border-t" style={{ borderColor: "#E5E7EB" }}>
                   <p className="text-sm italic leading-relaxed mb-2" style={{ color: "#333" }}>

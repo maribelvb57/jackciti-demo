@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { MapPin, Check, Heart, Star } from "lucide-react"
 import { useState } from "react"
 
@@ -24,6 +25,7 @@ type ResultCardProps = {
 }
 
 export function ResultCard({ data }: ResultCardProps) {
+  const router = useRouter()
   const [wished, setWished] = useState(false)
 
   return (
@@ -133,6 +135,7 @@ export function ResultCard({ data }: ResultCardProps) {
 
           {/* CTA button */}
           <button
+            onClick={() => router.push("/hotel/1")}
             className="flex items-center gap-1 px-5 py-3 rounded-xl font-bold text-sm flex-shrink-0 transition-opacity hover:opacity-90"
             style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
           >
