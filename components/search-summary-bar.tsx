@@ -46,14 +46,16 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
           <span>{data.petCount} {data.petCount === 1 ? "mascota" : "mascotas"}</span>
         </div>
 
-        {/* Transport */}
-        <div
-          className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
-          style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
-        >
-          {data.withTransport ? "<Car size={12} /><span>Transporte</span>" : ""}
-
-        </div>
+        {/* Transport — only shown if withTransport is true */}
+        {data.withTransport && (
+          <div
+            className="flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
+            style={{ backgroundColor: "rgba(255,255,255,0.85)", color: "#0A1830" }}
+          >
+            <Car size={12} />
+            <span>Transporte</span>
+          </div>
+        )}
 
         {/* Change button */}
         <button
@@ -67,3 +69,4 @@ export function SearchSummaryBar({ data, onChangeClick }: SearchSummaryBarProps)
     </div>
   )
 }
+
