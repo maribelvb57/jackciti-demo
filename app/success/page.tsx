@@ -80,7 +80,7 @@ export default function PaymentSuccessPage() {
                     Ya esta lista la reserva para tu peque
                   </p>
                 </div>
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 flex-shrink-0">
+                <div className="relative w-80 h-80 sm:w-96 sm:h-96 flex-shrink-0">
                   <Image
                     src="/images/jack-reserva-exitosa.jpg"
                     alt="Jack celebrando"
