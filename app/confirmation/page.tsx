@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
+import { SearchSummaryBar } from "@/components/search-summary-bar"
 import { 
   User,
   Mail,
@@ -132,6 +133,18 @@ export default function BookingConfirmationPage() {
       <div className="w-full max-w-[1200px] flex flex-col" style={{ backgroundColor: "#ffffff" }}>
         {/* Top navigation */}
         <SiteNavbar />
+
+        {/* Search summary bar */}
+        <SearchSummaryBar
+          data={{
+            city: "Santiago",
+            dateFrom: "7 mayo",
+            dateTo: "9 mayo",
+            petCount: 2,
+            withTransport: true,
+          }}
+          onChangeClick={() => {}}
+        />
 
         {/* Main content */}
         <div className="w-full px-4 pb-4 md:px-6 md:pb-6 pt-4">
