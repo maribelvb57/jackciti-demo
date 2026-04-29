@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
+import { SearchSummaryBar } from "@/components/search-summary-bar"
 import { 
   MapPin, 
   ChevronLeft, 
@@ -73,6 +74,15 @@ const RESERVATION_DATA = {
   nights: 3,
 }
 
+// Mock search data (would come from search store)
+const SEARCH_DATA = {
+  city: "Santiago",
+  dateFrom: "9 mayo",
+  dateTo: "12 mayo",
+  petCount: 2,
+  withTransport: true,
+}
+
 export default function HotelDetailPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [includeTransport, setIncludeTransport] = useState(false)
@@ -99,6 +109,15 @@ export default function HotelDetailPage() {
       <div className="w-full max-w-[1200px] flex flex-col" style={{ backgroundColor: "#ffffff" }}>
         {/* Top navigation */}
         <SiteNavbar />
+
+        {/* Search summary bar */}
+        <SearchSummaryBar 
+          data={SEARCH_DATA} 
+          onChangeClick={() => {
+            // TODO: Open edit modal or redirect to search
+            console.log("Cambiar búsqueda clicked")
+          }} 
+        />
 
         {/* Main content */}
         <div className="w-full p-4 md:p-6">
