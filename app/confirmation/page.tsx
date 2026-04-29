@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
 import { SearchSummaryBar } from "@/components/search-summary-bar"
@@ -81,6 +82,7 @@ interface PetData {
 }
 
 export default function BookingConfirmationPage() {
+  const router = useRouter()
   // User form state
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -563,6 +565,7 @@ export default function BookingConfirmationPage() {
                   </div>
 
                   <button
+                    onClick={() => router.push("/success")}
                     disabled={!allConditionsAccepted}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-base transition-opacity disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
                     style={{ backgroundColor: "#FFC43D", color: "#0A1830" }}
