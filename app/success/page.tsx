@@ -68,12 +68,12 @@ export default function PaymentSuccessPage() {
             </div>
 
             {/* Right column - 75% (success content) */}
-            <div className="flex flex-col gap-3 lg:w-3/4 order-2 lg:order-2">
+            <div className="flex flex-col gap-2 lg:w-3/4 order-2 lg:order-2">
 
               {/* Success message with Jack */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 py-2">
+              <div className="flex flex-col sm:flex-row items-center gap-2 py-0">
                 <div className="flex-1">
-                  <h1 className="text-2xl md:text-3xl font-bold mb-1" style={{ color: "#0A1830" }}>
+                  <h1 className="text-2xl md:text-3xl font-bold mb-0" style={{ color: "#0A1830" }}>
                     Felicitaciones!
                   </h1>
                   <p className="text-lg md:text-xl" style={{ color: "#555" }}>
