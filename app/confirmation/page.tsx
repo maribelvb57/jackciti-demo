@@ -143,7 +143,7 @@ export default function BookingConfirmationPage() {
               
               {/* Hotel photo */}
               <div className="bg-white rounded-2xl overflow-hidden border pt-4" style={{ borderColor: "#E5E7EB" }}>
-                <div className="relative aspect-[4/3] w-full px-4">
+                <div className="relative aspect-[4/3] w-full">
                   <Image
                     src={hotel.image}
                     alt={hotel.name}
@@ -151,7 +151,7 @@ export default function BookingConfirmationPage() {
                     className="object-cover"
                   />
                 </div>
-                <div className="p-3 px-4">
+                <div className="p-3">
                   <h3 className="font-bold text-sm" style={{ color: "#0A1830" }}>{hotel.name}</h3>
                   <div className="flex items-center gap-1 mt-1">
                     <MapPin size={12} style={{ color: "#6B7280" }} />
