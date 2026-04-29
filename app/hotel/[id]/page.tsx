@@ -119,8 +119,8 @@ export default function HotelDetailPage() {
             {/* Left column - 75% */}
             <div className="flex flex-col gap-4 lg:w-3/4">
               
-              {/* Photo Gallery */}
-              <div className="bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
+              {/* 1. Photo Gallery — order 1 on mobile, 1 on desktop */}
+              <div className="order-1 bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="relative aspect-[16/9] w-full">
                   <Image
                     src={hotel.images[currentImageIndex]}
@@ -150,8 +150,50 @@ export default function HotelDetailPage() {
                 </div>
               </div>
 
-              {/* Description */}
-              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
+              {/* 2. Score + Highlights — visible only on mobile, order 2 */}
+              <div className="flex flex-col gap-4 order-2 lg:hidden">
+                {/* Score and reviews */}
+                <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className="flex items-center justify-center px-3 py-2 rounded-lg text-white font-bold text-xl"
+                      style={{ backgroundColor: "#1a6b4a" }}
+                    >
+                      {hotel.score.toFixed(1).replace(".", ",")}
+                    </div>
+                    <div>
+                      <p className="font-semibold" style={{ color: "#0A1830" }}>{hotel.scoreLabel}</p>
+                      <p className="text-sm" style={{ color: "#555" }}>{hotel.reviewCount} comentarios</p>
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t" style={{ borderColor: "#E5E7EB" }}>
+                    <p className="text-sm italic leading-relaxed mb-2" style={{ color: "#333" }}>
+                      &quot;{hotel.reviews[0].text}&quot;
+                    </p>
+                    <p className="text-xs font-semibold" style={{ color: "#555" }}>
+                      - {hotel.reviews[0].author}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Highlights */}
+                <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
+                  <h3 className="text-sm font-bold mb-3" style={{ color: "#0A1830" }}>
+                    Puntos destacables
+                  </h3>
+                  <ul className="flex flex-col gap-2">
+                    {hotel.highlights.map((highlight, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm" style={{ color: "#333" }}>
+                        <Check size={14} style={{ color: "#16a34a", flexShrink: 0 }} strokeWidth={2.5} />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* 3. Description — order 3 on mobile, 2 on desktop */}
+              <div className="order-3 lg:order-2 bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
                   Descripcion del Hotel
                 </h2>
@@ -160,8 +202,8 @@ export default function HotelDetailPage() {
                 </p>
               </div>
 
-              {/* Conditions */}
-              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
+              {/* 4. Conditions — order 4 on mobile, 3 on desktop */}
+              <div className="order-4 lg:order-3 bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
                   Condiciones del Hotel
                 </h2>
@@ -193,8 +235,8 @@ export default function HotelDetailPage() {
                 </div>
               </div>
 
-              {/* Transport Section */}
-              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
+              {/* 5. Transport — order 5 on mobile, 4 on desktop */}
+              <div className="order-5 lg:order-4 bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-bold" style={{ color: "#0A1830" }}>
                     Transporte Incluido / Seleccionado
@@ -291,8 +333,8 @@ export default function HotelDetailPage() {
                 )}
               </div>
 
-              {/* Reservation Summary */}
-              <div className="bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
+              {/* 6. Reservation Summary — order 6 on mobile, 5 on desktop */}
+              <div className="order-6 lg:order-5 bg-white rounded-2xl p-5 border" style={{ borderColor: "#E5E7EB" }}>
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                   <div>
                     <h2 className="text-lg font-bold mb-3" style={{ color: "#0A1830" }}>
@@ -322,8 +364,8 @@ export default function HotelDetailPage() {
               </div>
             </div>
 
-            {/* Right column - 25% */}
-            <div className="flex flex-col gap-4 lg:w-1/4">
+            {/* Right column - 25% — hidden on mobile, shown on desktop */}
+            <div className="hidden lg:flex flex-col gap-4 lg:w-1/4">
               
               {/* Score and reviews count */}
               <div className="bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
@@ -364,22 +406,6 @@ export default function HotelDetailPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Add transport shortcut (mobile visible) */}
-              <div className="lg:hidden bg-white rounded-2xl p-4 border" style={{ borderColor: "#E5E7EB" }}>
-                <button
-                  onClick={() => setIncludeTransport(!includeTransport)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold border transition-colors"
-                  style={{
-                    backgroundColor: includeTransport ? "#FEF3C7" : "#fff",
-                    borderColor: "#FFC43D",
-                    color: "#0A1830",
-                  }}
-                >
-                  <Car size={16} />
-                  {includeTransport ? "Transporte agregado" : "Agregar Transporte"}
-                </button>
               </div>
             </div>
           </div>
