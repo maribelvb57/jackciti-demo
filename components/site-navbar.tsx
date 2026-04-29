@@ -17,7 +17,7 @@ export function SiteNavbar() {
           <span style={{ color: "#ffffff" }}>Jack</span>
           <span style={{ color: "#FFC43D" }}>City</span>
         </span>
-        <span className="text-sm font-medium ml-1" style={{ color: "#8899AA" }}>   43   </span>
+        <span className="text-sm font-medium ml-1" style={{ color: "#8899AA" }}>   45   </span>
       </div>
 
       {/* Nav links + button pushed to the right */}
