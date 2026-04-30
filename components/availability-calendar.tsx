@@ -85,8 +85,8 @@ function DayCell({ day, data, onCapacityChange }: DayCellProps) {
     >
       {/* Date label – top right */}
       <div
-        className="absolute top-1.5 right-1.5 min-w-[24px] h-6 flex items-center justify-center rounded text-xs font-bold px-1"
-        style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+        className="absolute top-2.5 right-2.5 min-w-[28px] h-7 flex items-center justify-center rounded text-xs font-bold px-1.5"
+        style={{ backgroundColor: "#4A90E2", color: "#ffffff" }}
       >
         {day}
       </div>
