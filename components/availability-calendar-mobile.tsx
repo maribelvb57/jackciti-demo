@@ -27,6 +27,7 @@ interface AvailabilityCalendarMobileProps {
   onBulkCapacityChange: (value: string) => void
   onBulkUpdate: () => void
   hotelId: string
+  onSaveClick: () => void
 }
 
 const MONTH_NAMES_ES = [
@@ -123,6 +124,7 @@ export function AvailabilityCalendarMobile({
   onBulkCapacityChange,
   onBulkUpdate,
   hotelId,
+  onSaveClick,
 }: AvailabilityCalendarMobileProps) {
   const days = Array.from({ length: totalDays }, (_, i) => i + 1)
 
@@ -182,9 +184,7 @@ export function AvailabilityCalendarMobile({
         <button
           className="w-full px-6 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
           style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
-          onClick={() => {
-            // TODO: connect to backend save logic
-          }}
+          onClick={onSaveClick}
         >
           Guardar cambios de este mes
         </button>
