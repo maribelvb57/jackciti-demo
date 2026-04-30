@@ -115,7 +115,7 @@ async function getSearchResults(): Promise<ResultCardData[]> {
   return MOCK_RESULTS
 }
 
-export default function BusquedaPage() {
+export default function SearchPage() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [mobileOrdenar, setMobileOrdenar] = useState("Recomendados de Jack")
@@ -283,7 +283,7 @@ export default function BusquedaPage() {
           {/* Right section - Search results */}
           <section className="flex-1 p-4 md:p-6 overflow-auto">
             <h1 className="text-lg md:text-xl font-bold mb-4 md:mb-6" style={{ color: "#0A1830" }}>
-              Resultados de busqueda
+              Hoteles encontrados...
             </h1>
 
             {isLoading && (
