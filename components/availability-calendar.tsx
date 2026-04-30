@@ -338,7 +338,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
             onClick={prevMonth}
             disabled={!canGoPrev}
             className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-            style={{ color: "#0D2B45" }}
+            style={{ color: "#1a3a5c" }}
             aria-label="Mes anterior"
           >
             <ChevronLeft size={28} strokeWidth={2.5} />
@@ -352,7 +352,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
             onClick={nextMonth}
             disabled={!canGoNext}
             className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-            style={{ color: "#0D2B45" }}
+            style={{ color: "#1a3a5c" }}
             aria-label="Mes siguiente"
           >
             <ChevronRight size={28} strokeWidth={2.5} />
@@ -402,7 +402,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
         <div className="flex justify-center mt-6">
           <button
             className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-            style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+            style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
             onClick={handleSaveClick}
           >
             Guardar cambios de este mes
@@ -471,7 +471,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
             {/* Modal Header */}
             <div
               className="flex items-center justify-between px-6 py-4"
-              style={{ backgroundColor: "#0D2B45" }}
+              style={{ backgroundColor: "#1a3a5c" }}
             >
               <h2 className="text-lg font-bold text-white">
                 Confirmar cambios
@@ -540,7 +540,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                   onClick={handleConfirmSave}
                   disabled={getChangedDays().length === 0}
                   className="px-6 py-2 rounded text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+                  style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
                 >
                   Guardar
                 </button>

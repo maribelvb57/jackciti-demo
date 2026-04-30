@@ -136,7 +136,7 @@ export function AvailabilityCalendarMobile({
           onClick={onPrevMonth}
           disabled={!canGoPrev}
           className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-          style={{ color: "#0D2B45" }}
+          style={{ color: "#1a3a5c" }}
           aria-label="Mes anterior"
         >
           <ChevronLeft size={28} strokeWidth={2.5} />
@@ -150,7 +150,7 @@ export function AvailabilityCalendarMobile({
           onClick={onNextMonth}
           disabled={!canGoNext}
           className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-          style={{ color: "#0D2B45" }}
+          style={{ color: "#1a3a5c" }}
           aria-label="Mes siguiente"
         >
           <ChevronRight size={28} strokeWidth={2.5} />
@@ -183,7 +183,7 @@ export function AvailabilityCalendarMobile({
       <div className="flex justify-center mb-6">
         <button
           className="w-full px-6 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-          style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+          style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
           onClick={onSaveClick}
         >
           Guardar cambios de este mes

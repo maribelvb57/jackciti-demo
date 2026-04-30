@@ -74,7 +74,7 @@ export function ManagerSidebar({ hotelId }: ManagerSidebarProps) {
       <button
         onClick={() => setIsMobileOpen(true)}
         className="fixed top-20 left-4 z-40 md:hidden flex items-center justify-center w-10 h-10 rounded-lg shadow-md"
-        style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+        style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
         aria-label="Abrir menú"
       >
         <Menu size={20} />
@@ -97,7 +97,7 @@ export function ManagerSidebar({ hotelId }: ManagerSidebarProps) {
           md:translate-x-0 md:relative md:z-auto
           ${isCollapsed ? "md:w-16" : "md:w-64"}
         `}
-        style={{ backgroundColor: "#0D2B45" }}
+        style={{ backgroundColor: "#1a3a5c" }}
       >
         {/* Header */}
         <div
@@ -147,7 +147,7 @@ export function ManagerSidebar({ hotelId }: ManagerSidebarProps) {
                         : "text-white/70 hover:bg-white/10 hover:text-white"
                       }
                     `}
-                    style={active ? { backgroundColor: "#FFC43D", color: "#0D2B45" } : undefined}
+                    style={active ? { backgroundColor: "#FFC43D", color: "#1a3a5c" } : undefined}
                     title={isCollapsed ? item.label : undefined}
                   >
                     <span className="flex-shrink-0">{item.icon}</span>

@@ -42,7 +42,7 @@ export function ManagerContextBar({ hotelId }: ManagerContextBarProps) {
         <Building2 size={18} style={{ color: "#FFC43D" }} />
         <span
           className="text-lg font-bold tracking-tight"
-          style={{ color: "#0D2B45" }}
+          style={{ color: "#1a3a5c" }}
         >
           {MOCK_HOTEL_NAME}
         </span>
@@ -69,8 +69,8 @@ export function ManagerContextBar({ hotelId }: ManagerContextBarProps) {
 
         {/* Manager */}
         <div className="flex items-center gap-1.5">
-          <UserCircle size={18} style={{ color: "#0D2B45" }} />
-          <span className="text-sm font-semibold" style={{ color: "#0D2B45" }}>
+          <UserCircle size={18} style={{ color: "#1a3a5c" }} />
+          <span className="text-sm font-semibold" style={{ color: "#1a3a5c" }}>
             {MOCK_MANAGER_NAME}
           </span>
         </div>
