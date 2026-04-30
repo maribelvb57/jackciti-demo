@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { AvailabilityCalendarMobile } from "./availability-calendar-mobile"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -281,113 +282,139 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8 font-sans">
 
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <button
-          onClick={prevMonth}
-          disabled={!canGoPrev}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-          style={{ color: "#0D2B45" }}
-          aria-label="Mes anterior"
-        >
-          <ChevronLeft size={28} strokeWidth={2.5} />
-        </button>
+      {/* Desktop view */}
+      <div className="hidden md:block">
 
-        <h1 className="text-3xl font-bold uppercase tracking-wider" style={{ color: "#0D2B45" }}>
-          {MONTH_NAMES_ES[cal.month]} {cal.year}
-        </h1>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <button
+            onClick={prevMonth}
+            disabled={!canGoPrev}
+            className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            style={{ color: "#0D2B45" }}
+            aria-label="Mes anterior"
+          >
+            <ChevronLeft size={28} strokeWidth={2.5} />
+          </button>
 
-        <button
-          onClick={nextMonth}
-          disabled={!canGoNext}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-          style={{ color: "#0D2B45" }}
-          aria-label="Mes siguiente"
-        >
-          <ChevronRight size={28} strokeWidth={2.5} />
-        </button>
-      </div>
+          <h1 className="text-3xl font-bold uppercase tracking-wider" style={{ color: "#0D2B45" }}>
+            {MONTH_NAMES_ES[cal.month]} {cal.year}
+          </h1>
 
-      {/* Calendar table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm relative">
-        {loading && (
-          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
-            <div className="text-sm font-medium" style={{ color: "#0D2B45" }}>Cargando...</div>
-          </div>
-        )}
-        <table className="w-full table-fixed border-collapse">
-          <thead>
-            <tr>
-              {DAY_NAMES_ES.map((name) => (
-                <th
-                  key={name}
-                  className="border border-gray-300 py-2 text-center text-sm font-semibold"
-                  style={{ backgroundColor: "#0D2B45", color: "#ffffff", width: "14.28%" }}
-                >
-                  {name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {weeks.map((week, wi) => (
-              <tr key={wi}>
-                {week.map((day, di) => (
-                  <DayCell
-                    key={`${wi}-${di}`}
-                    day={day}
-                    data={day !== null ? dayData[day] : undefined}
-                    onCapacityChange={handleCapacityChange}
-                    isPast={day !== null ? isPastDay(day) : false}
-                  />
+          <button
+            onClick={nextMonth}
+            disabled={!canGoNext}
+            className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            style={{ color: "#0D2B45" }}
+            aria-label="Mes siguiente"
+          >
+            <ChevronRight size={28} strokeWidth={2.5} />
+          </button>
+        </div>
+
+        {/* Calendar table */}
+        <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm relative">
+          {loading && (
+            <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+              <div className="text-sm font-medium" style={{ color: "#0D2B45" }}>Cargando...</div>
+            </div>
+          )}
+          <table className="w-full table-fixed border-collapse">
+            <thead>
+              <tr>
+                {DAY_NAMES_ES.map((name) => (
+                  <th
+                    key={name}
+                    className="border border-gray-300 py-2 text-center text-sm font-semibold"
+                    style={{ backgroundColor: "#0D2B45", color: "#ffffff", width: "14.28%" }}
+                  >
+                    {name}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {weeks.map((week, wi) => (
+                <tr key={wi}>
+                  {week.map((day, di) => (
+                    <DayCell
+                      key={`${wi}-${di}`}
+                      day={day}
+                      data={day !== null ? dayData[day] : undefined}
+                      onCapacityChange={handleCapacityChange}
+                      isPast={day !== null ? isPastDay(day) : false}
+                    />
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Save button */}
+        <div className="flex justify-center mt-6">
+          <button
+            className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
+            style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+            onClick={() => {
+              // TODO: connect to backend save logic
+            }}
+          >
+            Guardar cambios de este mes
+          </button>
+        </div>
+
+        {/* Bulk update footer */}
+        <div className="flex flex-wrap items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
+          <span className="text-sm" style={{ color: "#4B5563" }}>
+            Actualizar todas las disponibilidades futuras a
+          </span>
+          <input
+            type="number"
+            min={0}
+            max={99}
+            value={bulkCapacity}
+            onChange={(e) => setBulkCapacity(e.target.value)}
+            className="w-16 text-center text-sm font-bold border-2 border-gray-400 rounded focus:outline-none focus:ring-2 py-1"
+            style={{ color: "#0D2B45", ringColor: "#FFC43D" }}
+            aria-label="Capacidad masiva"
+          />
+          <button
+            onClick={handleBulkUpdate}
+            className="px-5 py-1.5 rounded text-sm font-bold transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
+          >
+            Go!
+          </button>
+        </div>
+
+        {/* Hotel ID note */}
+        <p className="text-xs text-right mt-2" style={{ color: "#9CA3AF" }}>
+          Hotel ID: {hotelId}
+        </p>
       </div>
 
-      {/* Save button */}
-      <div className="flex justify-center mt-6">
-        <button
-          className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-          style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
-          onClick={() => {
-            // TODO: connect to backend save logic
-          }}
-        >
-          Guardar cambios de este mes
-        </button>
-      </div>
-
-      {/* Bulk update footer */}
-      <div className="flex flex-wrap items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
-        <span className="text-sm" style={{ color: "#4B5563" }}>
-          Actualizar todas las disponibilidades futuras a
-        </span>
-        <input
-          type="number"
-          min={0}
-          max={99}
-          value={bulkCapacity}
-          onChange={(e) => setBulkCapacity(e.target.value)}
-          className="w-16 text-center text-sm font-bold border-2 border-gray-400 rounded focus:outline-none focus:ring-2 py-1"
-          style={{ color: "#0D2B45", ringColor: "#FFC43D" }}
-          aria-label="Capacidad masiva"
+      {/* Mobile view */}
+      <div className="md:hidden">
+        <AvailabilityCalendarMobile
+          monthName={MONTH_NAMES_ES[cal.month]}
+          year={cal.year}
+          dayData={dayData}
+          loading={loading}
+          canGoPrev={canGoPrev}
+          canGoNext={canGoNext}
+          onPrevMonth={prevMonth}
+          onNextMonth={nextMonth}
+          onCapacityChange={handleCapacityChange}
+          isPastDay={isPastDay}
+          totalDays={totalDays}
+          bulkCapacity={bulkCapacity}
+          onBulkCapacityChange={setBulkCapacity}
+          onBulkUpdate={handleBulkUpdate}
+          hotelId={hotelId}
         />
-        <button
-          onClick={handleBulkUpdate}
-          className="px-5 py-1.5 rounded text-sm font-bold transition-opacity hover:opacity-90"
-          style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
-        >
-          Go!
-        </button>
       </div>
 
-      {/* Hotel ID note */}
-      <p className="text-xs text-right mt-2" style={{ color: "#9CA3AF" }}>
-        Hotel ID: {hotelId}
-      </p>
     </div>
   )
 }
