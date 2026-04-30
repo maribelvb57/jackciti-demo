@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { MapPin, Check, Heart, Star } from "lucide-react"
 import { useState } from "react"
+import { formatClp } from "@/lib/format"
 
 export type ResultCardData = {
   name: string
@@ -128,7 +129,7 @@ export function ResultCard({ data }: ResultCardProps) {
             </p>
             {/* Price */}
             <p className="text-2xl md:text-3xl font-bold leading-tight mt-1" style={{ color: "#0A1830" }}>
-              ${data.price.toLocaleString("es-CL")}
+              {formatClp(data.price)}
             </p>
             <p className="text-xs" style={{ color: "#888" }}>IVA incluido</p>
           </div>

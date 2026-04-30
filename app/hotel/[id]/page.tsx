@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { formatClp } from "@/lib/format"
 import { SiteNavbar } from "@/components/site-navbar"
 import { SearchSummaryBar } from "@/components/search-summary-bar"
 import {
@@ -369,7 +370,7 @@ export default function HotelDetailPage() {
                   </div>
                   <div className="flex flex-col sm:items-end gap-1">
                     <p className="text-3xl md:text-4xl font-bold" style={{ color: "#0A1830" }}>
-                      ${totalPrice.toLocaleString("es-CL")}
+                      {formatClp(totalPrice)}
                     </p>
                     <p className="text-xs" style={{ color: "#888" }}>IVA incluido</p>
                   </div>

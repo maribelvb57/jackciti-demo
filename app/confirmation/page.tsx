@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
 import { SearchSummaryBar } from "@/components/search-summary-bar"
+import { formatClp } from "@/lib/format"
 import { 
   User,
   Mail,
@@ -559,7 +560,7 @@ export default function BookingConfirmationPage() {
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pt-4 border-t" style={{ borderColor: "#E5E7EB" }}>
                   <div>
                     <p className="text-3xl md:text-4xl font-bold" style={{ color: "#0A1830" }}>
-                      ${totalPrice.toLocaleString("es-CL")}
+                      {formatClp(totalPrice)}
                     </p>
                     <p className="text-xs" style={{ color: "#888" }}>IVA incluido</p>
                   </div>
