@@ -143,11 +143,11 @@ export function ManagerSidebar({ hotelId }: ManagerSidebarProps) {
                       flex items-center gap-3 px-3 py-3 rounded-lg
                       transition-colors duration-150
                       ${active
-                        ? "text-white font-semibold"
+                        ? "font-semibold"
                         : "text-white/70 hover:bg-white/10 hover:text-white"
                       }
                     `}
-                    style={active ? { backgroundColor: "#FFC43D" } : undefined}
+                    style={active ? { backgroundColor: "#FFC43D", color: "#0D2B45" } : undefined}
                     title={isCollapsed ? item.label : undefined}
                   >
                     <span className="flex-shrink-0">{item.icon}</span>
