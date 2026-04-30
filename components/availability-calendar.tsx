@@ -55,9 +55,10 @@ interface DayCellProps {
   day: number | null
   data: DayData | undefined
   onCapacityChange: (day: number, value: string) => void
+  isPast: boolean
 }
 
-function DayCell({ day, data, onCapacityChange }: DayCellProps) {
+function DayCell({ day, data, onCapacityChange, isPast }: DayCellProps) {
   // Empty/shaded cell (outside the current month)
   if (day === null) {
     return (
@@ -98,21 +99,27 @@ function DayCell({ day, data, onCapacityChange }: DayCellProps) {
           {data?.booked ?? "-"}
         </span>
         <span className="text-lg font-bold" style={{ color: "#0D2B45" }}>/</span>
-        {/* capacity – editable */}
-        <input
-          type="number"
-          min={0}
-          max={99}
-          value={data?.capacity ?? ""}
-          onChange={(e) => onCapacityChange(day, e.target.value)}
-          className="w-9 text-center text-sm font-bold border border-gray-400 rounded focus:outline-none focus:ring-1"
-          style={{
-            color: "#0D2B45",
-            backgroundColor: "#FFFDE7",
-            ringColor: "#FFC43D",
-          }}
-          aria-label={`Capacidad día ${day}`}
-        />
+        {/* capacity – editable for future days, read-only label for past days */}
+        {isPast ? (
+          <span className="text-lg font-bold" style={{ color: "#0D2B45" }}>
+            {data?.booked ?? "-"}
+          </span>
+        ) : (
+          <input
+            type="number"
+            min={0}
+            max={99}
+            value={data?.capacity ?? ""}
+            onChange={(e) => onCapacityChange(day, e.target.value)}
+            className="w-9 text-center text-sm font-bold border border-gray-400 rounded focus:outline-none focus:ring-1"
+            style={{
+              color: "#0D2B45",
+              backgroundColor: "#FFFDE7",
+              ringColor: "#FFC43D",
+            }}
+            aria-label={`Capacidad día ${day}`}
+          />
+        )}
       </div>
 
       {/* Dispo label – bottom */}
@@ -207,6 +214,18 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
     })
   }
 
+  // Determine if a given day in the current viewed month is in the past
+  const todayYear = today.getFullYear()
+  const todayMonth = today.getMonth()
+  const todayDate = today.getDate()
+
+  function isPastDay(day: number): boolean {
+    if (cal.year < todayYear) return true
+    if (cal.year === todayYear && cal.month < todayMonth) return true
+    if (cal.year === todayYear && cal.month === todayMonth && day < todayDate) return true
+    return false
+  }
+
   // Build calendar grid (6 rows × 7 cols)
   const firstDay = firstDayOfMonth(cal.year, cal.month)
   const totalDays = daysInMonth(cal.year, cal.month)
@@ -277,6 +296,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                     day={day}
                     data={day !== null ? dayData[day] : undefined}
                     onCapacityChange={handleCapacityChange}
+                    isPast={day !== null ? isPastDay(day) : false}
                   />
                 ))}
               </tr>
