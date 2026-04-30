@@ -97,7 +97,7 @@ export function PricingAndDiscounts({ hotelId }: { hotelId: string }) {
                         type="number"
                         value={editingValue}
                         onChange={(e) => setEditingValue(e.target.value)}
-                        className="w-32 px-3 py-2 text-sm border-2 border-blue-400 rounded focus:outline-none"
+                        className="w-32 px-3 py-2 text-sm border-2 rounded focus:outline-none"
                         style={{ borderColor: "#FFC43D" }}
                         autoFocus
                       />
@@ -146,6 +146,7 @@ export function PricingAndDiscounts({ hotelId }: { hotelId: string }) {
           Descuento
         </h2>
 
+        <div className="space-y-4">
           {/* Descuento por semana */}
           <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200 bg-white hover:shadow-sm transition-shadow">
             <label className="text-sm font-medium flex-1" style={{ color: "#1a3a5c" }}>
