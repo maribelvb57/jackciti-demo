@@ -1,9 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+interface DateAvailability {
+  bookings: number
+  capacity: number
+  available: number
+}
+
+interface HotelAvailability {
+  hotelId: number
+  monthId: string
+  dates: Record<number, DateAvailability>
+}
 
 interface DayData {
   date: number
@@ -36,17 +48,24 @@ function daysInMonth(year: number, month: number): number {
   return new Date(year, month + 1, 0).getDate()
 }
 
-/** Build mock data for every day in the month (deterministic to avoid hydration mismatch) */
-function buildMonthData(year: number, month: number): Record<number, DayData> {
-  const total = daysInMonth(year, month)
+/** Convert API response to DayData format */
+function apiToDayData(apiData: HotelAvailability): Record<number, DayData> {
   const data: Record<number, DayData> = {}
-  for (let d = 1; d <= total; d++) {
-    // Deterministic "booked" value based on day, month, year (avoids random hydration mismatch)
-    const booked = (d + month + (year % 10)) % 9
-    const capacity = 10
-    data[d] = { date: d, booked, capacity, dispo: capacity - booked }
+  for (const [dayStr, dateInfo] of Object.entries(apiData.dates)) {
+    const day = parseInt(dayStr, 10)
+    data[day] = {
+      date: day,
+      booked: dateInfo.bookings,
+      capacity: dateInfo.capacity,
+      dispo: dateInfo.available,
+    }
   }
   return data
+}
+
+/** Format month to API monthId format (e.g., "2026-05") */
+function formatMonthId(year: number, month: number): string {
+  return `${year}-${String(month + 1).padStart(2, "0")}`
 }
 
 // ─── Day Cell ─────────────────────────────────────────────────────────────────
@@ -55,9 +74,10 @@ interface DayCellProps {
   day: number | null
   data: DayData | undefined
   onCapacityChange: (day: number, value: string) => void
+  isPast: boolean
 }
 
-function DayCell({ day, data, onCapacityChange }: DayCellProps) {
+function DayCell({ day, data, onCapacityChange, isPast }: DayCellProps) {
   // Empty/shaded cell (outside the current month)
   if (day === null) {
     return (
@@ -84,12 +104,12 @@ function DayCell({ day, data, onCapacityChange }: DayCellProps) {
       style={{ minHeight: 96, height: 96, width: "14.28%" }}
     >
       {/* Date label – top right */}
-      <span
-        className="absolute top-1 right-2 text-xs font-semibold"
-        style={{ color: "#0D2B45" }}
+      <div
+        className="absolute top-0 right-0 min-w-[28px] h-7 flex items-center justify-center rounded-bl text-xs font-bold px-1.5"
+        style={{ backgroundColor: "rgb(51 147 29)", color: "#ffffff" }}
       >
         {day}
-      </span>
+      </div>
 
       {/* Booked / Capacity row */}
       <div className="flex items-center justify-center gap-0.5 mt-5">
@@ -98,21 +118,27 @@ function DayCell({ day, data, onCapacityChange }: DayCellProps) {
           {data?.booked ?? "-"}
         </span>
         <span className="text-lg font-bold" style={{ color: "#0D2B45" }}>/</span>
-        {/* capacity – editable */}
-        <input
-          type="number"
-          min={0}
-          max={99}
-          value={data?.capacity ?? ""}
-          onChange={(e) => onCapacityChange(day, e.target.value)}
-          className="w-9 text-center text-sm font-bold border border-gray-400 rounded focus:outline-none focus:ring-1"
-          style={{
-            color: "#0D2B45",
-            backgroundColor: "#FFFDE7",
-            ringColor: "#FFC43D",
-          }}
-          aria-label={`Capacidad día ${day}`}
-        />
+        {/* capacity – editable for future days, read-only label for past days */}
+        {isPast ? (
+          <span className="text-lg font-bold" style={{ color: "#0D2B45" }}>
+            {data?.booked ?? "-"}
+          </span>
+        ) : (
+          <input
+            type="number"
+            min={0}
+            max={99}
+            value={data?.capacity ?? ""}
+            onChange={(e) => onCapacityChange(day, e.target.value)}
+            className="w-9 text-center text-sm font-bold border border-gray-400 rounded focus:outline-none focus:ring-1"
+            style={{
+              color: "#0D2B45",
+              backgroundColor: "#FFFDE7",
+              ringColor: "#FFC43D",
+            }}
+            aria-label={`Capacidad día ${day}`}
+          />
+        )}
       </div>
 
       {/* Dispo label – bottom */}
@@ -137,25 +163,55 @@ interface AvailabilityCalendarProps {
 export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   const today = new Date()
   const [cal, setCal] = useState<CalendarState>({ year: today.getFullYear(), month: today.getMonth() })
-  const [dayData, setDayData] = useState<Record<number, DayData>>(() => buildMonthData(cal.year, cal.month))
+  const [dayData, setDayData] = useState<Record<number, DayData>>({})
   const [bulkCapacity, setBulkCapacity] = useState<string>("10")
+  const [loading, setLoading] = useState(true)
+
+  // Fetch availability data from API
+  const fetchAvailability = useCallback(async (year: number, month: number) => {
+    setLoading(true)
+    try {
+      const monthId = formatMonthId(year, month)
+      const res = await fetch(`/api/availability/${hotelId}/${monthId}`)
+      if (!res.ok) throw new Error("Failed to fetch")
+      const data: HotelAvailability = await res.json()
+      setDayData(apiToDayData(data))
+    } catch (error) {
+      console.error("[v0] Error fetching availability:", error)
+    } finally {
+      setLoading(false)
+    }
+  }, [hotelId])
+
+  // Fetch on mount and when month changes
+  useEffect(() => {
+    fetchAvailability(cal.year, cal.month)
+  }, [cal.year, cal.month, fetchAvailability])
+
+  // Navigation limits
+  const MIN_YEAR = 2026
+  const MIN_MONTH = 2 // Marzo (0-indexed)
+  const maxDate = new Date(today.getFullYear(), today.getMonth() + 3, 1)
+  const MAX_YEAR = maxDate.getFullYear()
+  const MAX_MONTH = maxDate.getMonth()
+
+  const canGoPrev = cal.year > MIN_YEAR || (cal.year === MIN_YEAR && cal.month > MIN_MONTH)
+  const canGoNext = cal.year < MAX_YEAR || (cal.year === MAX_YEAR && cal.month < MAX_MONTH)
 
   // Navigation
   function prevMonth() {
+    if (!canGoPrev) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month - 1, 1)
-      const next = { year: d.getFullYear(), month: d.getMonth() }
-      setDayData(buildMonthData(next.year, next.month))
-      return next
+      return { year: d.getFullYear(), month: d.getMonth() }
     })
   }
 
   function nextMonth() {
+    if (!canGoNext) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month + 1, 1)
-      const next = { year: d.getFullYear(), month: d.getMonth() }
-      setDayData(buildMonthData(next.year, next.month))
-      return next
+      return { year: d.getFullYear(), month: d.getMonth() }
     })
   }
 
@@ -195,6 +251,18 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
     })
   }
 
+  // Determine if a given day in the current viewed month is in the past
+  const todayYear = today.getFullYear()
+  const todayMonth = today.getMonth()
+  const todayDate = today.getDate()
+
+  function isPastDay(day: number): boolean {
+    if (cal.year < todayYear) return true
+    if (cal.year === todayYear && cal.month < todayMonth) return true
+    if (cal.year === todayYear && cal.month === todayMonth && day < todayDate) return true
+    return false
+  }
+
   // Build calendar grid (6 rows × 7 cols)
   const firstDay = firstDayOfMonth(cal.year, cal.month)
   const totalDays = daysInMonth(cal.year, cal.month)
@@ -217,7 +285,8 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={prevMonth}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100"
+          disabled={!canGoPrev}
+          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           style={{ color: "#0D2B45" }}
           aria-label="Mes anterior"
         >
@@ -230,7 +299,8 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
 
         <button
           onClick={nextMonth}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100"
+          disabled={!canGoNext}
+          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           style={{ color: "#0D2B45" }}
           aria-label="Mes siguiente"
         >
@@ -239,7 +309,12 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
       </div>
 
       {/* Calendar table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm">
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm relative">
+        {loading && (
+          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+            <div className="text-sm font-medium" style={{ color: "#0D2B45" }}>Cargando...</div>
+          </div>
+        )}
         <table className="w-full table-fixed border-collapse">
           <thead>
             <tr>
@@ -263,12 +338,26 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                     day={day}
                     data={day !== null ? dayData[day] : undefined}
                     onCapacityChange={handleCapacityChange}
+                    isPast={day !== null ? isPastDay(day) : false}
                   />
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Save button */}
+      <div className="flex justify-center mt-6">
+        <button
+          className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
+          style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+          onClick={() => {
+            // TODO: connect to backend save logic
+          }}
+        >
+          Guardar cambios de este mes
+        </button>
       </div>
 
       {/* Bulk update footer */}
