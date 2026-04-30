@@ -84,12 +84,12 @@ function DayCell({ day, data, onCapacityChange }: DayCellProps) {
       style={{ minHeight: 96, height: 96, width: "14.28%" }}
     >
       {/* Date label – top right */}
-      <span
-        className="absolute top-1 right-2 text-xs font-semibold"
-        style={{ color: "#0D2B45" }}
+      <div
+        className="absolute top-1.5 right-1.5 min-w-[24px] h-6 flex items-center justify-center rounded text-xs font-bold px-1"
+        style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
       >
         {day}
-      </span>
+      </div>
 
       {/* Booked / Capacity row */}
       <div className="flex items-center justify-center gap-0.5 mt-5">
