@@ -140,8 +140,19 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   const [dayData, setDayData] = useState<Record<number, DayData>>(() => buildMonthData(cal.year, cal.month))
   const [bulkCapacity, setBulkCapacity] = useState<string>("10")
 
+  // Navigation limits
+  const MIN_YEAR = 2026
+  const MIN_MONTH = 2 // Marzo (0-indexed)
+  const maxDate = new Date(today.getFullYear(), today.getMonth() + 3, 1)
+  const MAX_YEAR = maxDate.getFullYear()
+  const MAX_MONTH = maxDate.getMonth()
+
+  const canGoPrev = cal.year > MIN_YEAR || (cal.year === MIN_YEAR && cal.month > MIN_MONTH)
+  const canGoNext = cal.year < MAX_YEAR || (cal.year === MAX_YEAR && cal.month < MAX_MONTH)
+
   // Navigation
   function prevMonth() {
+    if (!canGoPrev) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month - 1, 1)
       const next = { year: d.getFullYear(), month: d.getMonth() }
@@ -151,6 +162,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   }
 
   function nextMonth() {
+    if (!canGoNext) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month + 1, 1)
       const next = { year: d.getFullYear(), month: d.getMonth() }
@@ -217,7 +229,8 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={prevMonth}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100"
+          disabled={!canGoPrev}
+          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           style={{ color: "#0D2B45" }}
           aria-label="Mes anterior"
         >
@@ -230,7 +243,8 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
 
         <button
           onClick={nextMonth}
-          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100"
+          disabled={!canGoNext}
+          className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
           style={{ color: "#0D2B45" }}
           aria-label="Mes siguiente"
         >
