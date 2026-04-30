@@ -373,7 +373,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                   <th
                     key={name}
                     className="border border-gray-300 py-2 text-center text-sm font-semibold"
-                    style={{ backgroundColor: "#FFFDE7", color: "#ffffff", width: "14.28%" }}
+                    style={{ backgroundColor: "#4B5563", color: "#ffffff", width: "14.28%" }}
                   >
                     {name}
                   </th>
