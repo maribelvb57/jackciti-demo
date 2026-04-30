@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { User } from "lucide-react"
 
 export function SiteNavbar() {
@@ -7,7 +8,7 @@ export function SiteNavbar() {
     <nav className="w-full px-4 md:px-6 flex items-center h-14" style={{ backgroundColor: "#0D2B45" }}>
 
       {/* Logo */}
-      <div className="flex items-center gap-2.5 flex-shrink-0">
+      <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
         <img
           src="/images/dog-icon.png"
           alt="JackCity mascot"
@@ -17,8 +18,8 @@ export function SiteNavbar() {
           <span style={{ color: "#ffffff" }}>Jack</span>
           <span style={{ color: "#FFC43D" }}>City</span>
         </span>
-        <span className="text-sm font-medium ml-1" style={{ color: "#8899AA" }}>   45   </span>
-      </div>
+        <span className="text-sm font-medium ml-1" style={{ color: "#8899AA" }}>   47   </span>
+      </Link>
 
       {/* Nav links + button pushed to the right */}
       <div className="hidden md:flex items-center gap-1 ml-auto">

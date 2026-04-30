@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { SiteNavbar } from "@/components/site-navbar"
 import { MapPin, Clock, Calendar, AlertCircle } from "lucide-react"
+import { formatClp } from "@/lib/format"
 
 // Mock hotel data
 const HOTEL_DATA = {
@@ -40,12 +41,12 @@ export default function PaymentSuccessPage() {
         <SiteNavbar />
 
         {/* Main content */}
-        <div className="w-full px-4 pb-6 md:px-6 md:pb-8 pt-4">
+        <div className="w-full px-2 pb-6 md:px-6 md:pb-8 pt-4">
           {/* Two column layout - 25% left, 75% right */}
           <div className="flex flex-col lg:flex-row gap-6">
             
             {/* Left column - 25% (hotel photo) */}
-            <div className="flex flex-col gap-4 lg:w-1/4 order-1 lg:order-1">
+            <div className="hidden lg:flex flex-col gap-4 lg:w-1/4 order-1 lg:order-1">
               
               {/* Hotel photo */}
               <div className="bg-white rounded-2xl overflow-hidden border" style={{ borderColor: "#E5E7EB" }}>
@@ -71,8 +72,8 @@ export default function PaymentSuccessPage() {
             <div className="flex flex-col gap-1 lg:w-3/4 order-2 lg:order-2">
 
               {/* Success message with Jack */}
-              <div className="flex flex-col sm:flex-row items-center gap-2 py-0">
-                <div className="flex-1">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-2 py-0">
+                <div className="w-full flex-1 pt-2 sm:pt-4">
                   <h1 className="text-2xl md:text-3xl font-bold mb-0" style={{ color: "#0A1830" }}>
                     Felicitaciones!
                   </h1>
@@ -80,7 +81,7 @@ export default function PaymentSuccessPage() {
                     Ya esta lista la reserva para tu peque
                   </p>
                 </div>
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96 flex-shrink-0">
+                <div className="relative w-[calc(100vw-1rem)] max-w-none sm:w-[26rem] lg:w-[26rem] aspect-[1133/681] flex-shrink-0">
                   <Image
                     src="/images/jack-reserva-exitosa.jpg"
                     alt="Jack celebrando"
@@ -114,7 +115,7 @@ export default function PaymentSuccessPage() {
                   
                   <div className="flex flex-col sm:items-end">
                     <p className="text-3xl md:text-4xl font-bold" style={{ color: "#0A1830" }}>
-                      ${reservation.totalPrice.toLocaleString("es-CL")}
+                      {formatClp(reservation.totalPrice)}
                     </p>
                   </div>
                 </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { MapPin, DollarSign, Home, Star, ArrowUpDown, ChevronDown } from "lucide-react"
+import { formatClp } from "@/lib/format"
 
 const NAVY = "#0A1830"
 const AMBER = "#FFC43D"
@@ -48,9 +49,6 @@ export function SearchFilters() {
       prev.includes(tipo) ? prev.filter((t) => t !== tipo) : [...prev, tipo]
     )
   }
-
-  const formatPrice = (value: number) =>
-    `$${value.toLocaleString("es-CL")}`
 
   const sliderPct = ((presupuesto - 30000) / (120000 - 30000)) * 100
   const puntuacionPct = ((puntuacionMin - 6) / (9 - 6)) * 100
@@ -148,7 +146,7 @@ export function SearchFilters() {
           </div>
           <div className="flex justify-between text-xs mt-1" style={{ color: GRAY }}>
             <span>$30.000</span>
-            <span className="font-bold" style={{ color: AMBER }}>{formatPrice(presupuesto)}</span>
+            <span className="font-bold" style={{ color: AMBER }}>{formatClp(presupuesto)}</span>
             <span>$120.000</span>
           </div>
         </div>

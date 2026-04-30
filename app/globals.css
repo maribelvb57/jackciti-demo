@@ -105,6 +105,9 @@
     @apply bg-background text-foreground;
     font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
   }
+  button {
+    cursor: pointer;
+  }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Proxima Nova', 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
   }

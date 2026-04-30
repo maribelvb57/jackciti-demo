@@ -42,6 +42,8 @@ const footerLinks = [
 ]
 
 export function SiteFooter() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer style={{ backgroundColor: "#111111", color: "#D6D9DF" }}>
       <div className="mx-auto max-w-[1100px] px-6 pt-14 pb-8">
@@ -116,7 +118,7 @@ export function SiteFooter() {
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-xs" style={{ color: "#7F8897" }}>
-            &copy; {new Date().getFullYear()} JackCity. Todos los derechos reservados.
+            &copy; <span suppressHydrationWarning>{currentYear}</span> JackCity. Todos los derechos reservados.
           </p>
           <p className="text-xs" style={{ color: "#7F8897" }}>
             Hecho con amor para los perritos de Chile
