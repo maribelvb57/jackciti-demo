@@ -402,7 +402,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
         <div className="flex justify-center mt-6">
           <button
             className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-            style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
+            style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
             onClick={handleSaveClick}
           >
             Guardar cambios de este mes
