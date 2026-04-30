@@ -36,12 +36,13 @@ function daysInMonth(year: number, month: number): number {
   return new Date(year, month + 1, 0).getDate()
 }
 
-/** Build mock data for every day in the month */
+/** Build mock data for every day in the month (deterministic to avoid hydration mismatch) */
 function buildMonthData(year: number, month: number): Record<number, DayData> {
   const total = daysInMonth(year, month)
   const data: Record<number, DayData> = {}
   for (let d = 1; d <= total; d++) {
-    const booked = Math.floor(Math.random() * 8)
+    // Deterministic "booked" value based on day, month, year (avoids random hydration mismatch)
+    const booked = (d + month + (year % 10)) % 9
     const capacity = 10
     data[d] = { date: d, booked, capacity, dispo: capacity - booked }
   }
