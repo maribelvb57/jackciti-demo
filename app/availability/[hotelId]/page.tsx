@@ -1,4 +1,4 @@
-import { SiteNavbar } from "@/components/site-navbar"
+import { ManagerLayout } from "@/components/manager-layout"
 import { AvailabilityCalendar } from "@/components/availability-calendar"
 
 interface PageProps {
@@ -17,9 +17,8 @@ export default async function AvailabilityPage({ params }: PageProps) {
   const { hotelId } = await params
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: "#F6F7F9" }}>
-      <SiteNavbar />
+    <ManagerLayout hotelId={hotelId}>
       <AvailabilityCalendar hotelId={hotelId} />
-    </main>
+    </ManagerLayout>
   )
 }
