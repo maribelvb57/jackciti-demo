@@ -1,9 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
+
+interface DateAvailability {
+  bookings: number
+  capacity: number
+  available: number
+}
+
+interface HotelAvailability {
+  hotelId: number
+  monthId: string
+  dates: Record<number, DateAvailability>
+}
 
 interface DayData {
   date: number
@@ -36,17 +48,24 @@ function daysInMonth(year: number, month: number): number {
   return new Date(year, month + 1, 0).getDate()
 }
 
-/** Build mock data for every day in the month (deterministic to avoid hydration mismatch) */
-function buildMonthData(year: number, month: number): Record<number, DayData> {
-  const total = daysInMonth(year, month)
+/** Convert API response to DayData format */
+function apiToDayData(apiData: HotelAvailability): Record<number, DayData> {
   const data: Record<number, DayData> = {}
-  for (let d = 1; d <= total; d++) {
-    // Deterministic "booked" value based on day, month, year (avoids random hydration mismatch)
-    const booked = (d + month + (year % 10)) % 9
-    const capacity = 10
-    data[d] = { date: d, booked, capacity, dispo: capacity - booked }
+  for (const [dayStr, dateInfo] of Object.entries(apiData.dates)) {
+    const day = parseInt(dayStr, 10)
+    data[day] = {
+      date: day,
+      booked: dateInfo.bookings,
+      capacity: dateInfo.capacity,
+      dispo: dateInfo.available,
+    }
   }
   return data
+}
+
+/** Format month to API monthId format (e.g., "2026-05") */
+function formatMonthId(year: number, month: number): string {
+  return `${year}-${String(month + 1).padStart(2, "0")}`
 }
 
 // ─── Day Cell ─────────────────────────────────────────────────────────────────
@@ -144,8 +163,30 @@ interface AvailabilityCalendarProps {
 export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   const today = new Date()
   const [cal, setCal] = useState<CalendarState>({ year: today.getFullYear(), month: today.getMonth() })
-  const [dayData, setDayData] = useState<Record<number, DayData>>(() => buildMonthData(cal.year, cal.month))
+  const [dayData, setDayData] = useState<Record<number, DayData>>({})
   const [bulkCapacity, setBulkCapacity] = useState<string>("10")
+  const [loading, setLoading] = useState(true)
+
+  // Fetch availability data from API
+  const fetchAvailability = useCallback(async (year: number, month: number) => {
+    setLoading(true)
+    try {
+      const monthId = formatMonthId(year, month)
+      const res = await fetch(`/api/availability/${hotelId}/${monthId}`)
+      if (!res.ok) throw new Error("Failed to fetch")
+      const data: HotelAvailability = await res.json()
+      setDayData(apiToDayData(data))
+    } catch (error) {
+      console.error("[v0] Error fetching availability:", error)
+    } finally {
+      setLoading(false)
+    }
+  }, [hotelId])
+
+  // Fetch on mount and when month changes
+  useEffect(() => {
+    fetchAvailability(cal.year, cal.month)
+  }, [cal.year, cal.month, fetchAvailability])
 
   // Navigation limits
   const MIN_YEAR = 2026
@@ -162,9 +203,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
     if (!canGoPrev) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month - 1, 1)
-      const next = { year: d.getFullYear(), month: d.getMonth() }
-      setDayData(buildMonthData(next.year, next.month))
-      return next
+      return { year: d.getFullYear(), month: d.getMonth() }
     })
   }
 
@@ -172,9 +211,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
     if (!canGoNext) return
     setCal((prev) => {
       const d = new Date(prev.year, prev.month + 1, 1)
-      const next = { year: d.getFullYear(), month: d.getMonth() }
-      setDayData(buildMonthData(next.year, next.month))
-      return next
+      return { year: d.getFullYear(), month: d.getMonth() }
     })
   }
 
@@ -272,7 +309,12 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
       </div>
 
       {/* Calendar table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm">
+      <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-sm relative">
+        {loading && (
+          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+            <div className="text-sm font-medium" style={{ color: "#0D2B45" }}>Cargando...</div>
+          </div>
+        )}
         <table className="w-full table-fixed border-collapse">
           <thead>
             <tr>
