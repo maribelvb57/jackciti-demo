@@ -271,6 +271,19 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
         </table>
       </div>
 
+      {/* Save button */}
+      <div className="flex justify-center mt-6">
+        <button
+          className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
+          style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
+          onClick={() => {
+            // TODO: connect to backend save logic
+          }}
+        >
+          Guardar cambios de este mes
+        </button>
+      </div>
+
       {/* Bulk update footer */}
       <div className="flex flex-wrap items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
         <span className="text-sm" style={{ color: "#4B5563" }}>
