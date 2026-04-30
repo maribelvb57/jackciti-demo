@@ -183,7 +183,7 @@ export function AvailabilityCalendarMobile({
       <div className="flex justify-center mb-6">
         <button
           className="w-full px-6 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-          style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
+          style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
           onClick={onSaveClick}
         >
           Guardar cambios de este mes

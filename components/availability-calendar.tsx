@@ -373,7 +373,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                   <th
                     key={name}
                     className="border border-gray-300 py-2 text-center text-sm font-semibold"
-                    style={{ backgroundColor: "#9ca3af", color: "#1a1a1a", width: "14.28%" }}
+                    style={{ backgroundColor: "#FFFDE7", color: "#ffffff", width: "14.28%" }}
                   >
                     {name}
                   </th>
@@ -402,7 +402,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
         <div className="flex justify-center mt-6">
           <button
             className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-            style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
+            style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
             onClick={handleSaveClick}
           >
             Guardar cambios de este mes
