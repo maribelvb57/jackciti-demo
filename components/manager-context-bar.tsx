@@ -42,7 +42,7 @@ export function ManagerContextBar({ hotelId }: ManagerContextBarProps) {
         <Building2 size={18} style={{ color: "#FFC43D" }} />
         <span
           className="text-lg font-bold tracking-tight"
-          style={{ color: "#1a3a5c" }}
+          style={{ color: "#ffffff" }}
         >
           {MOCK_HOTEL_NAME}
         </span>
