@@ -1,8 +1,16 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { AvailabilityCalendarMobile } from "./availability-calendar-mobile"
+
+// ─── Change Info Type ─────────────────────────────────────────────────────────
+
+interface DayChange {
+  day: number
+  oldCapacity: number
+  newCapacity: number
+}
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -165,8 +173,10 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
   const today = new Date()
   const [cal, setCal] = useState<CalendarState>({ year: today.getFullYear(), month: today.getMonth() })
   const [dayData, setDayData] = useState<Record<number, DayData>>({})
+  const [originalData, setOriginalData] = useState<Record<number, DayData>>({})
   const [bulkCapacity, setBulkCapacity] = useState<string>("10")
   const [loading, setLoading] = useState(true)
+  const [showSaveModal, setShowSaveModal] = useState(false)
 
   // Fetch availability data from API
   const fetchAvailability = useCallback(async (year: number, month: number) => {
@@ -176,7 +186,9 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
       const res = await fetch(`/api/availability/${hotelId}/${monthId}`)
       if (!res.ok) throw new Error("Failed to fetch")
       const data: HotelAvailability = await res.json()
-      setDayData(apiToDayData(data))
+      const converted = apiToDayData(data)
+      setDayData(converted)
+      setOriginalData(converted)
     } catch (error) {
       console.error("[v0] Error fetching availability:", error)
     } finally {
@@ -252,6 +264,41 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
     })
   }
 
+  // Get list of days that have been modified
+  function getChangedDays(): DayChange[] {
+    const changes: DayChange[] = []
+    for (const dayStr of Object.keys(dayData)) {
+      const day = parseInt(dayStr, 10)
+      const current = dayData[day]
+      const original = originalData[day]
+      if (current && original && current.capacity !== original.capacity) {
+        changes.push({
+          day,
+          oldCapacity: original.capacity,
+          newCapacity: current.capacity,
+        })
+      }
+    }
+    return changes.sort((a, b) => a.day - b.day)
+  }
+
+  // Handle save button click
+  function handleSaveClick() {
+    setShowSaveModal(true)
+  }
+
+  // Handle confirm save
+  function handleConfirmSave() {
+    // TODO: Call API to save changes
+    setOriginalData({ ...dayData })
+    setShowSaveModal(false)
+  }
+
+  // Handle cancel save
+  function handleCancelSave() {
+    setShowSaveModal(false)
+  }
+
   // Determine if a given day in the current viewed month is in the past
   const todayYear = today.getFullYear()
   const todayMonth = today.getMonth()
@@ -291,7 +338,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
             onClick={prevMonth}
             disabled={!canGoPrev}
             className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-            style={{ color: "#0D2B45" }}
+            style={{ color: "#1a3a5c" }}
             aria-label="Mes anterior"
           >
             <ChevronLeft size={28} strokeWidth={2.5} />
@@ -305,7 +352,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
             onClick={nextMonth}
             disabled={!canGoNext}
             className="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-            style={{ color: "#0D2B45" }}
+            style={{ color: "#1a3a5c" }}
             aria-label="Mes siguiente"
           >
             <ChevronRight size={28} strokeWidth={2.5} />
@@ -326,7 +373,7 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
                   <th
                     key={name}
                     className="border border-gray-300 py-2 text-center text-sm font-semibold"
-                    style={{ backgroundColor: "#0D2B45", color: "#ffffff", width: "14.28%" }}
+                    style={{ backgroundColor: "#4B5563", color: "#ffffff", width: "14.28%" }}
                   >
                     {name}
                   </th>
@@ -355,10 +402,8 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
         <div className="flex justify-center mt-6">
           <button
             className="px-10 py-3 rounded-lg text-base font-bold tracking-wide transition-opacity hover:opacity-90 shadow-sm"
-            style={{ backgroundColor: "#0D2B45", color: "#ffffff" }}
-            onClick={() => {
-              // TODO: connect to backend save logic
-            }}
+            style={{ backgroundColor: "#FFC43D", color: "#0D2B45" }}
+            onClick={handleSaveClick}
           >
             Guardar cambios de este mes
           </button>
@@ -412,8 +457,98 @@ export function AvailabilityCalendar({ hotelId }: AvailabilityCalendarProps) {
           onBulkCapacityChange={setBulkCapacity}
           onBulkUpdate={handleBulkUpdate}
           hotelId={hotelId}
+          onSaveClick={handleSaveClick}
         />
       </div>
+
+      {/* Save Confirmation Modal */}
+      {showSaveModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div
+            className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden"
+            style={{ maxHeight: "80vh" }}
+          >
+            {/* Modal Header */}
+            <div
+              className="flex items-center justify-between px-6 py-4"
+              style={{ backgroundColor: "#1a3a5c" }}
+            >
+              <h2 className="text-lg font-bold text-white">
+                Confirmar cambios
+              </h2>
+              <button
+                onClick={handleCancelSave}
+                className="text-white hover:opacity-70 transition-opacity"
+                aria-label="Cerrar"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-4 overflow-y-auto" style={{ maxHeight: "50vh" }}>
+              {(() => {
+                const changes = getChangedDays()
+                if (changes.length === 0) {
+                  return (
+                    <p className="text-sm" style={{ color: "#4B5563" }}>
+                      No hay cambios para guardar.
+                    </p>
+                  )
+                }
+                return (
+                  <>
+                    <p className="text-sm mb-4" style={{ color: "#4B5563" }}>
+                      Los siguientes días serán actualizados:
+                    </p>
+                    <div className="space-y-2">
+                      {changes.map(({ day, oldCapacity, newCapacity }) => (
+                        <div
+                          key={day}
+                          className="flex items-center justify-between py-2 px-3 rounded"
+                          style={{ backgroundColor: "#F3F4F6" }}
+                        >
+                          <span className="font-semibold" style={{ color: "#0D2B45" }}>
+                            Día {day}
+                          </span>
+                          <span className="text-sm" style={{ color: "#4B5563" }}>
+                            Capacidad: {oldCapacity} → <span className="font-bold" style={{ color: "rgb(51 147 29)" }}>{newCapacity}</span>
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 border-t border-gray-200">
+              <p className="text-sm mb-4" style={{ color: "#0D2B45" }}>
+                ¿Desea guardar estos cambios de disponibilidad para el mes de{" "}
+                <span className="font-bold">{MONTH_NAMES_ES[cal.month]} {cal.year}</span>?
+              </p>
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={handleCancelSave}
+                  className="px-6 py-2 rounded text-sm font-bold border-2 transition-colors hover:bg-gray-100"
+                  style={{ borderColor: "#9CA3AF", color: "#4B5563" }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleConfirmSave}
+                  disabled={getChangedDays().length === 0}
+                  className="px-6 py-2 rounded text-sm font-bold transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: "#1a3a5c", color: "#ffffff" }}
+                >
+                  Guardar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   )
